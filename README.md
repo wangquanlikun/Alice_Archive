@@ -1,6 +1,7 @@
 # Alice Archive
-面向对象程序设计实践（C++） 课程设计作业：宠物小精灵对战系统
+面向对象程序设计实践（C++） 课程设计作业：宠物小精灵对战系统  
 
+<img src="./AliceArchive_Logo.png" alt="Logo" width="30%">
 
 ## 介绍
 **邦邦咔邦**，这里是女仆勇者爱丽丝<sub>AL-1S</sub>！  
