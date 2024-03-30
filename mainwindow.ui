@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1280</width>
+    <height>720</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1280</width>
+    <height>720</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+	background-color: rgb(255, 255, 255);
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QStackedWidget" name="Mainpage">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1280</width>
+      <height>720</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>1280</width>
+      <height>720</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1280</width>
+      <height>720</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QStackedWidget{
+	
+	background-color: rgb(250, 255, 255);
+}</string>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="main" native="true">
+     <widget class="QLabel" name="Background">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1280</width>
+        <height>720</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="Resource.qrc">:/new/prefix1/Resource/background.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="enterGame">
+      <property name="geometry">
+       <rect>
+        <x>1000</x>
+        <y>500</y>
+        <width>165</width>
+        <height>70</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>18</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+border:1px groove gray;
+border-radius:6px;
+padding:2px 4px;
+border-style: outset;
+}
+QPushButton:hover{
+	background-color: rgb(155, 222, 255);
+color: black;
+}
+QPushButton:pressed{
+	background-color: rgb(0, 128, 255);
+border-style: inset;
+}</string>
+      </property>
+      <property name="text">
+       <string>进入游戏</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="ImageCopyright">
+      <property name="geometry">
+       <rect>
+        <x>890</x>
+        <y>690</y>
+        <width>390</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Consolas</family>
+        <pointsize>10</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>Non-commercial Use © 2024 NEXON Games &amp; Blue Archive</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="login">
+     <property name="styleSheet">
+      <string notr="true">QWight {
+	background-color: rgb(255, 255, 255);
+}</string>
+     </property>
+     <widget class="QLabel" name="AL1S">
+      <property name="geometry">
+       <rect>
+        <x>-50</x>
+        <y>-10</y>
+        <width>850</width>
+        <height>900</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="Resource.qrc">:/new/prefix1/Resource/BA_Arisu.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frame">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>230</y>
+        <width>400</width>
+        <height>300</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame {
+	border:0px;
+	border-radius:6px;
+	background-color: transparent;
+}
+QLabel {
+	background-color: transparent;
+}
+QLineEdit{
+	color: rgb(96, 96, 96);
+	background-color: rgb(255, 255, 255);
+	font-size:16px;
+	border-style:outset;
+	border-radius:6px;
+	border:1px groove gray
+}
+
+QPushButton{
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+border:1px groove gray;
+border-radius:6px;
+padding:2px 4px;
+border-style: outset;
+}
+QPushButton:hover{
+	background-color: rgb(155, 222, 255);
+color: black;
+}
+QPushButton:pressed{
+	background-color: rgb(0, 128, 255);
+border-style: inset;
+}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLineEdit" name="username">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>60</y>
+         <width>230</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string> username</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="password">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>130</y>
+         <width>230</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string> password</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="register_2">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>215</y>
+         <width>90</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>黑体</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>注册</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="login_2">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>215</y>
+         <width>90</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>黑体</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>登录</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_1">
+       <property name="geometry">
+        <rect>
+         <x>35</x>
+         <y>70</y>
+         <width>90</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>黑体</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>用户名：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>35</x>
+         <y>140</y>
+         <width>90</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>黑体</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>密  码：</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>880</x>
+        <y>190</y>
+        <width>380</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>小赖字体 SC</family>
+        <pointsize>20</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(51, 221, 255);</string>
+      </property>
+      <property name="text">
+       <string>勇士啊。光芒与你同在！</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="page2_to_page1">
+      <property name="geometry">
+       <rect>
+        <x>1150</x>
+        <y>640</y>
+        <width>80</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>黑体</family>
+        <pointsize>10</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+border:1px groove gray;
+border-radius:6px;
+padding:2px 4px;
+border-style: outset;
+}
+QPushButton:hover{
+	background-color: rgb(155, 222, 255);
+color: black;
+}
+QPushButton:pressed{
+	background-color: rgb(0, 128, 255);
+border-style: inset;
+}</string>
+      </property>
+      <property name="text">
+       <string>回到主页</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="fight"/>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="Resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

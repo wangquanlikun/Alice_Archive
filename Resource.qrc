@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>Resource/AliceArchive_Logo.png</file>
+        <file>Resource/BA_Arisu.png</file>
+        <file>Resource/background.png</file>
+        <file>Resource/MainBackground.jpg</file>
+    </qresource>
+</RCC>
