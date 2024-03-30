@@ -24,6 +24,10 @@ private slots:
 
     void on_page2_to_page1_clicked();
 
+    void on_register_2_clicked();
+
+    void on_login_2_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

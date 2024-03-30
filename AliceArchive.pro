@@ -13,7 +13,8 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    socket.h
 
 FORMS += \
     mainwindow.ui
