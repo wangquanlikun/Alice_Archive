@@ -4,5 +4,8 @@
         <file>Resource/BA_Arisu.png</file>
         <file>Resource/background.png</file>
         <file>Resource/MainBackground.jpg</file>
+        <file>Resource/AliceArchive_ICO.ico</file>
+        <file>Resource/blue_archive_big_head_sd/A.R.O.N.A~1.png</file>
+        <file>Resource/blue_archive_big_head_sd/ARONA~2.png</file>
     </qresource>
 </RCC>

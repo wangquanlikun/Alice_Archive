@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
+#include <QTcpServer>
+#include <QTcpSocket>
+#include <QHostAddress>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -28,7 +31,17 @@ private slots:
 
     void on_login_2_clicked();
 
+    void on_exitGame_clicked();
+
+    void on_About_returntomain_clicked();
+
+    void on_page2_to_page4_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+    QTcpSocket *socket;
+    QString IP;
+    int port;
 };
 #endif // MAINWINDOW_H

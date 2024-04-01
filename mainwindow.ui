@@ -54,14 +54,13 @@
     </property>
     <property name="styleSheet">
      <string notr="true">QStackedWidget{
-	
 	background-color: rgb(250, 255, 255);
 }</string>
     </property>
     <property name="currentIndex">
      <number>0</number>
     </property>
-    <widget class="QWidget" name="main" native="true">
+    <widget class="QWidget" name="main">
      <widget class="QLabel" name="Background">
       <property name="geometry">
        <rect>
@@ -82,7 +81,7 @@
       <property name="geometry">
        <rect>
         <x>1000</x>
-        <y>500</y>
+        <y>450</y>
         <width>165</width>
         <height>70</height>
        </rect>
@@ -137,6 +136,43 @@ border-style: inset;
       </property>
       <property name="text">
        <string>Non-commercial Use © 2024 NEXON Games &amp; Blue Archive</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="exitGame">
+      <property name="geometry">
+       <rect>
+        <x>1000</x>
+        <y>550</y>
+        <width>165</width>
+        <height>70</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+border:1px groove gray;
+border-radius:6px;
+padding:2px 4px;
+border-style: outset;
+}
+QPushButton:hover{
+	background-color: rgb(155, 222, 255);
+color: black;
+}
+QPushButton:pressed{
+	background-color: rgb(0, 128, 255);
+border-style: inset;
+}</string>
+      </property>
+      <property name="text">
+       <string>退出系统</string>
       </property>
      </widget>
     </widget>
@@ -351,7 +387,7 @@ border-style: inset;
       </property>
       <property name="font">
        <font>
-        <family>黑体</family>
+        <family>俐方体11号</family>
         <pointsize>10</pointsize>
         <bold>false</bold>
        </font>
@@ -378,8 +414,377 @@ border-style: inset;
        <string>回到主页</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="page2_to_page4">
+      <property name="geometry">
+       <rect>
+        <x>1050</x>
+        <y>640</y>
+        <width>80</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+border:1px groove gray;
+border-radius:6px;
+padding:2px 4px;
+border-style: outset;
+}
+QPushButton:hover{
+	background-color: rgb(155, 222, 255);
+color: black;
+}
+QPushButton:pressed{
+	background-color: rgb(0, 128, 255);
+border-style: inset;
+}</string>
+      </property>
+      <property name="text">
+       <string>关于</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QWidget" name="fight"/>
+    <widget class="QWidget" name="fight">
+     <widget class="QLabel" name="YourPal_IMG">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>90</y>
+        <width>240</width>
+        <height>240</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLable {
+	
+	background-color: rgb(0, 0, 0);
+	border-style:outset;
+	border:2px groove gray
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="Resource.qrc">:/new/prefix1/Resource/blue_archive_big_head_sd/ARONA~2.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="othersPal_IMG">
+      <property name="geometry">
+       <rect>
+        <x>880</x>
+        <y>90</y>
+        <width>240</width>
+        <height>240</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="Resource.qrc">:/new/prefix1/Resource/blue_archive_big_head_sd/A.R.O.N.A~1.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="VS">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>170</y>
+        <width>80</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>32</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>VS</string>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="YourPal_HP_ProgBar">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>350</y>
+        <width>280</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>100</number>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="othersPal_HP_ProgBar">
+      <property name="geometry">
+       <rect>
+        <x>880</x>
+        <y>350</y>
+        <width>280</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>100</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="HP">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>350</y>
+        <width>80</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>生命值：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="HP_2">
+      <property name="geometry">
+       <rect>
+        <x>800</x>
+        <y>350</y>
+        <width>80</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>生命值：</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="about">
+     <widget class="QLabel" name="About">
+      <property name="geometry">
+       <rect>
+        <x>940</x>
+        <y>110</y>
+        <width>70</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>24</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>关于</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="About_logo">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>220</y>
+        <width>681</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="Resource.qrc">:/new/prefix1/Resource/AliceArchive_Logo.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="About_line_1">
+      <property name="geometry">
+       <rect>
+        <x>735</x>
+        <y>220</y>
+        <width>490</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>本项目基于Qt工具箱并使用C++编写</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="About_line_2">
+      <property name="geometry">
+       <rect>
+        <x>735</x>
+        <y>260</y>
+        <width>600</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>开源项目地址：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="About_line_3">
+      <property name="geometry">
+       <rect>
+        <x>770</x>
+        <y>300</y>
+        <width>490</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>https://github.com/wangquanlikun/Alice_Archive</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="About_line_4">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>340</y>
+        <width>490</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Logo生成：https://lab.nulla.top/ba-logo</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="About_line_5">
+      <property name="geometry">
+       <rect>
+        <x>735</x>
+        <y>380</y>
+        <width>600</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>相关元素：Blue Archive 蔚蓝档案 蔚藍檔案 © NEXON</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="About_returntomain">
+      <property name="geometry">
+       <rect>
+        <x>1150</x>
+        <y>640</y>
+        <width>80</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+border:1px groove gray;
+border-radius:6px;
+padding:2px 4px;
+border-style: outset;
+}
+QPushButton:hover{
+	background-color: rgb(155, 222, 255);
+color: black;
+}
+QPushButton:pressed{
+	background-color: rgb(0, 128, 255);
+border-style: inset;
+}</string>
+      </property>
+      <property name="text">
+       <string>回到主页</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="About_line_6">
+      <property name="geometry">
+       <rect>
+        <x>770</x>
+        <y>420</y>
+        <width>500</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>头图：PID 110486537</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="About_line_7">
+      <property name="geometry">
+       <rect>
+        <x>770</x>
+        <y>460</y>
+        <width>500</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>大头素材：作者UID 51776118</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="personalspace"/>
    </widget>
   </widget>
  </widget>

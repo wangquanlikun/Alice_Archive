@@ -14,3 +14,16 @@
 3. 游戏对战的设计：已经登录的在线用户可以和服务器进行虚拟决斗，决斗分两种：升级赛和决斗赛；系统自动模拟每场比赛的每次出招等  
 
 > 勇士啊。光芒与你同在！
+
+## 项目
+
+本项目基于Qt工具箱并使用C++编写  
+
+相关设计元素：Blue Archive 蔚蓝档案 蔚藍檔案 © NEXON  
+
+有关素材使用：  
+1. Logo生成：[BlueArchive-Style Logo Generator](https://lab.nulla.top/ba-logo)  
+2. 头图：PID [110486537](https://www.pixiv.net/artworks/110486537)  
+3. 大头素材：作者UID [51776118](https://www.pixiv.net/users/51776118)  
+
+如有侵权行为，请与我联系，将会及时处理和回复，谢谢！
