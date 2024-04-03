@@ -30,6 +30,10 @@
 
 ## 构建
 
-本项目分为客户端和服务端系统
-其中`AliceArchive_server.pro`及以`_server`开头的文件或一级目录为服务端系统Qt源文件
-`AliceArchive.pro`及其它文件或一级目录为客户端系统Qt源文件
+本项目分为客户端和服务端系统  
+  
+其中`AliceArchive_server.pro`及以`_server`开头的文件或一级目录为服务端系统Qt源文件  
+`AliceArchive.pro`及其它文件或一级目录为客户端系统Qt源文件  
+  
+本项目开发与测试环境构建套件为 `Desktop Qt 6.6.3 MinGW 64-bit`  
+其它环境可自行调整适配
