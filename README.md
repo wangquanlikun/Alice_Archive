@@ -27,3 +27,9 @@
 3. 大头素材：作者UID [51776118](https://www.pixiv.net/users/51776118)  
 
 如有侵权行为，请与我联系，将会及时处理和回复，谢谢！
+
+## 构建
+
+本项目分为客户端和服务端系统
+其中`AliceArchive_server.pro`及以`_server`开头的文件或一级目录为服务端系统Qt源文件
+`AliceArchive.pro`及其它文件或一级目录为客户端系统Qt源文件
