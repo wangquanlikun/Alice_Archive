@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
+#include <QtWidgets/QWidget>
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QHostAddress>
@@ -24,18 +25,15 @@ public:
 
 private slots:
     void on_enterGame_clicked();
-
     void on_page2_to_page1_clicked();
-
     void on_register_2_clicked();
-
     void on_login_2_clicked();
-
     void on_exitGame_clicked();
-
     void on_About_returntomain_clicked();
-
     void on_page2_to_page4_clicked();
+
+    void readData();
+    void socket_disconnected();
 
 private:
     Ui::MainWindow *ui;
@@ -43,5 +41,8 @@ private:
     QTcpSocket *socket;
     QString IP;
     int port;
+
+    bool register_success;
+    bool login_success;
 };
 #endif // MAINWINDOW_H

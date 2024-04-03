@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "socket.h"
+#include "executor.h"
 
 #include<QMessageBox>
 #include<thread>
@@ -14,37 +15,64 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(tr("Alice Archive"));
     setWindowIcon(QIcon(":/new/prefix1/Resource/AliceArchive_ICO.ico"));
 
-    socket = new QTcpSocket();
-    // QObject::connect(socket, &QTcpSocket::readyRead, this, &MainWindow::readData);
-    // QObject::connect(socket, &QTcpSocket::disconnected, this, &MainWindow::socket_disconnected);
-
-    // ui->userPetPic_1->setScaledContents(true);
+    socket = new QTcpSocket(this);
+    QObject::connect(socket, &QTcpSocket::readyRead, this, &MainWindow::readData);
+    QObject::connect(socket, &QTcpSocket::disconnected, this, &MainWindow::socket_disconnected);
 
     IP = "127.0.0.1";
-    port = 6666;
-    // nowPet = 0;
+    port = 10043;
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow(){
     delete ui;
     delete socket;
 }
 
-void MainWindow::on_enterGame_clicked()
-{
-    ui->Mainpage->setCurrentIndex(1);
+void MainWindow::socket_disconnected(){
+    socket->close();
+}
+
+void MainWindow::readData(){
+    QByteArray buffer;
+    buffer = socket->readAll();
+    if(!buffer.isEmpty()){
+        Instruction instruction;
+        instruction.get_inst(buffer);
+        int buf = instruction.executor(); //对发回的buffer消息进行后续处理的逻辑
+        if(buf == USERNAMEIN){
+            register_success = false;
+            QMessageBox::warning(this,"注册失败","用户名已存在");
+        }
+        else if(buf == PASSWORDWRONG){
+            login_success = false;
+            QMessageBox::warning(this,"登陆失败","用户名或密码错误");
+        }
+        else if(buf == LOGINSUCCESS){
+            register_success = true;
+            login_success = true;
+        }
+    }
+}
+
+void MainWindow::on_enterGame_clicked(){
+    socket->abort(); //取消已有的连接
+    socket->connectToHost(IP, port);
+    if(!socket->waitForConnected(3000)){
+        QMessageBox::warning(this,"连接超时","请检查服务端是否正确配置  "+IP+":"+QString::number(port));
+    }
+    else{
+        socket->write("200 Connection Established.");
+        ui->Mainpage->setCurrentIndex(1);
+    }
 }
 
 
-void MainWindow::on_page2_to_page1_clicked()
-{
+void MainWindow::on_page2_to_page1_clicked(){
     ui->Mainpage->setCurrentIndex(0);
 }
 
 
-void MainWindow::on_register_2_clicked()
-{
+void MainWindow::on_register_2_clicked(){
     Packet packet;
     packet.clear();
     packet.getUserID(ui->username->text().toUtf8());
@@ -58,16 +86,18 @@ void MainWindow::on_register_2_clicked()
         QMessageBox::warning(this,"输入非法","用户名或密码不能为空！  ");
     }
     else{
-        /*
-         * Socket通信
-         * 进入页面3
-         */
+        socket->write(packet.trans_to_QByteArray());
+        bool iswrite = socket->waitForBytesWritten();
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        if(iswrite && register_success){
+            QMessageBox::about(this,"200","注册成功，现在登陆");
+            ui->Mainpage->setCurrentIndex(4);
+        }
     }
 }
 
 
-void MainWindow::on_login_2_clicked()
-{
+void MainWindow::on_login_2_clicked(){
     Packet packet;
     packet.clear();
     packet.getUserID(ui->username->text().toUtf8());
@@ -81,20 +111,22 @@ void MainWindow::on_login_2_clicked()
         QMessageBox::warning(this,"输入非法","用户名或密码不能为空！  ");
     }
     else{
-        /*
-         * Socket通信
-         * 进入页面3
-         */
+        socket->write(packet.trans_to_QByteArray());
+        bool iswrite = socket->waitForBytesWritten();
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        if(iswrite && login_success){
+            QMessageBox::about(this,"200","登陆成功");
+            ui->Mainpage->setCurrentIndex(4);
+        }
     }
 }
 
 
-void MainWindow::on_exitGame_clicked()
-{
+void MainWindow::on_exitGame_clicked(){
     QMessageBox::StandardButton box;
     box = QMessageBox::question(this,"邦邦咔邦","确定要离开吗？爱丽丝会想你的", QMessageBox::Yes | QMessageBox::No);
     if(box == QMessageBox::Yes){
-        std::this_thread::sleep_for(std::chrono::microseconds(200));
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         exit(0);
     }
     else
@@ -102,14 +134,12 @@ void MainWindow::on_exitGame_clicked()
 }
 
 
-void MainWindow::on_About_returntomain_clicked()
-{
+void MainWindow::on_About_returntomain_clicked(){
     ui->Mainpage->setCurrentIndex(0);
 }
 
 
-void MainWindow::on_page2_to_page4_clicked()
-{
+void MainWindow::on_page2_to_page4_clicked(){
     ui->Mainpage->setCurrentIndex(3);
 }
 

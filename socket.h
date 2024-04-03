@@ -1,6 +1,7 @@
 #ifndef SOCKET_H
 #define SOCKET_H
 
+#include <QtWidgets/QWidget>
 #include <QByteArray>
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -79,9 +80,18 @@ class Packet{
                 return 1;
         }
 
-        bool register_sent();
+        QByteArray trans_to_QByteArray(){
+            QByteArray temp;
+            if(usertry == _login)
+                temp.append("l");
+            else
+                temp.append("r");
 
-        bool login_sent();
+            temp.append(UserID);
+            temp.append("&");
+            temp.append(Password);
+            return temp;
+        }
 };
 
 #endif // SOCKET_H
