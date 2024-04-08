@@ -1,12 +1,14 @@
 #ifndef EXECUTOR_H
 #define EXECUTOR_H
 
+#include "mainwindow.h"
 #include <QByteArray>
 #include <QString>
 
 #define USERNAMEIN 1
 #define PASSWORDWRONG 2
-#define LOGINSUCCESS 3
+#define REGISTERSUCCESS 3
+#define LOGINSUCCESS 4
 
 class Instruction{
     private:
@@ -23,6 +25,7 @@ class Instruction{
         QString get_head();
 
         int executor();
+        //User get_user_info();
 };
 
 #endif // EXECUTOR_H

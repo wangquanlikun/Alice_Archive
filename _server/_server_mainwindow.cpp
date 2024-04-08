@@ -36,12 +36,9 @@ void _Server_MainWindow::ClientConnect(){
 void _Server_MainWindow::ReadData(){
     QByteArray buf = socket->readAll();//readAll最多接收65532的数据
     ui->text_Debug_Info->append("[R] " + QString(buf));
-
-    /*
-     *
-     * 后续逻辑处理
-     *
-     * */
+    //后续逻辑处理
+    Executor_Data executor(socket, buf);
+    executor.server_executor();
 }
 
 void _Server_MainWindow::on_Exit_Button_clicked(){

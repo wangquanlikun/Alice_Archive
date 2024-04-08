@@ -582,7 +582,7 @@ border-style: inset;
       <property name="geometry">
        <rect>
         <x>940</x>
-        <y>110</y>
+        <y>135</y>
         <width>70</width>
         <height>50</height>
        </rect>
@@ -781,6 +781,25 @@ border-style: inset;
       </property>
       <property name="text">
        <string>大头素材：作者UID 51776118</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="About_line_8">
+      <property name="geometry">
+       <rect>
+        <x>735</x>
+        <y>520</y>
+        <width>490</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>千禧年科技学院·游戏开发部 最新力作</string>
       </property>
      </widget>
     </widget>

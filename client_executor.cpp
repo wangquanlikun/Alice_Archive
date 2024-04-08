@@ -17,6 +17,9 @@ int Instruction::executor(){
     else if(head == "PasswordWrong"){
         return PASSWORDWRONG;
     }
+    else if(head == "RegisterSuccess"){
+        return REGISTERSUCCESS;
+    }
     else if(head == "LoginSuccess"){
         return LOGINSUCCESS;
     } //对于登录注册

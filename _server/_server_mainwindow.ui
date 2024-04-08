@@ -37,7 +37,7 @@ background-color: rgb(235, 255, 255);
    <widget class="QPushButton" name="Exit_Button">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>680</x>
       <y>40</y>
       <width>60</width>
       <height>30</height>
@@ -76,7 +76,7 @@ border-style: inset;
      <rect>
       <x>40</x>
       <y>40</y>
-      <width>300</width>
+      <width>580</width>
       <height>30</height>
      </rect>
     </property>
@@ -95,7 +95,7 @@ border-style: inset;
      <rect>
       <x>40</x>
       <y>100</y>
-      <width>540</width>
+      <width>580</width>
       <height>420</height>
      </rect>
     </property>

@@ -21,6 +21,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     IP = "127.0.0.1";
     port = 10043;
+
+    register_success = false;
+    login_success = false;
 }
 
 MainWindow::~MainWindow(){
@@ -35,6 +38,7 @@ void MainWindow::socket_disconnected(){
 void MainWindow::readData(){
     QByteArray buffer;
     buffer = socket->readAll();
+    qDebug() << "[R] " + buffer;
     if(!buffer.isEmpty()){
         Instruction instruction;
         instruction.get_inst(buffer);
@@ -47,9 +51,16 @@ void MainWindow::readData(){
             login_success = false;
             QMessageBox::warning(this,"登陆失败","用户名或密码错误");
         }
+        else if(buf == REGISTERSUCCESS){
+            register_success = true;
+            login_success = true;
+            QMessageBox::about(this,"200","注册成功，现在登陆");
+            ui->Mainpage->setCurrentIndex(4);
+        }
         else if(buf == LOGINSUCCESS){
             register_success = true;
             login_success = true;
+            ui->Mainpage->setCurrentIndex(4);
         }
     }
 }
@@ -87,12 +98,6 @@ void MainWindow::on_register_2_clicked(){
     }
     else{
         socket->write(packet.trans_to_QByteArray());
-        bool iswrite = socket->waitForBytesWritten();
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        if(iswrite && register_success){
-            QMessageBox::about(this,"200","注册成功，现在登陆");
-            ui->Mainpage->setCurrentIndex(4);
-        }
     }
 }
 
@@ -112,12 +117,6 @@ void MainWindow::on_login_2_clicked(){
     }
     else{
         socket->write(packet.trans_to_QByteArray());
-        bool iswrite = socket->waitForBytesWritten();
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        if(iswrite && login_success){
-            QMessageBox::about(this,"200","登陆成功");
-            ui->Mainpage->setCurrentIndex(4);
-        }
     }
 }
 
