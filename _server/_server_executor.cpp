@@ -28,7 +28,7 @@ Database::~Database(){
 
 bool Database::nameIndatabase(const QByteArray username){
     QString select = "select * from player where name = ";
-    select += QString(username);
+    select += ( "'" + QString::fromUtf8(username) + "'" );
     if(!DBquery->exec(select)){
         qDebug() << DBquery->lastError();
         return false;
@@ -62,10 +62,13 @@ void Executor_Data::server_login(){
         else
             login_username += socket_data[i];
     }
+    i++;
     for( ; i < this->socket_data.length(); i++)
         login_password += socket_data[i];
 
-    QString select_all = "select * from player where name = " + QString(login_username) + " and password = " +  QString(login_password);
+    qDebug() << "Login Try username: " + login_username + " password: " + login_password;
+
+    QString select_all = "select * from player where name = '" + QString(login_username) + "' and password = '" +  QString(login_password) + "'";
     userDatabase.DBquery->prepare(select_all);
     userDatabase.DBquery->exec(select_all);
 
@@ -89,6 +92,7 @@ void Executor_Data::server_register(){
         else
             register_username += socket_data[i];
     }
+    i++;
     for( ; i < this->socket_data.length(); i++)
         register_password += socket_data[i];
 
@@ -100,8 +104,10 @@ void Executor_Data::server_register(){
         QString insert_sql = "insert into player values (?, ?, ?, ?, ?, ?, ?)";
         userDatabase.DBquery->prepare(insert_sql);
 
-        userDatabase.DBquery->addBindValue(QString(register_username));  //name
-        userDatabase.DBquery->addBindValue(QString(register_password));  //password
+        qDebug() << "Register username: " + register_username + " password: " + register_password;
+
+        userDatabase.DBquery->addBindValue(QString::fromUtf8(register_username));  //name
+        userDatabase.DBquery->addBindValue(QString::fromUtf8(register_password));  //password
         userDatabase.DBquery->addBindValue(0);    //win num
         userDatabase.DBquery->addBindValue(0);    //fail num
         userDatabase.DBquery->addBindValue(3);    //pet num
