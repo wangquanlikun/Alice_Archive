@@ -1,4 +1,8 @@
 # include "_server_TcpServer.h"
+# include <vector>
+# include <time.h>
+
+std::vector<QString> Online_userName;
 
 Database::Database(){
     if (QSqlDatabase::contains("qt_sql_default_connection")) {
@@ -50,6 +54,10 @@ void Executor_Data::server_executor(){
         server_register();
     else if(socket_data[0] == 'l')
         server_login();
+    else{
+        if(socket_data == "userLogout")
+            server_logout();
+    }
 }
 
 void Executor_Data::server_login(){
@@ -73,9 +81,9 @@ void Executor_Data::server_login(){
     userDatabase.DBquery->exec(select_all);
 
     if(userDatabase.DBquery->next()){ //用户名已存在且密码正确
-
+        QString loginReturn = "LoginSuccess&";
         //还要返回用户信息
-        socket->write("LoginSuccess&");
+        socket->write(loginReturn.toUtf8());
     }
     else {
         socket->write("PasswordWrong&");
@@ -111,14 +119,58 @@ void Executor_Data::server_register(){
         userDatabase.DBquery->addBindValue(0);    //win num
         userDatabase.DBquery->addBindValue(0);    //fail num
         userDatabase.DBquery->addBindValue(3);    //pet num
+        userDatabase.DBquery->addBindValue(0);    //high pet num
 
         //初始化与随机值用户信息
-        userDatabase.DBquery->addBindValue(0);    //high pet num
-        userDatabase.DBquery->addBindValue(0);    //pet information
+        QString registerReturn = "RegisterSuccess&0 0 3 0 ";
+        QString random_pet_info = New_login_Random_Pals();
+        userDatabase.DBquery->addBindValue(random_pet_info);    //pet information
 
         userDatabase.DBquery->exec();
 
         //还要返回用户信息
-        socket->write("RegisterSuccess&");
+        registerReturn += random_pet_info;
+        socket->write(registerReturn.toUtf8());
     }
+}
+
+void Executor_Data::server_logout(){
+    ;
+}
+
+QString Executor_Data::New_login_Random_Pals(){
+    QString Random_Pals = "";
+    srand((unsigned)time(NULL));
+    for (int i = 0; i < 3; i++){
+        int type = rand() % 4 + 1;
+        int subtype = rand() % 4 + 1;
+        type = 10 * type + subtype;
+        Random_Pals += QString::number(type);
+        QString name;
+        int AP = 100, DP = 100, HP = 100, AI = 50;
+        switch(type/10){
+        case 1:  //力量型
+            AP = 150;
+            name = "Strong!";
+            break;
+        case 2:  //肉盾型
+            HP = 150;
+            name = "Tank!";
+            break;
+        case 3:  //防御型
+            DP = 150;
+            name = "Defence";
+            break;
+        case 4:  //敏捷型
+            AI = 35;
+            name = "fast";
+            break;
+        }
+        switch(type%10){
+
+        }
+        Random_Pals += (" " + QString::number(AP) + " " + QString::number(DP) + " " + QString::number(HP) + " " + QString::number(AI) + " " + name + " "+"1 0 ");
+    }
+
+    return Random_Pals;
 }

@@ -58,7 +58,7 @@
 }</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="main">
      <widget class="QLabel" name="Background">
@@ -269,6 +269,9 @@ border-style: inset;
          <width>230</width>
          <height>40</height>
         </rect>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
        </property>
        <property name="placeholderText">
         <string> password</string>
@@ -520,6 +523,9 @@ border-style: inset;
         <width>280</width>
         <height>25</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="value">
        <number>100</number>
@@ -803,7 +809,644 @@ border-style: inset;
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="personalspace"/>
+    <widget class="QWidget" name="personalspace">
+     <widget class="QPushButton" name="logout">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>650</y>
+        <width>100</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+border:1px groove gray;
+border-radius:6px;
+padding:2px 4px;
+border-style: outset;
+}
+QPushButton:hover{
+	background-color: rgb(155, 222, 255);
+color: black;
+}
+QPushButton:pressed{
+	background-color: rgb(0, 128, 255);
+border-style: inset;
+}</string>
+      </property>
+      <property name="text">
+       <string>退出登录</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Welcome_1">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>30</y>
+        <width>160</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>欢迎用户：</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="Welcome_username">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>30</y>
+        <width>180</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextBrower {
+	border:0px groove gray;
+}</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="basic_info">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>80</y>
+        <width>225</width>
+        <height>200</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLCDNumber" name="winNumLED">
+       <property name="geometry">
+        <rect>
+         <x>125</x>
+         <y>20</y>
+         <width>70</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLCDNumber" name="failNumLED">
+       <property name="geometry">
+        <rect>
+         <x>125</x>
+         <y>60</y>
+         <width>70</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="winNUM">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>20</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>胜利场数</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="failNUM">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>60</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>失败场数</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TEXT_Honor">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>110</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>用户荣誉：</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="Pals_info">
+      <property name="geometry">
+       <rect>
+        <x>439</x>
+        <y>30</y>
+        <width>675</width>
+        <height>660</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QProgressBar{
+	border-radius: 5px;
+	background: white;
+}
+QProgressBar::chunk{
+	border-radius: 5px;
+	background: rgb(47, 109, 255);
+}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QListView" name="Pals_list">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>90</y>
+         <width>295</width>
+         <height>190</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="choose_Fight_1">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>120</y>
+         <width>80</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+border:1px groove gray;
+border-radius:6px;
+padding:2px 4px;
+border-style: outset;
+}
+QPushButton:hover{
+	background-color: rgb(155, 222, 255);
+color: black;
+}
+QPushButton:pressed{
+	background-color: rgb(0, 128, 255);
+border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string>开始决斗</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TEXT_mypals">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>40</y>
+         <width>180</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>我的宠物小精灵</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TEXT_mypals_info">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>320</y>
+         <width>180</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>小精灵基本信息</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="this_Pal_img">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>370</y>
+         <width>240</width>
+         <height>240</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/blue_archive_big_head_sd/ARONA~2.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QTextBrowser" name="this_Pal_attribute">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>410</y>
+         <width>135</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TEXT_Attribute">
+       <property name="geometry">
+        <rect>
+         <x>375</x>
+         <y>410</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>基本属性</string>
+       </property>
+      </widget>
+      <widget class="QTextBrowser" name="this_Pal_name">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>370</y>
+         <width>135</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TEXT_NAME">
+       <property name="geometry">
+        <rect>
+         <x>375</x>
+         <y>370</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>精灵姓名</string>
+       </property>
+      </widget>
+      <widget class="QLCDNumber" name="this_Pal_LV">
+       <property name="geometry">
+        <rect>
+         <x>420</x>
+         <y>455</y>
+         <width>65</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLCDNumber" name="this_Pal_Exp">
+       <property name="geometry">
+        <rect>
+         <x>550</x>
+         <y>455</y>
+         <width>65</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TEXT_LV">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>455</y>
+         <width>40</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>LV.</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TEXT_EXP">
+       <property name="geometry">
+        <rect>
+         <x>505</x>
+         <y>455</y>
+         <width>40</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>EXP.</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TEXT_FightPoint">
+       <property name="geometry">
+        <rect>
+         <x>375</x>
+         <y>500</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>攻击力</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TEXT_DefightPoint">
+       <property name="geometry">
+        <rect>
+         <x>375</x>
+         <y>530</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>防御力</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TEXT_HealthPoint">
+       <property name="geometry">
+        <rect>
+         <x>375</x>
+         <y>560</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>生命值</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TEXT_AttackInterval">
+       <property name="geometry">
+        <rect>
+         <x>375</x>
+         <y>590</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>攻击间隔</string>
+       </property>
+      </widget>
+      <widget class="QProgressBar" name="this_Pal_AP">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>505</y>
+         <width>118</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>1000</number>
+       </property>
+       <property name="value">
+        <number>150</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QProgressBar" name="this_Pal_DP">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>535</y>
+         <width>118</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>1000</number>
+       </property>
+       <property name="value">
+        <number>24</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QProgressBar" name="this_Pal_HP">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>565</y>
+         <width>118</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>1000</number>
+       </property>
+       <property name="value">
+        <number>24</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QProgressBar" name="this_Pal_AI">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>595</y>
+         <width>118</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QProgressBar::chunk{
+	border-radius: 5px;
+	background: yellow;
+}</string>
+       </property>
+       <property name="maximum">
+        <number>50</number>
+       </property>
+       <property name="value">
+        <number>35</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="choose_Fight_2">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>200</y>
+         <width>80</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+border:1px groove gray;
+border-radius:6px;
+padding:2px 4px;
+border-style: outset;
+}
+QPushButton:hover{
+	background-color: rgb(155, 222, 255);
+color: black;
+}
+QPushButton:pressed{
+	background-color: rgb(0, 128, 255);
+border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string>升级历练</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="TEXT_loggedUser">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>290</y>
+        <width>225</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>在线用户列表：</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
  </widget>

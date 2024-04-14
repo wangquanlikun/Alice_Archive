@@ -24,6 +24,8 @@ class Executor_Data{
         QByteArray socket_data;
         void server_register();
         void server_login();
+        void server_logout();
+        QString New_login_Random_Pals();
     public:
         Executor_Data(QTcpSocket* socket, QByteArray data){
             this->socket = socket;

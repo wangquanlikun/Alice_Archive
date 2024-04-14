@@ -7,6 +7,11 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QHostAddress>
+#include <QStringListModel>
+#include <QStandardItemModel>
+#include <QModelIndex>
+
+#include "user.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -31,6 +36,8 @@ private slots:
     void on_exitGame_clicked();
     void on_About_returntomain_clicked();
     void on_page2_to_page4_clicked();
+    void on_logout_clicked();
+    void Pal_list_click(QModelIndex index);
 
     void readData();
     void socket_disconnected();
@@ -44,5 +51,11 @@ private:
 
     bool register_success;
     bool login_success;
+
+    User_Data userdata;
+    int Now_pet;
+    void window_personalPage();
+    QStandardItemModel *ItemModel_PetList;
+    void change_now_pet(int Now_pet);
 };
 #endif // MAINWINDOW_H

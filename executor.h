@@ -25,7 +25,6 @@ class Instruction{
         QString get_head();
 
         int executor();
-        //User get_user_info();
 };
 
 #endif // EXECUTOR_H

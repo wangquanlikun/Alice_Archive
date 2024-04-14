@@ -12,7 +12,8 @@ CONFIG += c++17
 SOURCES += \
     client_executor.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    user.cpp
 
 HEADERS += \
     executor.h \

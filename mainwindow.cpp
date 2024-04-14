@@ -24,6 +24,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     register_success = false;
     login_success = false;
+
+    ui->Mainpage->setCurrentIndex(0);
+
+    Now_pet = 1;
 }
 
 MainWindow::~MainWindow(){
@@ -56,11 +60,15 @@ void MainWindow::readData(){
             login_success = true;
             QMessageBox::about(this,"200","注册成功，现在登陆");
             ui->Mainpage->setCurrentIndex(4);
+            userdata.Write_userData(buffer);
+            window_personalPage();
         }
         else if(buf == LOGINSUCCESS){
             register_success = true;
             login_success = true;
             ui->Mainpage->setCurrentIndex(4);
+            userdata.Write_userData(buffer);
+            window_personalPage();
         }
     }
 }
@@ -87,6 +95,7 @@ void MainWindow::on_register_2_clicked(){
     Packet packet;
     packet.clear();
     packet.getUserID(ui->username->text().toUtf8());
+    userdata.write_name(ui->username->text().toUtf8());
     packet.getPassword(ui->password->text().toUtf8());
     packet.getUserTry(Register_Try);
 
@@ -106,6 +115,7 @@ void MainWindow::on_login_2_clicked(){
     Packet packet;
     packet.clear();
     packet.getUserID(ui->username->text().toUtf8());
+    userdata.write_name(ui->username->text().toUtf8());
     packet.getPassword(ui->password->text().toUtf8());
     packet.getUserTry(Login_Try);
 
@@ -142,3 +152,71 @@ void MainWindow::on_page2_to_page4_clicked(){
     ui->Mainpage->setCurrentIndex(3);
 }
 
+
+void MainWindow::on_logout_clicked(){
+    socket->write("userLogout");
+    //要写回用户信息更改吗
+    ui->Mainpage->setCurrentIndex(1);
+}
+
+void MainWindow::window_personalPage(){
+    ui->Welcome_username->setText(userdata.get_name());
+    ui->winNumLED->display(userdata.winNum);
+    ui->failNumLED->display(userdata.failNum);
+
+    ItemModel_PetList = new QStandardItemModel(this);
+    QStringList strList;
+    strList.append("\t姓名列表：");
+    for (int i = 0; i < this->userdata.petNum; i++){
+        strList.append(this->userdata.userPals[i].name);
+    }
+    int nCount = strList.size();
+    for(int i = 0; i < nCount; i++){
+        QString string = static_cast<QString>(strList.at(i));
+        QStandardItem *item = new QStandardItem(string);
+        ItemModel_PetList->appendRow(item);
+    }
+    ui->Pals_list->setModel(ItemModel_PetList);
+    connect(ui->Pals_list,SIGNAL(clicked(QModelIndex)),this,SLOT(Pal_list_click(QModelIndex)));
+    change_now_pet(1);
+}
+
+void MainWindow::Pal_list_click(QModelIndex index){
+    this->Now_pet = index.row();
+    if(Now_pet != 0){
+        change_now_pet(Now_pet);
+        QMessageBox msg;
+        msg.setText("你选择了"+QString::number(Now_pet)+"号精灵！");
+        msg.exec();
+    }
+    else {
+        Now_pet = 1;
+        QMessageBox msg;
+        msg.setText("点击列表查看精灵详细信息");
+        msg.exec();
+    }
+}
+void MainWindow::change_now_pet(int Now_pet){
+    Pal this_pal = this->userdata.userPals[Now_pet - 1];
+    ui->this_Pal_name->setText(this_pal.name);
+    ui->this_Pal_LV->display(this_pal.level);
+    ui->this_Pal_Exp->display(this_pal.exp);
+    ui->this_Pal_AP->setValue(this_pal.Attack_power);
+    ui->this_Pal_DP->setValue(this_pal.Defense);
+    ui->this_Pal_HP->setValue(this_pal.HP);
+    ui->this_Pal_AI->setValue(this_pal.Attack_interval);
+    switch(this_pal.get_attribute_int()){
+    case 1:
+        ui->this_Pal_attribute->setText("力量型");
+        break;
+    case 2:
+        ui->this_Pal_attribute->setText("肉盾型");
+        break;
+    case 3:
+        ui->this_Pal_attribute->setText("防御型");
+        break;
+    case 4:
+        ui->this_Pal_attribute->setText("敏捷型");
+        break;
+    }
+}

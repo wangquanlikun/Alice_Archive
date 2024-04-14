@@ -1,4 +1,6 @@
 #include "executor.h"
+#include "user.h"
+#include <QDebug>
 
 QString Instruction::get_head(){
     QString buf;
@@ -27,4 +29,18 @@ int Instruction::executor(){
 
     }
     return 0;
+}
+
+void User_Data::Write_userData(QByteArray buffer){
+    int pos = buffer.indexOf('&');
+    QByteArray cache = buffer.mid(pos + 1);
+    QTextStream stream(&cache);
+    stream >> this->winNum >> this->failNum >> this->petNum >> this->HighpetNum;
+    userPals.resize(petNum);
+    for (int i = 0; i < petNum; i++){
+        int type, AP, DP, HP, AI, LV, EXP;
+        QString name;
+        stream >> type >> AP >> DP >> HP >> AI >> name >> LV >> EXP;
+        userPals[i].Initi_set(type, name, AP, DP, HP, AI, LV, EXP);
+    }
 }
