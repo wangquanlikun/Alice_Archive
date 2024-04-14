@@ -42,6 +42,8 @@ private slots:
     void readData();
     void socket_disconnected();
 
+    void Init_pinyin();
+
 private:
     Ui::MainWindow *ui;
 

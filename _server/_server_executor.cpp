@@ -122,8 +122,8 @@ void Executor_Data::server_register(){
         userDatabase.DBquery->addBindValue(0);    //high pet num
 
         //初始化与随机值用户信息
-        QString registerReturn = "RegisterSuccess&0 0 3 0 ";
-        QString random_pet_info = New_login_Random_Pals();
+        QString registerReturn = "RegisterSuccess&0 0 30 0 ";
+        QString random_pet_info = New_login_Random_Pals(30);
         userDatabase.DBquery->addBindValue(random_pet_info);    //pet information
 
         userDatabase.DBquery->exec();
@@ -138,36 +138,81 @@ void Executor_Data::server_logout(){
     ;
 }
 
-QString Executor_Data::New_login_Random_Pals(){
+QString Executor_Data::New_login_Random_Pals(int times){
     QString Random_Pals = "";
     srand((unsigned)time(NULL));
-    for (int i = 0; i < 3; i++){
+    for (int i = 0; i < times; i++){
         int type = rand() % 4 + 1;
         int subtype = rand() % 4 + 1;
         type = 10 * type + subtype;
         Random_Pals += QString::number(type);
         QString name;
         int AP = 100, DP = 100, HP = 100, AI = 50;
-        switch(type/10){
-        case 1:  //力量型
-            AP = 150;
-            name = "Strong!";
-            break;
-        case 2:  //肉盾型
-            HP = 150;
-            name = "Tank!";
-            break;
-        case 3:  //防御型
-            DP = 150;
-            name = "Defence";
-            break;
-        case 4:  //敏捷型
-            AI = 35;
-            name = "fast";
-            break;
-        }
-        switch(type%10){
-
+        switch(type){
+            case 11:  //力量型
+                AP = 150;
+                name = "圣园弥香";
+                break;
+            case 12:
+                AP = 150;
+                name = "空崎阳奈";
+                break;
+            case 13:
+                AP = 150;
+                name = "天童爱丽丝";
+                break;
+            case 14:
+                AP = 150;
+                name = "白洲梓";
+                break;
+            case 21:  //肉盾型
+                HP = 150;
+                name = "优香";
+                break;
+            case 22:
+                HP = 150;
+                name = "小鸟游星野";
+                break;
+            case 23:
+                HP = 150;
+                name = "阿罗娜";
+                break;
+            case 24:
+                HP = 150;
+                name = "普拉娜";
+                break;
+            case 31:  //防御型
+                DP = 150;
+                name = "枣伊吕波";
+                break;
+            case 32:
+                DP = 150;
+                name = "阿慈谷日富美";
+                break;
+            case 33:
+                DP = 150;
+                name = "砂狼白子";
+                break;
+            case 34:
+                DP = 150;
+                name = "才羽桃井";
+                break;
+            case 41:  //敏捷型
+                AI = 35;
+                name = "才羽绿";
+                break;
+            case 42:
+                AI = 35;
+                name = "伊落玛丽";
+                break;
+            case 43:
+                AI = 35;
+                name = "下江小春";
+                break;
+            case 44:
+                AI = 35;
+                name = "花岗柚子";
+                break;
         }
         Random_Pals += (" " + QString::number(AP) + " " + QString::number(DP) + " " + QString::number(HP) + " " + QString::number(AI) + " " + name + " "+"1 0 ");
     }

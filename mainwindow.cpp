@@ -4,8 +4,12 @@
 #include "executor.h"
 
 #include<QMessageBox>
+#include<QPixmapCache>
 #include<thread>
 #include<chrono>
+
+#include<map>
+extern std::map<QString, QString> ToPinyin;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -28,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->Mainpage->setCurrentIndex(0);
 
     Now_pet = 1;
+    Init_pinyin();
 }
 
 MainWindow::~MainWindow(){
@@ -164,6 +169,24 @@ void MainWindow::window_personalPage(){
     ui->winNumLED->display(userdata.winNum);
     ui->failNumLED->display(userdata.failNum);
 
+    if(userdata.petNum >= 30)
+        ui->HONOR_1->setText("宠物个数勋章：金勋章");
+    else if(userdata.petNum >= 20)
+        ui->HONOR_1->setText("宠物个数勋章：银勋章");
+    else if(userdata.petNum >= 10)
+        ui->HONOR_1->setText("宠物个数勋章：铜勋章");
+    else
+        ui->HONOR_1->setText("宠物个数勋章：Null");
+
+    if(userdata.HighpetNum >= 8)
+        ui->HONOR_2->setText("高级宠物勋章：金勋章");
+    else if(userdata.HighpetNum >= 5)
+        ui->HONOR_2->setText("高级宠物勋章：银勋章");
+    else if(userdata.HighpetNum >= 3)
+        ui->HONOR_2->setText("高级宠物勋章：铜勋章");
+    else
+        ui->HONOR_2->setText("高级宠物勋章：Null");
+
     ItemModel_PetList = new QStandardItemModel(this);
     QStringList strList;
     strList.append("\t姓名列表：");
@@ -205,18 +228,32 @@ void MainWindow::change_now_pet(int Now_pet){
     ui->this_Pal_DP->setValue(this_pal.Defense);
     ui->this_Pal_HP->setValue(this_pal.HP);
     ui->this_Pal_AI->setValue(this_pal.Attack_interval);
+    QPixmap pixmap;
+    QString pix_path = ":/new/prefix1/Resource/blue_archive_big_head_sd/" + ToPinyin[this_pal.name] + ".png";
     switch(this_pal.get_attribute_int()){
     case 1:
         ui->this_Pal_attribute->setText("力量型");
+        QPixmapCache::clear();
+        pixmap.load(pix_path);
+        ui->this_Pal_img->setPixmap(pixmap);
         break;
     case 2:
         ui->this_Pal_attribute->setText("肉盾型");
+        QPixmapCache::clear();
+        pixmap.load(pix_path);
+        ui->this_Pal_img->setPixmap(pixmap);
         break;
     case 3:
         ui->this_Pal_attribute->setText("防御型");
+        QPixmapCache::clear();
+        pixmap.load(pix_path);
+        ui->this_Pal_img->setPixmap(pixmap);
         break;
     case 4:
         ui->this_Pal_attribute->setText("敏捷型");
+        QPixmapCache::clear();
+        pixmap.load(pix_path);
+        ui->this_Pal_img->setPixmap(pixmap);
         break;
     }
 }

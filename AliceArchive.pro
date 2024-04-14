@@ -13,6 +13,7 @@ SOURCES += \
     client_executor.cpp \
     main.cpp \
     mainwindow.cpp \
+    pinyin_alphabet.cpp \
     user.cpp
 
 HEADERS += \
