@@ -37,3 +37,23 @@
   
 本项目开发与测试环境构建套件为 `Desktop Qt 6.6.3 MinGW 64-bit`  
 其它环境可自行调整适配
+
+## 运行
+
+如下为本程序运行演示相关页面：
+
+### 客户端
+
+#### 主页面
+
+![MAIN](./Intro/Main_Page.png)
+
+#### 注册与登录页面
+
+![login](./Intro/Login.png)
+
+### 服务端
+
+本页面用于展示运行过程中，服务端的相关运行参数与接受到的socket信息内容
+
+![Server](./Intro/Server.png)
