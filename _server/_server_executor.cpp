@@ -93,13 +93,14 @@ void Executor_Data::server_login(){
 
         //返回所有用户与其精灵信息
         QString all_user_info;
-        userDatabase.DBquery->prepare("SELECT name, pet FROM player");
+        userDatabase.DBquery->prepare("SELECT name, pet, petNum FROM player");
         userDatabase.DBquery->exec();
         int user_num = 0;
         while(userDatabase.DBquery->next()){
             QString name = userDatabase.DBquery->value(0).toString();
             QString pet = userDatabase.DBquery->value(1).toString();
-            all_user_info += (" " + name);
+            QString petNum = userDatabase.DBquery->value(2).toString();
+            all_user_info += (" " + name + " " + petNum + " " + pet);
             user_num ++;
         }
         loginReturn += ("#" + QString::number(user_num) + all_user_info);
@@ -155,13 +156,14 @@ void Executor_Data::server_register(){
 
         //返回所有用户与其精灵信息
         QString all_user_info;
-        userDatabase.DBquery->prepare("SELECT name, pet FROM player");
+        userDatabase.DBquery->prepare("SELECT name, pet, petNum FROM player");
         userDatabase.DBquery->exec();
         int user_num = 0;
         while(userDatabase.DBquery->next()){
             QString name = userDatabase.DBquery->value(0).toString();
             QString pet = userDatabase.DBquery->value(1).toString();
-            all_user_info += (" " + name);
+            QString petNum = userDatabase.DBquery->value(2).toString();
+            all_user_info += (" " + name + " " + petNum + " " + pet);
             user_num ++;
         }
         registerReturn += ("#" + QString::number(user_num) + all_user_info);

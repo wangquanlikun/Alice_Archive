@@ -38,6 +38,7 @@ private slots:
     void on_page2_to_page4_clicked();
     void on_logout_clicked();
     void Pal_list_click(QModelIndex index);
+    void Userlist_click(QModelIndex index);
 
     void readData();
     void socket_disconnected();

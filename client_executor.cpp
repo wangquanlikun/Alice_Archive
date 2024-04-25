@@ -4,6 +4,7 @@
 #include "user.h"
 #include <QDebug>
 #include <QRandomGenerator>
+#include <QMessageBox>
 
 QString Instruction::get_head(){
     QString buf;
@@ -60,6 +61,16 @@ void MainWindow::write_regi_userdata(const QByteArray buffer){
     this->regi_userdata.resize(regi_user_num);
     for(int i = 0; i < regi_user_num; i++){
         stream >> this->regi_userdata[i].username;
+
+        int petnum;
+        stream >> petnum;
+        this->regi_userdata[i].Pals_name.resize(petnum);
+        this->regi_userdata[i].petNum = petnum;
+
+        for(int j = 0; j < petnum; j++){
+            int type, AP, DP, HP, AI, LV, EXP;
+            stream >> type >> AP >> DP >> HP >> AI >> this->regi_userdata[i].Pals_name[j] >> LV >> EXP;
+        }
     }
 }
 
@@ -186,4 +197,26 @@ void MainWindow::creat_Regi_User_List(){
         ItemModel_RegiUserList->appendRow(item);
     }
     this->ui->Userlist->setModel(ItemModel_RegiUserList);
+    connect(ui->Userlist,SIGNAL(clicked(QModelIndex)),this,SLOT(Userlist_click(QModelIndex)));
+}
+
+void MainWindow::Userlist_click(QModelIndex index){
+    if(index.row() == 0){
+        QMessageBox msg;
+        msg.setText("点击列表查看用户详细信息");
+        msg.exec();
+        return;
+    }
+
+    QMessageBox msg;
+    QString message_test;
+    message_test += "你选择的用户名称为：" + this->regi_userdata[index.row() - 1].username + "\n";
+    message_test += "用户拥有 " + QString::number(this->regi_userdata[index.row() - 1].petNum) + " 个精灵" + "\n";
+    message_test += "用户精灵为：\n";
+    for(int i = 0; i < this->regi_userdata[index.row() - 1].petNum; i++){
+        message_test += this->regi_userdata[index.row() - 1].Pals_name[i];
+        message_test += "  ";
+    }
+    msg.setText(message_test);
+    msg.exec();
 }
