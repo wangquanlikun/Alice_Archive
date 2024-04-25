@@ -81,8 +81,29 @@ void Executor_Data::server_login(){
     userDatabase.DBquery->exec(select_all);
 
     if(userDatabase.DBquery->next()){ //用户名已存在且密码正确
+        Online_userName.push_back(login_username);
         QString loginReturn = "LoginSuccess&";
         //还要返回用户信息
+        QString winNum = userDatabase.DBquery->value(2).toString();
+        QString failNum = userDatabase.DBquery->value(3).toString();
+        QString petNum = userDatabase.DBquery->value(4).toString();
+        QString highPetNum = userDatabase.DBquery->value(5).toString();
+        QString pet = userDatabase.DBquery->value(6).toString();
+        loginReturn += (winNum + " " + failNum + " " + petNum + " " + highPetNum + " " + pet);
+
+        //返回所有用户与其精灵信息
+        QString all_user_info;
+        userDatabase.DBquery->prepare("SELECT name, pet FROM player");
+        userDatabase.DBquery->exec();
+        int user_num = 0;
+        while(userDatabase.DBquery->next()){
+            QString name = userDatabase.DBquery->value(0).toString();
+            QString pet = userDatabase.DBquery->value(1).toString();
+            all_user_info += (" " + name);
+            user_num ++;
+        }
+        loginReturn += ("#" + QString::number(user_num) + all_user_info);
+
         socket->write(loginReturn.toUtf8());
     }
     else {
@@ -113,12 +134,13 @@ void Executor_Data::server_register(){
         userDatabase.DBquery->prepare(insert_sql);
 
         qDebug() << "Register username: " + register_username + " password: " + register_password;
+        Online_userName.push_back(register_username);
 
         userDatabase.DBquery->addBindValue(QString::fromUtf8(register_username));  //name
         userDatabase.DBquery->addBindValue(QString::fromUtf8(register_password));  //password
         userDatabase.DBquery->addBindValue(0);    //win num
         userDatabase.DBquery->addBindValue(0);    //fail num
-        userDatabase.DBquery->addBindValue(3);    //pet num
+        userDatabase.DBquery->addBindValue(30);    //pet num
         userDatabase.DBquery->addBindValue(0);    //high pet num
 
         //初始化与随机值用户信息
@@ -130,6 +152,20 @@ void Executor_Data::server_register(){
 
         //还要返回用户信息
         registerReturn += random_pet_info;
+
+        //返回所有用户与其精灵信息
+        QString all_user_info;
+        userDatabase.DBquery->prepare("SELECT name, pet FROM player");
+        userDatabase.DBquery->exec();
+        int user_num = 0;
+        while(userDatabase.DBquery->next()){
+            QString name = userDatabase.DBquery->value(0).toString();
+            QString pet = userDatabase.DBquery->value(1).toString();
+            all_user_info += (" " + name);
+            user_num ++;
+        }
+        registerReturn += ("#" + QString::number(user_num) + all_user_info);
+
         socket->write(registerReturn.toUtf8());
     }
 }

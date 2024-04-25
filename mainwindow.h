@@ -55,9 +55,19 @@ private:
     bool login_success;
 
     User_Data userdata;
+    std::vector<Pal> Server_Pals_list;
+    void create_Server_Pals_list();
     int Now_pet;
     void window_personalPage();
     QStandardItemModel *ItemModel_PetList;
+    QStandardItemModel *ItemModel_serverPetList;
     void change_now_pet(int Now_pet);
+
+    std::vector<Registered_userdata> regi_userdata;
+    void write_regi_userdata(const QByteArray buffer);
+    QStandardItemModel *ItemModel_RegiUserList;
+    void creat_Regi_User_List();
+
+    Pal choosed_fight_pal;
 };
 #endif // MAINWINDOW_H

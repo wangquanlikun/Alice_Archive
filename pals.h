@@ -4,6 +4,8 @@
 #include <Qstring>
 #include <vector>
 
+#define SERVER_V_PALS_NUM 20
+
 class Attribute{
 public:
     enum Main{
@@ -38,7 +40,9 @@ public:
     int Defense;
     int HP;
     int Attack_interval;
-    //virtual void Attack();
+    virtual void Attack(){
+        return;
+    }
 
     bool levelUp(){
         if(level < 15){
@@ -51,7 +55,7 @@ public:
         else
             return false;
     }
-    void getExp(int exp){
+    void getExp(const int exp){
         this->exp += exp;
         if(this->exp >= expNeed_for_levelup()){
             if(levelUp())
@@ -60,6 +64,23 @@ public:
     }
 
     void Initi_set(int type, QString name, int AP, int DP, int HP, int AI, int LV, int EXP);
+
+    void set_attribute_int(const int main_type){
+        switch(main_type){
+        case 1:
+            this->attribute.main_attribute = Attribute::Strength;
+            break;
+        case 2:
+            this->attribute.main_attribute = Attribute::Tank;
+            break;
+        case 3:
+            this->attribute.main_attribute = Attribute::Defense;
+            break;
+        case 4:
+            this->attribute.main_attribute = Attribute::Agile;
+            break;
+        }
+    }
 
     int get_attribute_int(){
         switch(this->attribute.main_attribute){

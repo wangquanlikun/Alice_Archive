@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include <map>
-#include <QString>
+#include <Qstring>
 
 std::map<QString, QString> ToPinyin;
 

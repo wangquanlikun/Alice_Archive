@@ -1023,7 +1023,7 @@ border-style: inset;
        <rect>
         <x>439</x>
         <y>30</y>
-        <width>675</width>
+        <width>720</width>
         <height>660</height>
        </rect>
       </property>
@@ -1065,7 +1065,7 @@ QProgressBar::chunk{
       <widget class="QPushButton" name="choose_Fight_1">
        <property name="geometry">
         <rect>
-         <x>480</x>
+         <x>380</x>
          <y>120</y>
          <width>80</width>
          <height>40</height>
@@ -1377,7 +1377,7 @@ border-style: inset;
         <number>1000</number>
        </property>
        <property name="value">
-        <number>24</number>
+        <number>100</number>
        </property>
        <property name="textVisible">
         <bool>false</bool>
@@ -1396,7 +1396,7 @@ border-style: inset;
         <number>1000</number>
        </property>
        <property name="value">
-        <number>24</number>
+        <number>100</number>
        </property>
        <property name="textVisible">
         <bool>false</bool>
@@ -1430,7 +1430,7 @@ border-style: inset;
       <widget class="QPushButton" name="choose_Fight_2">
        <property name="geometry">
         <rect>
-         <x>480</x>
+         <x>380</x>
          <y>200</y>
          <width>80</width>
          <height>40</height>
@@ -1464,25 +1464,98 @@ border-style: inset;
         <string>升级历练</string>
        </property>
       </widget>
+      <widget class="QListView" name="Server_Pals_list">
+       <property name="geometry">
+        <rect>
+         <x>490</x>
+         <y>90</y>
+         <width>200</width>
+         <height>190</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="TEXT_server_pal">
+       <property name="geometry">
+        <rect>
+         <x>490</x>
+         <y>40</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>虚拟精灵列表</string>
+       </property>
+      </widget>
      </widget>
-     <widget class="QLabel" name="TEXT_loggedUser">
+     <widget class="QFrame" name="other_User_info">
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>290</y>
-        <width>225</width>
-        <height>35</height>
+        <y>300</y>
+        <width>385</width>
+        <height>320</height>
        </rect>
       </property>
-      <property name="font">
-       <font>
-        <family>俐方体11号</family>
-        <pointsize>14</pointsize>
-       </font>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
       </property>
-      <property name="text">
-       <string>在线用户列表：</string>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
       </property>
+      <widget class="QLabel" name="TEXT_otherUser">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>225</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>系统用户列表：</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="Userlist">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>80</y>
+         <width>220</width>
+         <height>225</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>

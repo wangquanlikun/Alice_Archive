@@ -22,8 +22,17 @@ public:
     QString get_name(){
         return username;
     }
-    void Write_userData(QByteArray buffer);
+    void Write_userData(const QByteArray buffer);
     void erase_userdata();
+};
+
+class Registered_userdata{
+public:
+    QString username;
+    int winNum;
+    int failNum;
+    int petNum;
+    std::vector<QString> Pals_name;
 };
 
 #endif // USER_H

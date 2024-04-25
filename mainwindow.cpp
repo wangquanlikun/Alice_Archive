@@ -66,6 +66,7 @@ void MainWindow::readData(){
             QMessageBox::about(this,"200","注册成功，现在登陆");
             ui->Mainpage->setCurrentIndex(4);
             userdata.Write_userData(buffer);
+            write_regi_userdata(buffer);
             window_personalPage();
         }
         else if(buf == LOGINSUCCESS){
@@ -73,6 +74,7 @@ void MainWindow::readData(){
             login_success = true;
             ui->Mainpage->setCurrentIndex(4);
             userdata.Write_userData(buffer);
+            write_regi_userdata(buffer);
             window_personalPage();
         }
     }
@@ -186,6 +188,9 @@ void MainWindow::window_personalPage(){
         ui->HONOR_2->setText("高级宠物勋章：铜勋章");
     else
         ui->HONOR_2->setText("高级宠物勋章：Null");
+
+    create_Server_Pals_list();
+    creat_Regi_User_List();
 
     ItemModel_PetList = new QStandardItemModel(this);
     QStringList strList;
