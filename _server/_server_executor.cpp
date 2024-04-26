@@ -93,14 +93,26 @@ void Executor_Data::server_login(){
 
         //返回所有用户与其精灵信息
         QString all_user_info;
-        userDatabase.DBquery->prepare("SELECT name, pet, petNum FROM player");
+        userDatabase.DBquery->prepare("SELECT name, pet, petNum, winNum, failNum FROM player");
         userDatabase.DBquery->exec();
         int user_num = 0;
         while(userDatabase.DBquery->next()){
             QString name = userDatabase.DBquery->value(0).toString();
             QString pet = userDatabase.DBquery->value(1).toString();
+            int int_petnum = userDatabase.DBquery->value(2).toInt();
             QString petNum = userDatabase.DBquery->value(2).toString();
-            all_user_info += (" " + name + " " + petNum + " " + pet);
+            QString winNum = userDatabase.DBquery->value(3).toString();
+            QString failNum = userDatabase.DBquery->value(4).toString();
+
+            QString pet_name_LV;
+            QTextStream stream(&pet);
+            for(int i = 0; i < int_petnum; i++){
+                int type, AP, DP, HP, AI, LV, EXP;
+                QString now_pet_name;
+                stream >> type >> AP >> DP >> HP >> AI >> now_pet_name >> LV >> EXP;
+                pet_name_LV += (now_pet_name + " " + QString::number(LV) + " ");
+            }
+            all_user_info += (" " + name + " " + petNum + " " + pet_name_LV + " " + winNum + " " + failNum);
             user_num ++;
         }
         loginReturn += ("#" + QString::number(user_num) + all_user_info);
@@ -156,14 +168,26 @@ void Executor_Data::server_register(){
 
         //返回所有用户与其精灵信息
         QString all_user_info;
-        userDatabase.DBquery->prepare("SELECT name, pet, petNum FROM player");
+        userDatabase.DBquery->prepare("SELECT name, pet, petNum, winNum, failNum FROM player");
         userDatabase.DBquery->exec();
         int user_num = 0;
         while(userDatabase.DBquery->next()){
             QString name = userDatabase.DBquery->value(0).toString();
             QString pet = userDatabase.DBquery->value(1).toString();
+            int int_petnum = userDatabase.DBquery->value(2).toInt();
             QString petNum = userDatabase.DBquery->value(2).toString();
-            all_user_info += (" " + name + " " + petNum + " " + pet);
+            QString winNum = userDatabase.DBquery->value(3).toString();
+            QString failNum = userDatabase.DBquery->value(4).toString();
+
+            QString pet_name_LV;
+            QTextStream stream(&pet);
+            for(int i = 0; i < int_petnum; i++){
+                int type, AP, DP, HP, AI, LV, EXP;
+                QString now_pet_name;
+                stream >> type >> AP >> DP >> HP >> AI >> now_pet_name >> LV >> EXP;
+                pet_name_LV += (now_pet_name + " " + QString::number(LV) + " ");
+            }
+            all_user_info += (" " + name + " " + petNum + " " + pet_name_LV + " " + winNum + " " + failNum);
             user_num ++;
         }
         registerReturn += ("#" + QString::number(user_num) + all_user_info);

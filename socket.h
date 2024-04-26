@@ -47,6 +47,10 @@ class Packet{
             return (UserID.length() > 0 ) && (Password.length() > 0);
         }
 
+        bool usernameTooShort(){
+            return (UserID.length() <= 2);
+        }
+
         void clear(){
             UserID.clear();
             Password.clear();

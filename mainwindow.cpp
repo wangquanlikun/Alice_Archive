@@ -112,6 +112,9 @@ void MainWindow::on_register_2_clicked(){
     else if(!packet.notempty()){
         QMessageBox::warning(this,"输入非法","用户名或密码不能为空！  ");
     }
+    else if(packet.usernameTooShort()){
+        QMessageBox::warning(this,"用户名过短","用户名请大于2个字符！  ");
+    }
     else{
         socket->write(packet.trans_to_QByteArray());
     }
@@ -131,6 +134,9 @@ void MainWindow::on_login_2_clicked(){
     }
     else if(!packet.notempty()){
         QMessageBox::warning(this,"输入非法","用户名或密码不能为空！  ");
+    }
+    else if(packet.usernameTooShort()){
+        QMessageBox::warning(this,"用户名过短","用户名请大于2个字符！  ");
     }
     else{
         socket->write(packet.trans_to_QByteArray());
@@ -213,9 +219,11 @@ void MainWindow::Pal_list_click(QModelIndex index){
     this->Now_pet = index.row();
     if(Now_pet != 0){
         change_now_pet(Now_pet);
+        /*
         QMessageBox msg;
         msg.setText("你选择了"+QString::number(Now_pet)+"号精灵！");
         msg.exec();
+        */
     }
     else {
         Now_pet = 1;

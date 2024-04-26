@@ -1066,7 +1066,7 @@ QProgressBar::chunk{
        <property name="geometry">
         <rect>
          <x>380</x>
-         <y>120</y>
+         <y>90</y>
          <width>80</width>
          <height>40</height>
         </rect>
@@ -1431,7 +1431,7 @@ border-style: inset;
        <property name="geometry">
         <rect>
          <x>380</x>
-         <y>200</y>
+         <y>165</y>
          <width>80</width>
          <height>40</height>
         </rect>
@@ -1500,6 +1500,43 @@ border-style: inset;
        </property>
        <property name="text">
         <string>虚拟精灵列表</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="refresh_Virtual_Pals">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>240</y>
+         <width>80</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+border:1px groove gray;
+border-radius:6px;
+padding:2px 4px;
+border-style: outset;
+}
+QPushButton:hover{
+	background-color: rgb(155, 222, 255);
+color: black;
+}
+QPushButton:pressed{
+	background-color: rgb(0, 128, 255);
+border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string>刷新对战</string>
        </property>
       </widget>
      </widget>

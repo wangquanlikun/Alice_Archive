@@ -68,9 +68,12 @@ void MainWindow::write_regi_userdata(const QByteArray buffer){
         this->regi_userdata[i].petNum = petnum;
 
         for(int j = 0; j < petnum; j++){
-            int type, AP, DP, HP, AI, LV, EXP;
-            stream >> type >> AP >> DP >> HP >> AI >> this->regi_userdata[i].Pals_name[j] >> LV >> EXP;
+            int LV;
+            stream >> this->regi_userdata[i].Pals_name[j] >> LV;
+            this->regi_userdata[i].Pals_name[j] += ( "  LV." + QString::number(LV));
         }
+
+        stream >> this->regi_userdata[i].winNum >> this->regi_userdata[i].failNum;
     }
 }
 
@@ -183,7 +186,7 @@ void MainWindow::create_Server_Pals_list(){
 void MainWindow::creat_Regi_User_List(){
     ItemModel_RegiUserList = new QStandardItemModel(this);
     QStringList strList;
-    strList.append("  注册用户用户名：");
+    strList.append("    注册用户用户名：");
 
     int regi_user_num = regi_userdata.size();
     for(int i = 0; i < regi_user_num; i++){
@@ -211,11 +214,23 @@ void MainWindow::Userlist_click(QModelIndex index){
     QMessageBox msg;
     QString message_test;
     message_test += "你选择的用户名称为：" + this->regi_userdata[index.row() - 1].username + "\n";
+    int winNum = this->regi_userdata[index.row() - 1].winNum;
+    int failNum = this->regi_userdata[index.row() - 1].failNum;
+    float winRate = -1;
+    if(winNum + failNum != 0)
+        winRate = (float)winNum / (float)(winNum + failNum);
+    QString S_winRate;
+    if(winRate == -1)
+        S_winRate = "NA";
+    else
+        S_winRate = QString::number((int)(winRate*100));
+    message_test += "用户胜利 " + QString::number(winNum) + " 场，失败 " + QString::number(failNum) + " 场，胜率为 " + S_winRate + "% \n";
     message_test += "用户拥有 " + QString::number(this->regi_userdata[index.row() - 1].petNum) + " 个精灵" + "\n";
     message_test += "用户精灵为：\n";
     for(int i = 0; i < this->regi_userdata[index.row() - 1].petNum; i++){
+        message_test += "\t";
         message_test += this->regi_userdata[index.row() - 1].Pals_name[i];
-        message_test += "  ";
+        message_test += "\n";
     }
     msg.setText(message_test);
     msg.exec();
