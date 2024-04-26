@@ -39,6 +39,9 @@ private slots:
     void on_logout_clicked();
     void Pal_list_click(QModelIndex index);
     void Userlist_click(QModelIndex index);
+    void on_choose_Fight_1_clicked();
+    void on_choose_Fight_2_clicked();
+    void Server_Pals_list_click(const QModelIndex index);
 
     void readData();
     void socket_disconnected();
@@ -70,5 +73,7 @@ private:
     void creat_Regi_User_List();
 
     Pal choosed_fight_pal;
+    void init_fight_page();
+    bool fight();
 };
 #endif // MAINWINDOW_H

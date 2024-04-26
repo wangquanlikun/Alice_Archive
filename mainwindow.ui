@@ -1350,7 +1350,7 @@ border-style: inset;
         <rect>
          <x>460</x>
          <y>505</y>
-         <width>118</width>
+         <width>145</width>
          <height>20</height>
         </rect>
        </property>
@@ -1369,7 +1369,7 @@ border-style: inset;
         <rect>
          <x>460</x>
          <y>535</y>
-         <width>118</width>
+         <width>145</width>
          <height>20</height>
         </rect>
        </property>
@@ -1388,7 +1388,7 @@ border-style: inset;
         <rect>
          <x>460</x>
          <y>565</y>
-         <width>118</width>
+         <width>145</width>
          <height>20</height>
         </rect>
        </property>
@@ -1407,7 +1407,7 @@ border-style: inset;
         <rect>
          <x>460</x>
          <y>595</y>
-         <width>118</width>
+         <width>145</width>
          <height>20</height>
         </rect>
        </property>

@@ -11,6 +11,7 @@ CONFIG += c++17
 
 SOURCES += \
     client_executor.cpp \
+    fight.cpp \
     main.cpp \
     mainwindow.cpp \
     pinyin_alphabet.cpp \

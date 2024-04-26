@@ -181,6 +181,7 @@ void MainWindow::create_Server_Pals_list(){
         ItemModel_serverPetList->appendRow(item);
     }
     this->ui->Server_Pals_list->setModel(ItemModel_serverPetList);
+    connect(ui->Server_Pals_list,SIGNAL(clicked(QModelIndex)),this,SLOT(Server_Pals_list_click(QModelIndex)));
 }
 
 void MainWindow::creat_Regi_User_List(){

@@ -3,8 +3,6 @@
 
 void Pal::Initi_set(int type, QString name, int AP, int DP, int HP, int AI, int LV, int EXP){
     this->name = name;
-    this->level = 1;
-    this->exp = 0;
     this->Attack_power = AP;
     this->Defense = DP;
     this->HP = HP;

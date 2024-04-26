@@ -32,6 +32,10 @@ private:
         return level * 100 + 5 * level * level;
     }
 
+    int expNeed_for_levelup(int pre_level){
+        return pre_level * 100 + 5 * pre_level * pre_level;
+    }
+
 public:
     QString name;
     int level;
@@ -47,9 +51,32 @@ public:
     bool levelUp(){
         if(level < 15){
             level++;
-
-            /*精灵升级的时候，宠物对应的属性值会有少量增加（主属性增加量相对较多）*/
-
+            switch(this->attribute.main_attribute){
+            case Attribute::Strength:
+                Attack_power = 150 + 2 * level * level + 25 * level;
+                HP = 100 + 20 * level;
+                Defense = 100 + 20 * level;
+                Attack_interval = 50 - level;
+                break;
+            case Attribute::Tank:
+                Attack_power = 100 + 20 * level;
+                HP = 150 + 2 * level * level + 25 * level;
+                Defense = 100 + 20 * level;
+                Attack_interval = 50 - level;
+                break;
+            case Attribute::Defense:
+                Attack_power = 100 + 20 * level;
+                HP = 100 + 20 * level;
+                Defense = 150 + 2 * level * level + 25 * level;
+                Attack_interval = 50 - level;
+                break;
+            case Attribute::Agile:
+                Attack_power = 100 + 20 * level;
+                HP = 100 + 20 * level;
+                Defense = 100 + 20 * level;
+                Attack_interval = 35 - 2 * level;
+                break;
+            }
             return true;
         }
         else
@@ -59,7 +86,7 @@ public:
         this->exp += exp;
         if(this->exp >= expNeed_for_levelup()){
             if(levelUp())
-                this->exp -= expNeed_for_levelup();
+                this->exp -= expNeed_for_levelup(this->level - 1);
         }
     }
 

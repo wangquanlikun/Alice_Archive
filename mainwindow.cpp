@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->Mainpage->setCurrentIndex(0);
 
     Now_pet = 1;
+    choosed_fight_pal.name = "NULL";
     Init_pinyin();
 }
 
@@ -219,11 +220,9 @@ void MainWindow::Pal_list_click(QModelIndex index){
     this->Now_pet = index.row();
     if(Now_pet != 0){
         change_now_pet(Now_pet);
-        /*
         QMessageBox msg;
         msg.setText("你选择了"+QString::number(Now_pet)+"号精灵！");
         msg.exec();
-        */
     }
     else {
         Now_pet = 1;
