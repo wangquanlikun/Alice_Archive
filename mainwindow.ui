@@ -1023,7 +1023,7 @@ border-style: inset;
        <rect>
         <x>439</x>
         <y>30</y>
-        <width>720</width>
+        <width>840</width>
         <height>660</height>
        </rect>
       </property>
@@ -1043,29 +1043,10 @@ QProgressBar::chunk{
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QListView" name="Pals_list">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>90</y>
-         <width>295</width>
-         <height>190</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>俐方体11号</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="editTriggers">
-        <set>QAbstractItemView::NoEditTriggers</set>
-       </property>
-      </widget>
       <widget class="QPushButton" name="choose_Fight_1">
        <property name="geometry">
         <rect>
-         <x>380</x>
+         <x>310</x>
          <y>90</y>
          <width>80</width>
          <height>40</height>
@@ -1430,7 +1411,7 @@ border-style: inset;
       <widget class="QPushButton" name="choose_Fight_2">
        <property name="geometry">
         <rect>
-         <x>380</x>
+         <x>310</x>
          <y>165</y>
          <width>80</width>
          <height>40</height>
@@ -1464,29 +1445,10 @@ border-style: inset;
         <string>升级历练</string>
        </property>
       </widget>
-      <widget class="QListView" name="Server_Pals_list">
-       <property name="geometry">
-        <rect>
-         <x>490</x>
-         <y>90</y>
-         <width>200</width>
-         <height>190</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>俐方体11号</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="editTriggers">
-        <set>QAbstractItemView::NoEditTriggers</set>
-       </property>
-      </widget>
       <widget class="QLabel" name="TEXT_server_pal">
        <property name="geometry">
         <rect>
-         <x>490</x>
+         <x>420</x>
          <y>40</y>
          <width>140</width>
          <height>40</height>
@@ -1505,7 +1467,7 @@ border-style: inset;
       <widget class="QPushButton" name="refresh_Virtual_Pals">
        <property name="geometry">
         <rect>
-         <x>380</x>
+         <x>310</x>
          <y>240</y>
          <width>80</width>
          <height>40</height>
@@ -1537,6 +1499,41 @@ border-style: inset;
        </property>
        <property name="text">
         <string>刷新对战</string>
+       </property>
+      </widget>
+      <widget class="QTableView" name="Server_Pals_list">
+       <property name="geometry">
+        <rect>
+         <x>420</x>
+         <y>90</y>
+         <width>320</width>
+         <height>190</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+      </widget>
+      <widget class="QTableView" name="Pals_list">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>90</y>
+         <width>235</width>
+         <height>190</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>12</pointsize>
+        </font>
        </property>
       </widget>
      </widget>
@@ -1574,13 +1571,13 @@ border-style: inset;
         <string>系统用户列表：</string>
        </property>
       </widget>
-      <widget class="QListView" name="Userlist">
+      <widget class="QTableView" name="Userlist">
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>80</y>
-         <width>220</width>
-         <height>225</height>
+         <y>70</y>
+         <width>250</width>
+         <height>235</height>
         </rect>
        </property>
        <property name="font">
@@ -1588,9 +1585,6 @@ border-style: inset;
          <family>俐方体11号</family>
          <pointsize>12</pointsize>
         </font>
-       </property>
-       <property name="editTriggers">
-        <set>QAbstractItemView::NoEditTriggers</set>
        </property>
       </widget>
      </widget>

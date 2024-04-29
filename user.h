@@ -3,7 +3,7 @@
 
 #include "pals.h"
 #include <vector>
-#include <QString>
+#include <Qstring>
 #include <QMainWindow>
 
 class User_Data{
@@ -33,6 +33,7 @@ public:
     int failNum;
     int petNum;
     std::vector<QString> Pals_name;
+    int online; //boolean
 };
 
 #endif // USER_H

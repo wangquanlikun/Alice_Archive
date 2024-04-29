@@ -14,15 +14,12 @@ extern std::map<QString, QString> ToPinyin;
 #include<chrono>
 
 void MainWindow::Server_Pals_list_click(const QModelIndex index){
-    if(index.row() == 0){
-        QMessageBox msg;
-        msg.setText("请点击列表选择虚拟决斗精灵！");
-        msg.exec();
-    }
-    else{
-        int Server_V_Pals_array = index.row() - 1;
-        choosed_fight_pal = Server_Pals_list[Server_V_Pals_array];
-    }
+    int Server_V_Pals_array = index.row();
+    choosed_fight_pal = Server_Pals_list[Server_V_Pals_array];
+
+    QMessageBox msg;
+    msg.setText("你选择了" + QString::number(Server_V_Pals_array + 1) + "号精灵：" + Server_Pals_list[Server_V_Pals_array].name);
+    msg.exec();
 }
 
 void MainWindow::on_choose_Fight_1_clicked(){ //决斗赛
@@ -34,10 +31,12 @@ void MainWindow::on_choose_Fight_1_clicked(){ //决斗赛
         init_fight_page();
         if(fight()){
             QMessageBox::about(this,"邦邦咔邦","对战胜利！");
+            userdata.winNum ++;
             //得到新精灵
         }
         else{
             QMessageBox::about(this,"苦呀西","对战失败了呜… 下次再努力吧");
+            userdata.failNum ++;
             //失去此精灵
             //判断，若无精灵则给予一只精灵
         }
@@ -46,7 +45,7 @@ void MainWindow::on_choose_Fight_1_clicked(){ //决斗赛
         box = QMessageBox::question(this,"邦邦咔邦","战斗结束，要离开这里吗？", QMessageBox::Yes | QMessageBox::No);
         if(box == QMessageBox::Yes){
             ui->Mainpage->setCurrentIndex(4);
-            //刷新页面上用户状态
+            refresh_personalPage();
         }
         else
             return;
@@ -64,17 +63,26 @@ void MainWindow::on_choose_Fight_2_clicked(){ //升级赛
         std::this_thread::sleep_for(std::chrono::seconds(1));
         if(fight()){
             QMessageBox::about(this,"邦邦咔邦","对战胜利！");
+            userdata.winNum ++;
+
+            bool HighPet = false;
+            if(this->userdata.userPals[Now_pet - 1].level == 15)
+                HighPet = true;
             this->userdata.userPals[Now_pet - 1].getExp(100);
+
+            if(this->userdata.userPals[Now_pet - 1].level == 15 && (!HighPet))
+                this->userdata.HighpetNum ++;
         }
         else{
             QMessageBox::about(this,"苦呀西","对战失败了呜… 下次再努力吧");
+            userdata.failNum ++;
         }
 
         QMessageBox::StandardButton box;
         box = QMessageBox::question(this,"邦邦咔邦","战斗结束，要离开这里吗？", QMessageBox::Yes | QMessageBox::No);
         if(box == QMessageBox::Yes){
             ui->Mainpage->setCurrentIndex(4);
-            this->change_now_pet(this->Now_pet); //刷新当前宠物数据
+            refresh_personalPage();
         }
         else
             return;
@@ -138,4 +146,44 @@ bool MainWindow::fight(){
 */
 
     return true;
+}
+
+void MainWindow::refresh_personalPage(){
+    ui->winNumLED->display(userdata.winNum);
+    ui->failNumLED->display(userdata.failNum);
+
+    if(userdata.petNum >= 30)
+        ui->HONOR_1->setText("宠物个数勋章：金勋章");
+    else if(userdata.petNum >= 20)
+        ui->HONOR_1->setText("宠物个数勋章：银勋章");
+    else if(userdata.petNum >= 10)
+        ui->HONOR_1->setText("宠物个数勋章：铜勋章");
+    else
+        ui->HONOR_1->setText("宠物个数勋章：Null");
+
+    if(userdata.HighpetNum >= 8)
+        ui->HONOR_2->setText("高级宠物勋章：金勋章");
+    else if(userdata.HighpetNum >= 5)
+        ui->HONOR_2->setText("高级宠物勋章：银勋章");
+    else if(userdata.HighpetNum >= 3)
+        ui->HONOR_2->setText("高级宠物勋章：铜勋章");
+    else
+        ui->HONOR_2->setText("高级宠物勋章：Null");
+
+
+    ItemModel_PetList->clear();
+    QStringList labels = QStringLiteral("精灵,等级").simplified().split(",");
+    ItemModel_PetList->setHorizontalHeaderLabels(labels);
+    QStandardItem* item = 0;
+
+    for (int i = 0; i < this->userdata.petNum; i++){
+        item = new QStandardItem(userdata.userPals[i].name);
+        ItemModel_PetList->setItem(i, 0, item);
+        item = new QStandardItem(QString::number(userdata.userPals[i].level));
+        ItemModel_PetList->setItem(i, 1, item);
+    }
+    ui->Pals_list->setModel(ItemModel_PetList);
+    ui->Pals_list->setColumnWidth(1, 50);
+
+    change_now_pet(this->Now_pet);
 }

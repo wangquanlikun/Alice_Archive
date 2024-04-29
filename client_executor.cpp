@@ -79,15 +79,18 @@ void MainWindow::write_regi_userdata(const QByteArray buffer){
 
 void MainWindow::create_Server_Pals_list(){
     ItemModel_serverPetList = new QStandardItemModel(this);
-    QStringList strList;
-    Server_Pals_list.resize(SERVER_V_PALS_NUM);
-    strList.append("    精灵列表：");
+    QStringList labels = QStringLiteral("精灵,属性,等级").simplified().split(",");
+    ItemModel_serverPetList->setHorizontalHeaderLabels(labels);
 
+    QStandardItem* item = 0;
+
+    Server_Pals_list.resize(SERVER_V_PALS_NUM);
     for(int i = 0; i < SERVER_V_PALS_NUM; i++){
         int type;
         type = QRandomGenerator::global()->bounded(1, 4);
         type = 10 * type + QRandomGenerator::global()->bounded(1, 4);
         QString name;
+        QString str_type;
         int LV;
         int LV_Temp = QRandomGenerator::global()->bounded(15);
         LV = LV_Temp %4 != 0 ? QRandomGenerator::global()->bounded(1, 15) : 1;
@@ -160,6 +163,21 @@ void MainWindow::create_Server_Pals_list(){
             break;
         }
 
+        switch(type /10){
+        case 1:
+            str_type = "力量型";
+            break;
+        case 2:
+            str_type = "肉盾型";
+            break;
+        case 3:
+            str_type = "防御型";
+            break;
+        case 4:
+            str_type = "敏捷型";
+            break;
+        }
+
         Server_Pals_list[i].set_attribute_int(type / 10);
         Server_Pals_list[i].name = name;
         Server_Pals_list[i].Attack_power = AP;
@@ -171,52 +189,49 @@ void MainWindow::create_Server_Pals_list(){
         for(int i = 0; i < LV; i++)
             Server_Pals_list[i].levelUp();
 
-        strList.append(name + "  LV:" + QString::number(LV));
-    }
-
-    int nCount = strList.size();
-    for(int i = 0; i < nCount; i++){
-        QString string = static_cast<QString>(strList.at(i));
-        QStandardItem *item = new QStandardItem(string);
-        ItemModel_serverPetList->appendRow(item);
+        item = new QStandardItem(name);
+        ItemModel_serverPetList->setItem(i, 0, item);
+        item = new QStandardItem(str_type);
+        ItemModel_serverPetList->setItem(i, 1, item);
+        item = new QStandardItem(QString::number(LV));
+        ItemModel_serverPetList->setItem(i, 2, item);
     }
     this->ui->Server_Pals_list->setModel(ItemModel_serverPetList);
-    connect(ui->Server_Pals_list,SIGNAL(clicked(QModelIndex)),this,SLOT(Server_Pals_list_click(QModelIndex)));
+    ui->Server_Pals_list->setColumnWidth(0, 120);
+    ui->Server_Pals_list->setColumnWidth(2, 55);
 }
 
 void MainWindow::creat_Regi_User_List(){
     ItemModel_RegiUserList = new QStandardItemModel(this);
-    QStringList strList;
-    strList.append("    注册用户用户名：");
+    QStringList labels = QStringLiteral("用户名,状态").simplified().split(",");
+    ItemModel_RegiUserList->setHorizontalHeaderLabels(labels);
+
+    QStandardItem* item = 0;
 
     int regi_user_num = regi_userdata.size();
     for(int i = 0; i < regi_user_num; i++){
-        strList.append(regi_userdata[i].username);
+        item = new QStandardItem(regi_userdata[i].username);
+        ItemModel_RegiUserList->setItem(i, 0, item);
+        QString Online_status;
+        if(regi_userdata[i].online == 1)
+            Online_status = "在线";
+        else
+            Online_status = "离线";
+        item = new QStandardItem(Online_status);
+        ItemModel_RegiUserList->setItem(i, 1, item);
     }
 
-    int nCount = strList.size();
-    for(int i = 0; i < nCount; i++){
-        QString string = static_cast<QString>(strList.at(i));
-        QStandardItem *item = new QStandardItem(string);
-        ItemModel_RegiUserList->appendRow(item);
-    }
     this->ui->Userlist->setModel(ItemModel_RegiUserList);
-    connect(ui->Userlist,SIGNAL(clicked(QModelIndex)),this,SLOT(Userlist_click(QModelIndex)));
+    ui->Userlist->setColumnWidth(0, 150);
+    ui->Userlist->setColumnWidth(1, 80);
 }
 
 void MainWindow::Userlist_click(QModelIndex index){
-    if(index.row() == 0){
-        QMessageBox msg;
-        msg.setText("点击列表查看用户详细信息");
-        msg.exec();
-        return;
-    }
-
     QMessageBox msg;
     QString message_test;
-    message_test += "你选择的用户名称为：" + this->regi_userdata[index.row() - 1].username + "\n";
-    int winNum = this->regi_userdata[index.row() - 1].winNum;
-    int failNum = this->regi_userdata[index.row() - 1].failNum;
+    message_test += "你选择的用户名称为：" + this->regi_userdata[index.row()].username + "\n";
+    int winNum = this->regi_userdata[index.row()].winNum;
+    int failNum = this->regi_userdata[index.row()].failNum;
     float winRate = -1;
     if(winNum + failNum != 0)
         winRate = (float)winNum / (float)(winNum + failNum);
@@ -226,11 +241,11 @@ void MainWindow::Userlist_click(QModelIndex index){
     else
         S_winRate = QString::number((int)(winRate*100));
     message_test += "用户胜利 " + QString::number(winNum) + " 场，失败 " + QString::number(failNum) + " 场，胜率为 " + S_winRate + "% \n";
-    message_test += "用户拥有 " + QString::number(this->regi_userdata[index.row() - 1].petNum) + " 个精灵" + "\n";
+    message_test += "用户拥有 " + QString::number(this->regi_userdata[index.row()].petNum) + " 个精灵" + "\n";
     message_test += "用户精灵为：\n";
-    for(int i = 0; i < this->regi_userdata[index.row() - 1].petNum; i++){
+    for(int i = 0; i < this->regi_userdata[index.row()].petNum; i++){
         message_test += "\t";
-        message_test += this->regi_userdata[index.row() - 1].Pals_name[i];
+        message_test += this->regi_userdata[index.row()].Pals_name[i];
         message_test += "\n";
     }
     msg.setText(message_test);

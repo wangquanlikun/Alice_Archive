@@ -75,5 +75,6 @@ private:
     Pal choosed_fight_pal;
     void init_fight_page();
     bool fight();
+    void refresh_personalPage();
 };
 #endif // MAINWINDOW_H

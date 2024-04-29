@@ -31,6 +31,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->Mainpage->setCurrentIndex(0);
 
+    connect(ui->Pals_list,SIGNAL(clicked(QModelIndex)),this,SLOT(Pal_list_click(QModelIndex)));
+    connect(ui->Server_Pals_list,SIGNAL(clicked(QModelIndex)),this,SLOT(Server_Pals_list_click(QModelIndex)));
+    connect(ui->Userlist,SIGNAL(clicked(QModelIndex)),this,SLOT(Userlist_click(QModelIndex)));
+
     Now_pet = 1;
     choosed_fight_pal.name = "NULL";
     Init_pinyin();
@@ -200,36 +204,29 @@ void MainWindow::window_personalPage(){
     creat_Regi_User_List();
 
     ItemModel_PetList = new QStandardItemModel(this);
-    QStringList strList;
-    strList.append("\t姓名列表：");
+    QStringList labels = QStringLiteral("精灵,等级").simplified().split(",");
+    ItemModel_PetList->setHorizontalHeaderLabels(labels);
+    QStandardItem* item = 0;
+
     for (int i = 0; i < this->userdata.petNum; i++){
-        strList.append(this->userdata.userPals[i].name);
-    }
-    int nCount = strList.size();
-    for(int i = 0; i < nCount; i++){
-        QString string = static_cast<QString>(strList.at(i));
-        QStandardItem *item = new QStandardItem(string);
-        ItemModel_PetList->appendRow(item);
+        item = new QStandardItem(userdata.userPals[i].name);
+        ItemModel_PetList->setItem(i, 0, item);
+        item = new QStandardItem(QString::number(userdata.userPals[i].level));
+        ItemModel_PetList->setItem(i, 1, item);
     }
     ui->Pals_list->setModel(ItemModel_PetList);
-    connect(ui->Pals_list,SIGNAL(clicked(QModelIndex)),this,SLOT(Pal_list_click(QModelIndex)));
+    ui->Pals_list->setColumnWidth(0, 120);
+    ui->Pals_list->setColumnWidth(1, 60);
+
     change_now_pet(1);
 }
 
 void MainWindow::Pal_list_click(QModelIndex index){
-    this->Now_pet = index.row();
-    if(Now_pet != 0){
-        change_now_pet(Now_pet);
-        QMessageBox msg;
-        msg.setText("你选择了"+QString::number(Now_pet)+"号精灵！");
-        msg.exec();
-    }
-    else {
-        Now_pet = 1;
-        QMessageBox msg;
-        msg.setText("点击列表查看精灵详细信息");
-        msg.exec();
-    }
+    this->Now_pet = index.row() + 1;
+    change_now_pet(Now_pet);
+    QMessageBox msg;
+    msg.setText("你选择了"+QString::number(Now_pet)+"号精灵！");
+    msg.exec();
 }
 void MainWindow::change_now_pet(int Now_pet){
     Pal this_pal = this->userdata.userPals[Now_pet - 1];
