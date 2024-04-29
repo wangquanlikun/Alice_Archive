@@ -55,7 +55,7 @@ void Executor_Data::server_executor(){
     else if(socket_data[0] == 'l')
         server_login();
     else{
-        if(socket_data == "userLogout")
+        if(socket_data[0] == 'O')
             server_logout();
     }
 }
@@ -112,7 +112,14 @@ void Executor_Data::server_login(){
                 stream >> type >> AP >> DP >> HP >> AI >> now_pet_name >> LV >> EXP;
                 pet_name_LV += (now_pet_name + " " + QString::number(LV) + " ");
             }
-            all_user_info += (" " + name + " " + petNum + " " + pet_name_LV + " " + winNum + " " + failNum);
+            all_user_info += (" " + name + " " + petNum + " " + pet_name_LV + " " + winNum + " " + failNum + " ");
+            auto it = std::find(Online_userName.begin(), Online_userName.end(), name);
+            if (it != Online_userName.end()) {
+                all_user_info += "1";
+            } else {
+                all_user_info += "0";
+            }
+
             user_num ++;
         }
         loginReturn += ("#" + QString::number(user_num) + all_user_info);
@@ -187,7 +194,14 @@ void Executor_Data::server_register(){
                 stream >> type >> AP >> DP >> HP >> AI >> now_pet_name >> LV >> EXP;
                 pet_name_LV += (now_pet_name + " " + QString::number(LV) + " ");
             }
-            all_user_info += (" " + name + " " + petNum + " " + pet_name_LV + " " + winNum + " " + failNum);
+            all_user_info += (" " + name + " " + petNum + " " + pet_name_LV + " " + winNum + " " + failNum + " ");
+            auto it = std::find(Online_userName.begin(), Online_userName.end(), name);
+            if (it != Online_userName.end()) {
+                all_user_info += "1";
+            } else {
+                all_user_info += "0";
+            }
+
             user_num ++;
         }
         registerReturn += ("#" + QString::number(user_num) + all_user_info);
@@ -197,7 +211,17 @@ void Executor_Data::server_register(){
 }
 
 void Executor_Data::server_logout(){
-    ;
+    QString Logout_username;
+    for(int i = 2; i < this->socket_data.length(); i++)
+        Logout_username += socket_data[i];
+
+    auto it = std::find(Online_userName.begin(), Online_userName.end(), Logout_username);
+    if (it != Online_userName.end()) {
+        Online_userName.erase(it);
+        qDebug() << "Logout " + Logout_username;
+    } else {
+        qDebug() << "Logout Error: " + Logout_username;
+    }
 }
 
 QString Executor_Data::New_login_Random_Pals(int times){

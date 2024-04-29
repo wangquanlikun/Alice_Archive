@@ -73,7 +73,7 @@ void MainWindow::write_regi_userdata(const QByteArray buffer){
             this->regi_userdata[i].Pals_name[j] += ( "  LV." + QString::number(LV));
         }
 
-        stream >> this->regi_userdata[i].winNum >> this->regi_userdata[i].failNum;
+        stream >> this->regi_userdata[i].winNum >> this->regi_userdata[i].failNum >> this->regi_userdata[i].online;
     }
 }
 

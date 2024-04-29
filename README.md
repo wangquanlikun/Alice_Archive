@@ -52,6 +52,10 @@
 
 ![login](./Intro/Login.png)
 
+#### 用户信息界面
+
+![User](./Intro/Person_Page.png)
+
 ### 服务端
 
 本页面用于展示运行过程中，服务端的相关运行参数与接受到的socket信息内容

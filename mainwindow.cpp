@@ -172,7 +172,7 @@ void MainWindow::on_page2_to_page4_clicked(){
 
 
 void MainWindow::on_logout_clicked(){
-    socket->write("userLogout");
+    socket->write("O&" + userdata.get_name().toUtf8());
     //要写回用户信息更改吗
     ui->Mainpage->setCurrentIndex(1);
 }
