@@ -2,7 +2,7 @@
 #define PALS_H
 
 #include <Qstring>
-#include <vector>
+#include <QRandomGenerator>
 
 #define SERVER_V_PALS_NUM 20
 
@@ -23,6 +23,29 @@ public:
     Sub sub_attribute;
 };
 
+class Fight_info{
+public:
+    int Attack_power;
+    QString special_power_name;
+    QString special_power;
+
+    int real_HP_loss;
+    QString special_status;
+
+    Fight_info(){
+        Attack_power = 0;
+        special_power_name = "";
+        special_power = "";
+        real_HP_loss = 0;
+        special_status = "";
+    }
+
+    QString Fight_info_output(){
+        QString output;
+
+        return output;
+    }
+};
 
 class Pal{
 private:
@@ -44,9 +67,9 @@ public:
     int Defense;
     int HP;
     int Attack_interval;
-    virtual void Attack(){
-        return;
-    }
+
+    int interval;
+    int cost;
 
     bool levelUp(){
         if(level < 15){
@@ -121,7 +144,183 @@ public:
             return 4;
         }
     }
+
+    virtual Fight_info fight(){
+        Fight_info attack_info;
+        return attack_info;
+    } //内部自行判断是否给出普通攻击与技能。如果给出内部自行处理cost与interval
+
+    virtual Fight_info fight(Fight_info attack_infomation){
+        Fight_info get_attack_info;
+        return get_attack_info;
+    } //内部判断受击结果，自行处理HP等。给出反馈
+
 };
 
+class Strength_Pal: public Pal{
+    private:
+        int special_power_choice;
+        int special_power[3 + 1];
+        int special_power_cost[3 + 1];
+        QString special_power_name[3 + 1];
+
+    public:
+        Strength_Pal(Pal Base_Pal){
+            interval = 0;
+            cost = 0;
+
+            name = Base_Pal.name;
+            level = Base_Pal.level;
+            exp = Base_Pal.exp;
+            Attack_power = Base_Pal.Attack_power;
+            Defense = Base_Pal.Defense;
+            HP = Base_Pal.HP;
+            Attack_interval = Base_Pal.Attack_interval;
+            set_attribute_int(Base_Pal.get_attribute_int());
+            special_power_choice = -1;
+
+            special_power[1] = 2 * Attack_power;
+            special_power[2] = 4 * Attack_power;
+            special_power[3] = 2 * Attack_power;
+
+            special_power_cost[1] = 20;
+            special_power_cost[2] = 35;
+            special_power_cost[3] = 30;
+
+            special_power_name[1] = "瓦尼瓦尼";
+            special_power_name[2] = "光啊！";
+            special_power_name[3] = "格黑娜的风纪委员";
+        }
+
+        Fight_info fight(){
+            Fight_info attack_info;
+            if(interval >= Attack_interval){
+                attack_info.Attack_power += Attack_power;
+                interval -= Attack_interval;
+            }
+
+            if(special_power_choice == -1){
+                special_power_choice = QRandomGenerator::global()->bounded(1, 3);
+            }
+            else{
+                switch(special_power_choice){
+                case 1:
+                    if(cost >= special_power_cost[1]){
+                        cost -= special_power_cost[1];
+                        attack_info.Attack_power += special_power[1];
+                        attack_info.special_power_name = special_power_name[1];
+
+                        special_power_choice = -1;
+                    }
+                    break;
+                case 2:
+                    if(cost >= special_power_cost[2]){
+                        cost -= special_power_cost[2];
+                        attack_info.Attack_power += special_power[2];
+                        attack_info.special_power_name = special_power_name[2];
+
+                        special_power_choice = -1;
+                    }
+                    break;
+                case 3:
+                    if(cost >= special_power_cost[3]){
+                        cost -= special_power_cost[3];
+                        attack_info.Attack_power += special_power[3];
+                        attack_info.special_power_name = special_power_name[3];
+
+                        special_power_choice = -1;
+                    }
+                    break;
+                }
+            }
+            return attack_info;
+        }
+
+        Fight_info fight(Fight_info attack_infomation){
+            Fight_info get_attack_info;
+            return get_attack_info;
+        }
+};
+
+class Tank_Pal: public Pal{
+public:
+    Tank_Pal(Pal Base_Pal){
+        interval = 0;
+        cost = 0;
+
+        name = Base_Pal.name;
+        level = Base_Pal.level;
+        exp = Base_Pal.exp;
+        Attack_power = Base_Pal.Attack_power;
+        Defense = Base_Pal.Defense;
+        HP = Base_Pal.HP;
+        Attack_interval = Base_Pal.Attack_interval;
+        set_attribute_int(Base_Pal.get_attribute_int());
+    }
+
+    Fight_info fight(){
+        Fight_info attack_info;
+        return attack_info;
+    }
+
+    Fight_info fight(Fight_info attack_infomation){
+        Fight_info get_attack_info;
+        return get_attack_info;
+    }
+};
+
+class Defense_Pal: public Pal{
+public:
+    Defense_Pal(Pal Base_Pal){
+        interval = 0;
+        cost = 0;
+
+        name = Base_Pal.name;
+        level = Base_Pal.level;
+        exp = Base_Pal.exp;
+        Attack_power = Base_Pal.Attack_power;
+        Defense = Base_Pal.Defense;
+        HP = Base_Pal.HP;
+        Attack_interval = Base_Pal.Attack_interval;
+        set_attribute_int(Base_Pal.get_attribute_int());
+    }
+
+    Fight_info fight(){
+        Fight_info attack_info;
+        return attack_info;
+    }
+
+    Fight_info fight(Fight_info attack_infomation){
+        Fight_info get_attack_info;
+        return get_attack_info;
+    }
+};
+
+class Agile_Pal: public Pal{
+public:
+    Agile_Pal(Pal Base_Pal){
+        interval = 0;
+        cost = 0;
+
+        name = Base_Pal.name;
+        level = Base_Pal.level;
+        exp = Base_Pal.exp;
+        Attack_power = Base_Pal.Attack_power;
+        Defense = Base_Pal.Defense;
+        HP = Base_Pal.HP;
+        Attack_interval = Base_Pal.Attack_interval;
+        set_attribute_int(Base_Pal.get_attribute_int());
+    }
+
+    Fight_info fight(){
+        Fight_info attack_info;
+        return attack_info;
+    }
+
+    Fight_info fight(Fight_info attack_infomation){
+        Fight_info get_attack_info;
+        return get_attack_info;
+    }
+};
 
 #endif // PALS_H

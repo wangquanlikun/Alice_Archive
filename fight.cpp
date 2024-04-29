@@ -111,40 +111,79 @@ bool MainWindow::fight(){
     int YourPal_Attribute = this->userdata.userPals[Now_pet - 1].get_attribute_int();
     int othersPal_Attribute = choosed_fight_pal.get_attribute_int();
 
+    Pal* YourPal;
+    Pal* othersPal;
     //根据如上属性生成新的精灵类
+    switch (YourPal_Attribute){
+        case 1:
+            YourPal = new Strength_Pal(userdata.userPals[Now_pet - 1]);
+            break;
+        case 2:
+            YourPal = new Tank_Pal(userdata.userPals[Now_pet - 1]);
+            break;
+        case 3:
+            YourPal = new Defense_Pal(userdata.userPals[Now_pet - 1]);
+            break;
+        case 4:
+            YourPal = new Agile_Pal(userdata.userPals[Now_pet - 1]);
+            break;
+        default:
+            YourPal = NULL;
+    }
+
+    switch (othersPal_Attribute){
+        case 1:
+            othersPal = new Strength_Pal(userdata.userPals[Now_pet - 1]);
+            break;
+        case 2:
+            othersPal = new Tank_Pal(userdata.userPals[Now_pet - 1]);
+            break;
+        case 3:
+            othersPal = new Defense_Pal(userdata.userPals[Now_pet - 1]);
+            break;
+        case 4:
+            othersPal = new Agile_Pal(userdata.userPals[Now_pet - 1]);
+            break;
+        default:
+            othersPal = NULL;
+    }
+
 /*
     while(true){ // 在双方血量不为零时持续攻击
+        std::this_thread::sleep_for(std::chrono::milliseconds(400));
+
         //双方经过攻击间隔的时间 ++
-        //YourPal.interval ++;
-        //othersPal.interval ++;
+        YourPal->interval ++;
+        othersPal->interval ++;
 
         //双方技能点 ++
-        //YourPal.cost ++;
-        //othersPal.cost ++;
+        YourPal->cost ++;
+        othersPal->cost ++;
 
         //内部自行判断是否给出普通攻击与技能。如果给出内部自行处理cost与interval
         //内部判断受击反馈
 
-        //QString YourPal_Attack = YourPal.fight();
-        //QString othersPal_GET_Attack othersPal.fight(YourPal_Attack);
-        //根据攻击与反馈写出到屏幕上
+        Fight_info YourPal_Attack = YourPal->fight();
+        Fight_info othersPal_GET_Attack = othersPal->fight(YourPal_Attack);
+        //根据攻击与反馈写出到屏幕上 othersPal_GET_Attack.Fight_info_output();
         //血量更新
 
-        //QString othersPal_Attack = othersPal.fight();
-        //QString YourPal_GET_Attack YourPal.fight(othersPal_Attack);
-        //根据攻击与反馈写出到屏幕上
+        Fight_info othersPal_Attack = othersPal->fight();
+        Fight_info YourPal_GET_Attack = YourPal->fight(YourPal_Attack);
+        //根据攻击与反馈写出到屏幕上 YourPal_GET_Attack.Fight_info_output();
         //血量更新
 
         //判断血量
+        if(YourPal->HP == 0 || othersPal->HP == 0)
+            break;
     }
-*/
-/*
-    if(YourPal.HP != 0)
+
+
+    if(YourPal->HP != 0)
         return WIN;
     else
         return FAIL;
 */
-
     return true;
 }
 

@@ -253,3 +253,128 @@ void MainWindow::Userlist_click(QModelIndex index){
     msg.setText(message_test);
     msg.exec();
 }
+
+void MainWindow::on_refresh_Virtual_Pals_clicked(){
+    ItemModel_serverPetList->clear();
+    QStringList labels = QStringLiteral("精灵,属性,等级").simplified().split(",");
+    ItemModel_serverPetList->setHorizontalHeaderLabels(labels);
+
+    QStandardItem* item = 0;
+
+    Server_Pals_list.resize(SERVER_V_PALS_NUM);
+    for(int i = 0; i < SERVER_V_PALS_NUM; i++){
+        int type;
+        type = QRandomGenerator::global()->bounded(1, 4);
+        type = 10 * type + QRandomGenerator::global()->bounded(1, 4);
+        QString name;
+        QString str_type;
+        int LV;
+        int LV_Temp = QRandomGenerator::global()->bounded(15);
+        LV = LV_Temp %4 != 0 ? QRandomGenerator::global()->bounded(1, 15) : 1;
+        Server_Pals_list[i].level = 1;
+        int AP = 100, HP = 100, DP = 100, AI = 50;
+        switch(type){
+            case 11:  //力量型
+                AP = 150;
+                name = "圣园弥香";
+                break;
+            case 12:
+                AP = 150;
+                name = "空崎阳奈";
+                break;
+            case 13:
+                AP = 150;
+                name = "天童爱丽丝";
+                break;
+            case 14:
+                AP = 150;
+                name = "白洲梓";
+                break;
+            case 21:  //肉盾型
+                HP = 150;
+                name = "优香";
+                break;
+            case 22:
+                HP = 150;
+                name = "小鸟游星野";
+                break;
+            case 23:
+                HP = 150;
+                name = "阿罗娜";
+                break;
+            case 24:
+                HP = 150;
+                name = "普拉娜";
+                break;
+            case 31:  //防御型
+                DP = 150;
+                name = "枣伊吕波";
+                break;
+            case 32:
+                DP = 150;
+                name = "阿慈谷日富美";
+                break;
+            case 33:
+                DP = 150;
+                name = "砂狼白子";
+                break;
+            case 34:
+                DP = 150;
+                name = "才羽桃井";
+                break;
+            case 41:  //敏捷型
+                AI = 35;
+                name = "才羽绿";
+                break;
+            case 42:
+                AI = 35;
+                name = "伊落玛丽";
+                break;
+            case 43:
+                AI = 35;
+                name = "下江小春";
+                break;
+            case 44:
+                AI = 35;
+                name = "花岗柚子";
+                break;
+        }
+
+        switch(type /10){
+            case 1:
+                str_type = "力量型";
+                break;
+            case 2:
+                str_type = "肉盾型";
+                break;
+            case 3:
+                str_type = "防御型";
+                break;
+            case 4:
+                str_type = "敏捷型";
+                break;
+        }
+
+        Server_Pals_list[i].set_attribute_int(type / 10);
+        Server_Pals_list[i].name = name;
+        Server_Pals_list[i].Attack_power = AP;
+        Server_Pals_list[i].HP = HP;
+        Server_Pals_list[i].Defense = DP;
+        Server_Pals_list[i].Attack_interval = AI;
+        Server_Pals_list[i].exp = 0;
+
+        for(int i = 0; i < LV; i++)
+            Server_Pals_list[i].levelUp();
+
+        item = new QStandardItem(name);
+        ItemModel_serverPetList->setItem(i, 0, item);
+        item = new QStandardItem(str_type);
+        ItemModel_serverPetList->setItem(i, 1, item);
+        item = new QStandardItem(QString::number(LV));
+        ItemModel_serverPetList->setItem(i, 2, item);
+    }
+    this->ui->Server_Pals_list->setModel(ItemModel_serverPetList);
+    ui->Server_Pals_list->setColumnWidth(0, 120);
+    ui->Server_Pals_list->setColumnWidth(2, 55);
+    ui->Server_Pals_list->setSelectionBehavior(QTableView::SelectRows);
+}

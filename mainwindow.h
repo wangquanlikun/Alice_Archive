@@ -48,6 +48,8 @@ private slots:
 
     void Init_pinyin();
 
+    void on_refresh_Virtual_Pals_clicked();
+
 private:
     Ui::MainWindow *ui;
 

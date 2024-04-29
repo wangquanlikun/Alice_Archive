@@ -793,7 +793,7 @@ border-style: inset;
       <property name="geometry">
        <rect>
         <x>735</x>
-        <y>520</y>
+        <y>560</y>
         <width>490</width>
         <height>30</height>
        </rect>
@@ -806,6 +806,25 @@ border-style: inset;
       </property>
       <property name="text">
        <string>千禧年科技学院·游戏开发部 最新力作</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="About_line_9">
+      <property name="geometry">
+       <rect>
+        <x>770</x>
+        <y>500</y>
+        <width>520</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>伶方体11号：https://github.com/ACh-K/Cubic-11</string>
       </property>
      </widget>
     </widget>
@@ -1046,7 +1065,7 @@ QProgressBar::chunk{
       <widget class="QPushButton" name="choose_Fight_1">
        <property name="geometry">
         <rect>
-         <x>310</x>
+         <x>315</x>
          <y>90</y>
          <width>80</width>
          <height>40</height>
@@ -1411,7 +1430,7 @@ border-style: inset;
       <widget class="QPushButton" name="choose_Fight_2">
        <property name="geometry">
         <rect>
-         <x>310</x>
+         <x>315</x>
          <y>165</y>
          <width>80</width>
          <height>40</height>
@@ -1467,7 +1486,7 @@ border-style: inset;
       <widget class="QPushButton" name="refresh_Virtual_Pals">
        <property name="geometry">
         <rect>
-         <x>310</x>
+         <x>315</x>
          <y>240</y>
          <width>80</width>
          <height>40</height>
