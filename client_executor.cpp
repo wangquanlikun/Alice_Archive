@@ -199,6 +199,7 @@ void MainWindow::create_Server_Pals_list(){
     this->ui->Server_Pals_list->setModel(ItemModel_serverPetList);
     ui->Server_Pals_list->setColumnWidth(0, 120);
     ui->Server_Pals_list->setColumnWidth(2, 55);
+    ui->Server_Pals_list->setSelectionBehavior(QTableView::SelectRows);
 }
 
 void MainWindow::creat_Regi_User_List(){
@@ -224,6 +225,7 @@ void MainWindow::creat_Regi_User_List(){
     this->ui->Userlist->setModel(ItemModel_RegiUserList);
     ui->Userlist->setColumnWidth(0, 150);
     ui->Userlist->setColumnWidth(1, 80);
+    ui->Userlist->setSelectionBehavior(QTableView::SelectRows);
 }
 
 void MainWindow::Userlist_click(QModelIndex index){

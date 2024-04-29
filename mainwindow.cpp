@@ -217,6 +217,7 @@ void MainWindow::window_personalPage(){
     ui->Pals_list->setModel(ItemModel_PetList);
     ui->Pals_list->setColumnWidth(0, 120);
     ui->Pals_list->setColumnWidth(1, 60);
+    ui->Pals_list->setSelectionBehavior(QTableView::SelectRows);
 
     change_now_pet(1);
 }
