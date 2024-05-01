@@ -10,15 +10,22 @@ extern std::map<QString, QString> ToPinyin;
 #define WIN true
 #define FAIL false
 
-#include<thread>
-#include<chrono>
+#include<QThread>
+#include<QCoreApplication>
 
 void MainWindow::Server_Pals_list_click(const QModelIndex index){
     int Server_V_Pals_array = index.row();
     choosed_fight_pal = Server_Pals_list[Server_V_Pals_array];
 
     QMessageBox msg;
-    msg.setText("你选择了" + QString::number(Server_V_Pals_array + 1) + "号精灵：" + Server_Pals_list[Server_V_Pals_array].name);
+    QString box_mes;
+    box_mes += ("你选择了" + QString::number(Server_V_Pals_array + 1) + "号精灵：" + Server_Pals_list[Server_V_Pals_array].name + "\n");
+    box_mes += ("LV: " + QString::number(Server_Pals_list[Server_V_Pals_array].level) + "  ");
+    box_mes += ("HP: " + QString::number(Server_Pals_list[Server_V_Pals_array].HP) + "  ");
+    box_mes += ("DP: " + QString::number(Server_Pals_list[Server_V_Pals_array].Defense) + "  ");
+    box_mes += ("AP: " + QString::number(Server_Pals_list[Server_V_Pals_array].Attack_power) + "  ");
+    box_mes += ("AI: " + QString::number(Server_Pals_list[Server_V_Pals_array].Attack_interval));
+    msg.setText(box_mes);
     msg.exec();
 }
 
@@ -59,8 +66,6 @@ void MainWindow::on_choose_Fight_2_clicked(){ //升级赛
     else{
         ui->Mainpage->setCurrentIndex(2);
         init_fight_page();
-        QMessageBox::about(this,"邦邦咔邦","对战开始");
-        std::this_thread::sleep_for(std::chrono::seconds(1));
         if(fight()){
             QMessageBox::about(this,"邦邦咔邦","对战胜利！");
             userdata.winNum ++;
@@ -133,58 +138,97 @@ bool MainWindow::fight(){
 
     switch (othersPal_Attribute){
         case 1:
-            othersPal = new Strength_Pal(userdata.userPals[Now_pet - 1]);
+            othersPal = new Strength_Pal(choosed_fight_pal);
             break;
         case 2:
-            othersPal = new Tank_Pal(userdata.userPals[Now_pet - 1]);
+            othersPal = new Tank_Pal(choosed_fight_pal);
             break;
         case 3:
-            othersPal = new Defense_Pal(userdata.userPals[Now_pet - 1]);
+            othersPal = new Defense_Pal(choosed_fight_pal);
             break;
         case 4:
-            othersPal = new Agile_Pal(userdata.userPals[Now_pet - 1]);
+            othersPal = new Agile_Pal(choosed_fight_pal);
             break;
         default:
             othersPal = NULL;
     }
 
-/*
-    while(true){ // 在双方血量不为零时持续攻击
-        std::this_thread::sleep_for(std::chrono::milliseconds(400));
+    int round = 0;
+    ui->fight_Round->display(round);
+    ui->fight_Desc->clear();
 
-        //双方经过攻击间隔的时间 ++
+    QMessageBox::about(this,"邦邦咔邦","对战开始");
+
+    #define ENABLE_MESSAGEBOX 0
+
+    while(true){
+        QThread::msleep(20);
+        QCoreApplication::processEvents();
+
         YourPal->interval ++;
         othersPal->interval ++;
-
-        //双方技能点 ++
+        round ++;
+        ui->fight_Round->display(round);
         YourPal->cost ++;
         othersPal->cost ++;
-
-        //内部自行判断是否给出普通攻击与技能。如果给出内部自行处理cost与interval
-        //内部判断受击反馈
+        ui->YourPal_cost->display(YourPal->cost);
+        ui->othersPal_cost->display(othersPal->cost);
 
         Fight_info YourPal_Attack = YourPal->fight();
         Fight_info othersPal_GET_Attack = othersPal->fight(YourPal_Attack);
-        //根据攻击与反馈写出到屏幕上 othersPal_GET_Attack.Fight_info_output();
-        //血量更新
+        if(othersPal_GET_Attack.Fight_info_output() != "-1"){
+            ui->fight_Desc->append("Round: " + QString::number(round) + "\t" + othersPal_GET_Attack.Fight_info_output());
+            #if ENABLE_MESSAGEBOX
+                QMessageBox::about(this,"",othersPal_GET_Attack.Fight_info_output());
+            #else
+                QThread::msleep(200);
+                QCoreApplication::processEvents();
+            #endif
+        }
+        ui->othersPal_HP_ProgBar->setValue(fmax((int) ( ((double)othersPal->HP / (double)choosed_fight_pal.HP)*100 ) , 0));
+
+        QThread::msleep(20);
+        QCoreApplication::processEvents();
 
         Fight_info othersPal_Attack = othersPal->fight();
-        Fight_info YourPal_GET_Attack = YourPal->fight(YourPal_Attack);
-        //根据攻击与反馈写出到屏幕上 YourPal_GET_Attack.Fight_info_output();
-        //血量更新
+        Fight_info YourPal_GET_Attack = YourPal->fight(othersPal_Attack);
+        if(YourPal_GET_Attack.Fight_info_output() != "-1"){
+            ui->fight_Desc->append("Round: " + QString::number(round) + "\t" + YourPal_GET_Attack.Fight_info_output());
+            #if ENABLE_MESSAGEBOX
+                QMessageBox::about(this,"",YourPal_GET_Attack.Fight_info_output());
+            #else
+                QThread::msleep(200);
+                QCoreApplication::processEvents();
+            #endif
+        }
+        ui->YourPal_HP_ProgBar->setValue(fmax((int) ( ((double)YourPal->HP / (double)userdata.userPals[Now_pet - 1].HP)*100 ) , 0));
 
-        //判断血量
-        if(YourPal->HP == 0 || othersPal->HP == 0)
+        if(YourPal->HP <= 0 || othersPal->HP <= 0)
             break;
     }
 
+    QThread::msleep(200);
+    QCoreApplication::processEvents();
 
-    if(YourPal->HP != 0)
+    if(YourPal->HP < 0)
+        ui->YourPal_HP_ProgBar->setValue(0);
+    else
+        ui->YourPal_HP_ProgBar->setValue((int) ( ((double)YourPal->HP / (double)userdata.userPals[Now_pet - 1].HP) * 100 ) );
+    if(othersPal->HP < 0)
+        ui->othersPal_HP_ProgBar->setValue(0);
+    else
+        ui->othersPal_HP_ProgBar->setValue((int) ( ((double)othersPal->HP / (double)choosed_fight_pal.HP) * 100 ) );
+
+    ui->YourPal_cost->display(YourPal->cost);
+    ui->othersPal_cost->display(othersPal->cost);
+    #if ENABLE_MESSAGEBOX
+    QMessageBox::about(this,"","战斗结束");
+    #endif
+
+    if(YourPal->HP > 0)
         return WIN;
     else
         return FAIL;
-*/
-    return true;
 }
 
 void MainWindow::refresh_personalPage(){

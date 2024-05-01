@@ -87,13 +87,13 @@ void MainWindow::create_Server_Pals_list(){
     Server_Pals_list.resize(SERVER_V_PALS_NUM);
     for(int i = 0; i < SERVER_V_PALS_NUM; i++){
         int type;
-        type = QRandomGenerator::global()->bounded(1, 4);
-        type = 10 * type + QRandomGenerator::global()->bounded(1, 4);
+        type = QRandomGenerator::global()->bounded(1, 5);
+        type = 10 * type + QRandomGenerator::global()->bounded(1, 5);
         QString name;
         QString str_type;
         int LV;
-        int LV_Temp = QRandomGenerator::global()->bounded(15);
-        LV = LV_Temp %4 != 0 ? QRandomGenerator::global()->bounded(1, 15) : 1;
+        int LV_Temp = QRandomGenerator::global()->bounded(1, 16);
+        LV = (LV_Temp %4 != 0) ? QRandomGenerator::global()->bounded(1, 16) : 1;
         Server_Pals_list[i].level = 1;
         int AP = 100, HP = 100, DP = 100, AI = 50;
         switch(type){
@@ -186,7 +186,7 @@ void MainWindow::create_Server_Pals_list(){
         Server_Pals_list[i].Attack_interval = AI;
         Server_Pals_list[i].exp = 0;
 
-        for(int i = 0; i < LV; i++)
+        for(int j = 1; j < LV; j++)
             Server_Pals_list[i].levelUp();
 
         item = new QStandardItem(name);
@@ -255,6 +255,8 @@ void MainWindow::Userlist_click(QModelIndex index){
 }
 
 void MainWindow::on_refresh_Virtual_Pals_clicked(){
+    choosed_fight_pal.name = "NULL";
+
     ItemModel_serverPetList->clear();
     QStringList labels = QStringLiteral("精灵,属性,等级").simplified().split(",");
     ItemModel_serverPetList->setHorizontalHeaderLabels(labels);
@@ -264,13 +266,13 @@ void MainWindow::on_refresh_Virtual_Pals_clicked(){
     Server_Pals_list.resize(SERVER_V_PALS_NUM);
     for(int i = 0; i < SERVER_V_PALS_NUM; i++){
         int type;
-        type = QRandomGenerator::global()->bounded(1, 4);
-        type = 10 * type + QRandomGenerator::global()->bounded(1, 4);
+        type = QRandomGenerator::global()->bounded(1, 5);
+        type = 10 * type + QRandomGenerator::global()->bounded(1, 5);
         QString name;
         QString str_type;
         int LV;
-        int LV_Temp = QRandomGenerator::global()->bounded(15);
-        LV = LV_Temp %4 != 0 ? QRandomGenerator::global()->bounded(1, 15) : 1;
+        int LV_Temp = QRandomGenerator::global()->bounded(1, 16);
+        LV = LV_Temp %4 != 0 ? QRandomGenerator::global()->bounded(1, 16) : 1;
         Server_Pals_list[i].level = 1;
         int AP = 100, HP = 100, DP = 100, AI = 50;
         switch(type){
@@ -363,7 +365,7 @@ void MainWindow::on_refresh_Virtual_Pals_clicked(){
         Server_Pals_list[i].Attack_interval = AI;
         Server_Pals_list[i].exp = 0;
 
-        for(int i = 0; i < LV; i++)
+        for(int j = 1; j < LV; j++)
             Server_Pals_list[i].levelUp();
 
         item = new QStandardItem(name);
