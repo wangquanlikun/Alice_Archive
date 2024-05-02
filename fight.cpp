@@ -4,6 +4,7 @@
 #include <user.h>
 
 #include <QMessageBox>
+#include <QInputDialog>
 #include <QPixmapCache>
 extern std::map<QString, QString> ToPinyin;
 
@@ -39,13 +40,107 @@ void MainWindow::on_choose_Fight_1_clicked(){ //决斗赛
         if(fight()){
             QMessageBox::about(this,"邦邦咔邦","对战胜利！");
             userdata.winNum ++;
-            //得到新精灵
+            userdata.userPals.push_back(choosed_fight_pal);
+            userdata.petNum ++;
+            QString New_Pal_info;
+            New_Pal_info += ("获得新精灵：" + choosed_fight_pal.name + "  LV. " + QString::number(choosed_fight_pal.level));
+            QMessageBox::about(this,"获得新精灵！",New_Pal_info);
         }
         else{
             QMessageBox::about(this,"苦呀西","对战失败了呜… 下次再努力吧");
             userdata.failNum ++;
-            //失去此精灵
-            //判断，若无精灵则给予一只精灵
+            QString Thrown_Pal_info;
+            int thrown_Pal_index = choose_throw_pal();
+            Thrown_Pal_info += ("失去了精灵：" + userdata.userPals[thrown_Pal_index - 1].name);
+            QMessageBox::warning(this,"失去了精灵！",Thrown_Pal_info);
+            userdata.userPals.erase( userdata.userPals.begin() + (thrown_Pal_index - 1) );
+            userdata.petNum --;
+            if(Now_pet > userdata.petNum)
+                Now_pet --;
+            if(userdata.petNum == 0){ //判断，若无精灵则给予一只精灵
+                Pal new_pal;
+
+                int type;
+                type = QRandomGenerator::global()->bounded(1, 5);
+                type = 10 * type + QRandomGenerator::global()->bounded(1, 5);
+                QString name;
+                int LV = 1;
+                int AP = 100, HP = 100, DP = 100, AI = 50;
+                switch(type){
+                    case 11:  //力量型
+                        AP = 150;
+                        name = "圣园弥香";
+                        break;
+                    case 12:
+                        AP = 150;
+                        name = "空崎阳奈";
+                        break;
+                    case 13:
+                        AP = 150;
+                        name = "天童爱丽丝";
+                        break;
+                    case 14:
+                        AP = 150;
+                        name = "白洲梓";
+                        break;
+                    case 21:  //肉盾型
+                        HP = 150;
+                        name = "优香";
+                        break;
+                    case 22:
+                        HP = 150;
+                        name = "小鸟游星野";
+                        break;
+                    case 23:
+                        HP = 150;
+                        name = "阿罗娜";
+                        break;
+                    case 24:
+                        HP = 150;
+                        name = "普拉娜";
+                        break;
+                    case 31:  //防御型
+                        DP = 150;
+                        name = "枣伊吕波";
+                        break;
+                    case 32:
+                        DP = 150;
+                        name = "阿慈谷日富美";
+                        break;
+                    case 33:
+                        DP = 150;
+                        name = "砂狼白子";
+                        break;
+                    case 34:
+                        DP = 150;
+                        name = "才羽桃井";
+                        break;
+                    case 41:  //敏捷型
+                        AI = 35;
+                        name = "才羽绿";
+                        break;
+                    case 42:
+                        AI = 35;
+                        name = "伊落玛丽";
+                        break;
+                    case 43:
+                        AI = 35;
+                        name = "下江小春";
+                        break;
+                    case 44:
+                        AI = 35;
+                        name = "花岗柚子";
+                        break;
+                }
+                new_pal.Initi_set(type, name, AP, DP, HP, AI, LV, 0);
+
+                userdata.userPals.push_back(new_pal);
+                userdata.petNum ++;
+                Now_pet = 1;
+
+                QString get_new_pal = "杂鱼♡~杂鱼~ 没有精灵可太可怜了！来，带上这个吧\n\n  获得精灵：" + new_pal.name + " LV. 1";
+                QMessageBox::about(this,"哼！才不是给你的精灵呢", get_new_pal);
+            }
         }
 
         QMessageBox::StandardButton box;
@@ -271,4 +366,40 @@ void MainWindow::refresh_personalPage(){
     ui->Pals_list->setSelectionBehavior(QTableView::SelectRows);
 
     change_now_pet(this->Now_pet);
+}
+
+int MainWindow::choose_throw_pal(){
+    int choosed_pal_index = Now_pet;
+    std::vector<int> pre_choose_pal_index;
+    pre_choose_pal_index.resize(fmin(3, userdata.petNum));
+    for(int i = 0; i < fmin(3, userdata.petNum); i++){
+        re_rand:
+        int temp_random = QRandomGenerator::global()->bounded(1, userdata.petNum + 1);
+        for(int j = 0; j < i; j++){
+            if(temp_random == pre_choose_pal_index[j])
+                goto re_rand;
+        }
+        pre_choose_pal_index[i] = temp_random;
+    }
+
+    std::map<QString, int> name_to_index;
+    QString TEXT_choose_to_throw_pal_1;
+    QString TEXT_choose_to_throw_pal_2 = "";
+    TEXT_choose_to_throw_pal_1 = "请选择一个精灵送出";
+    QStringList items;
+    for(int i = 0; i < (int)pre_choose_pal_index.size(); i++){
+        TEXT_choose_to_throw_pal_2 += QString::number(i + 1) + ". 精灵名称：" + userdata.userPals[pre_choose_pal_index[i] - 1].name;
+        TEXT_choose_to_throw_pal_2 += "   LV. " + QString::number(userdata.userPals[pre_choose_pal_index[i] - 1].level);
+        TEXT_choose_to_throw_pal_2 += "\n";
+        items << userdata.userPals[pre_choose_pal_index[i] - 1].name;
+        name_to_index[userdata.userPals[pre_choose_pal_index[i] - 1].name] = i;
+    }
+    bool ok;
+    QString item = QInputDialog::getItem(nullptr, TEXT_choose_to_throw_pal_1, TEXT_choose_to_throw_pal_2, items, 0, false, &ok);
+
+    if (ok && !item.isEmpty()) {
+        qDebug() << "送出的精灵：" + item;
+        choosed_pal_index = pre_choose_pal_index[name_to_index[item]];
+    }
+    return choosed_pal_index;
 }

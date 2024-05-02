@@ -78,5 +78,6 @@ private:
     void init_fight_page();
     bool fight();
     void refresh_personalPage();
+    int choose_throw_pal();
 };
 #endif // MAINWINDOW_H

@@ -4,6 +4,8 @@
 
 std::vector<QString> Online_userName;
 
+#define REGI_INIT_PET_NUM 5
+
 Database::Database(){
     if (QSqlDatabase::contains("qt_sql_default_connection")) {
         data = QSqlDatabase::database("qt_sql_default_connection");
@@ -160,12 +162,12 @@ void Executor_Data::server_register(){
         userDatabase.DBquery->addBindValue(QString::fromUtf8(register_password));  //password
         userDatabase.DBquery->addBindValue(0);    //win num
         userDatabase.DBquery->addBindValue(0);    //fail num
-        userDatabase.DBquery->addBindValue(30);    //pet num
+        userDatabase.DBquery->addBindValue(REGI_INIT_PET_NUM);    //pet num
         userDatabase.DBquery->addBindValue(0);    //high pet num
 
         //初始化与随机值用户信息
-        QString registerReturn = "RegisterSuccess&0 0 30 0 ";
-        QString random_pet_info = New_login_Random_Pals(30);
+        QString registerReturn = "RegisterSuccess&0 0 " + QString::number(REGI_INIT_PET_NUM) + " 0 ";
+        QString random_pet_info = New_login_Random_Pals(REGI_INIT_PET_NUM);
         userDatabase.DBquery->addBindValue(random_pet_info);    //pet information
 
         userDatabase.DBquery->exec();

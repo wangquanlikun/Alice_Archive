@@ -58,16 +58,27 @@ public:
                 output += (" 无效化了对手下一次技能");
             else if(special_power_desc == "0&24")
                 output += (" 抵消了下一次受到的攻击");
+            else if(special_power_desc == "0&31" || special_power_desc == "0&31x")
+                output += (" 虎丸坦克登场！");
+            else if(special_power_desc == "0&32" || special_power_desc == "0&32x")
+                output += (" 抵消了下一次受到的攻击");
+            else if(special_power_desc == "0&33" || special_power_desc == "0&33x")
+                output += (" 增加 100% 的防御力，持续 4 回合");
             else if(special_power_desc == "0&42")
                 output += (" 立即回复了 20% 的生命值");
             else if(special_power_desc == "0&43")
-                output += (" 立即增加了 40 普通攻击点与 20 技能点");
+                output += (" 立即增加了 20 普通攻击点与 10 技能点");
         }
         else{
+            if((special_power_desc.length() == 5 && special_power_desc[4] == 'x') || (special_power_desc != "" && special_power_desc[0] == 'x'))
+                output += "搭载虎王坦克 ";
             output += (Attack_giver_name + " 对 " + Attack_reciver_name);
             if(special_power_name != "")
                 output += (" 发动了 【" + special_power_name + "】");
             output += " 造成了 " + QString::number(real_HP_loss) + " 点伤害";
+
+            if(special_status == "tank")
+                output += " 真实伤害由虎丸坦克承担 ";
 
             if(special_power_desc != ""){
                 if(special_power_desc[0] == '1')
@@ -83,8 +94,18 @@ public:
                     output += (" 下一次受击时防御力增加 50%");
                 else if(special_power_desc == "0&24")
                     output += (" 抵消了下一次受到的攻击");
+                else if(special_power_desc == "0&31" || special_power_desc == "0&31x")
+                    output += (" 虎丸坦克登场！");
+                else if(special_power_desc == "0&32" || special_power_desc == "0&32x")
+                    output += (" 抵消了下一次受到的攻击");
+                else if(special_power_desc == "0&33" || special_power_desc == "0&33x")
+                    output += (" 增加 100% 的防御力，持续 4 回合");
+                else if(special_power_desc == "0&34" || special_power_desc == "0&34x")
+                    output += (" 防御增加了 50% ");
                 else if(special_power_desc == "0&42")
                     output += (" 立即回复了 20% 的生命值");
+                else if(special_power_desc == "0&43")
+                    output += (" 立即增加了 20 普通攻击点与 10 技能点");
             }
         }
         return output;
@@ -455,6 +476,14 @@ class Defense_Pal: public Pal{
         QString special_power_name[4 + 1];
         QString special_power_desc[4 + 1];
 
+        bool on_tank;
+        int tank_HP;
+        int tank_DP;
+        int tank_AP;
+        bool PLL;
+        bool DP_up;
+        int kuyaxi;
+
     public:
         Defense_Pal(Pal Base_Pal){
             interval = 0;
@@ -471,33 +500,135 @@ class Defense_Pal: public Pal{
 
             special_power_choice = -1;
 
-            special_power[1] = 2 * Attack_power;
+            special_power[1] = 0;
             special_power[2] = 0;
-            special_power[3] = 2 * Attack_power;
+            special_power[3] = 0;
             special_power[4] = 0;
-            special_power_cost[1] = 35;
-            special_power_cost[2] = 30;
-            special_power_cost[3] = 35;
-            special_power_cost[4] = 30;
-            special_power_name[1] = "千年的100kg小姐";
-            special_power_name[2] = "蓝色恶魔";
-            special_power_name[3] = "一动不动还是好热啊~ ";
-            special_power_name[4] = "大人的责任";
-            special_power_desc[1] = "0&21";
-            special_power_desc[2] = "0&22";
-            special_power_desc[3] = "0&23";
-            special_power_desc[4] = "0&24";
+            special_power_cost[1] = 30;
+            special_power_cost[2] = 25;
+            special_power_cost[3] = 10;
+            special_power_cost[4] = 25;
+            special_power_name[1] = "虎丸！出击";
+            special_power_name[2] = "佩洛洛Sama";
+            special_power_name[3] = "苦呀西~ ";
+            special_power_name[4] = "银行不妙曲";
+            special_power_desc[1] = "0&31";
+            special_power_desc[2] = "0&32";
+            special_power_desc[3] = "0&33";
+            special_power_desc[4] = "0&34";
+
+            on_tank = false;
+            tank_HP = 0;
+            tank_DP = 0;
+            tank_AP = 0;
+            PLL = false;
+            DP_up = false;
+            kuyaxi = 0;
         }
 
         Fight_info fight(){
             Fight_info attack_info;
+            attack_info.Attack_giver_name = this->name;
+            if(interval >= Attack_interval){
+                attack_info.Attack_power += Attack_power;
+                interval -= Attack_interval;
+            }
+
+            if(special_power_choice == -1){
+                special_power_choice = QRandomGenerator::global()->bounded(1, 5);
+            }
+            else{
+                switch(special_power_choice){
+                case 1:
+                    if(cost >= special_power_cost[1]){
+                        cost -= special_power_cost[1];
+                        attack_info.Attack_power += special_power[1];
+                        attack_info.special_power_name = special_power_name[1];
+                        attack_info.special_power_desc = special_power_desc[1];
+                        special_power_choice = -1;
+
+                        on_tank = true;
+                        tank_HP = HP >> 2;
+                        tank_DP = Defense;
+                        tank_AP = Attack_power << 1;
+                    }
+                    break;
+                case 2:
+                    if(cost >= special_power_cost[2]){
+                        cost -= special_power_cost[2];
+                        attack_info.Attack_power += special_power[2];
+                        attack_info.special_power_name = special_power_name[2];
+                        attack_info.special_power_desc = special_power_desc[2];
+                        special_power_choice = -1;
+
+                        PLL = true;
+                    }
+                    break;
+                case 3:
+                    if(cost >= special_power_cost[3]){
+                        cost -= special_power_cost[3];
+                        attack_info.Attack_power += special_power[3];
+                        attack_info.special_power_name = special_power_name[3];
+                        attack_info.special_power_desc = special_power_desc[3];
+                        special_power_choice = -1;
+
+                        kuyaxi = 4;
+                    }
+                    break;
+                case 4:
+                    if(cost >= special_power_cost[4]){
+                        cost -= special_power_cost[4];
+                        attack_info.Attack_power += QRandomGenerator::global()->bounded(Attack_power, (Attack_power << 1) + 1);
+                        attack_info.special_power_name = special_power_name[4];
+                        attack_info.special_power_desc = special_power_desc[4];
+                        special_power_choice = -1;
+
+                        DP_up = true;
+                    }
+                    break;
+                }
+            }
+
+            if(on_tank){
+                attack_info.special_power_desc += 'x';
+                if(interval >= 15) {
+                    attack_info.Attack_power += tank_AP;
+                    interval -= 15;
+                }
+            }
             return attack_info;
         }
 
         Fight_info fight(Fight_info attack_infomation){
             Fight_info get_attack_info = attack_infomation;
             get_attack_info.Attack_reciver_name = this->name;
-            get_attack_info.real_HP_loss = (int)((double)get_attack_info.Attack_power * (double)(1 - Defense/1000) * 0.05);
+            if(PLL){
+                get_attack_info.real_HP_loss = 0;
+                PLL = false;
+            }
+            else if(on_tank){
+                if(tank_HP <= 0){
+                    on_tank = false;
+                    get_attack_info.real_HP_loss = (int)((double)get_attack_info.Attack_power * (double)(1 - Defense/1000) * 0.05);
+                }
+                else{
+                    get_attack_info.real_HP_loss = 0;
+                    tank_HP -= (int)((double)get_attack_info.Attack_power * (double)(1 - tank_DP/1000) * 0.05);
+                    get_attack_info.special_status = "tank";
+                }
+            }
+            else{
+                int DP_temp = Defense;
+                if(kuyaxi > 0){
+                    DP_temp = fmin(1000, 3 * Defense);
+                    kuyaxi --;
+                }
+                if(DP_up){
+                    DP_temp = fmin(1000, 2 * Defense);
+                    DP_up = false;
+                }
+                get_attack_info.real_HP_loss = (int)((double)get_attack_info.Attack_power * (double)(1 - DP_temp/1000) * 0.05);
+            }
             this->HP -= get_attack_info.real_HP_loss;
             return get_attack_info;
         }
@@ -593,8 +724,8 @@ class Agile_Pal: public Pal{
                         attack_info.special_power_desc = special_power_desc[3];
                         special_power_choice = -1;
 
-                        this->interval += 40;
-                        this->cost += 20;
+                        this->interval += 20;
+                        this->cost += 10;
                     }
                     break;
                 case 4:
