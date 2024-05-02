@@ -185,6 +185,7 @@ void MainWindow::create_Server_Pals_list(){
         Server_Pals_list[i].Defense = DP;
         Server_Pals_list[i].Attack_interval = AI;
         Server_Pals_list[i].exp = 0;
+        Server_Pals_list[i].type = type;
 
         for(int j = 1; j < LV; j++)
             Server_Pals_list[i].levelUp();
@@ -364,6 +365,7 @@ void MainWindow::on_refresh_Virtual_Pals_clicked(){
         Server_Pals_list[i].Defense = DP;
         Server_Pals_list[i].Attack_interval = AI;
         Server_Pals_list[i].exp = 0;
+        Server_Pals_list[i].type = type;
 
         for(int j = 1; j < LV; j++)
             Server_Pals_list[i].levelUp();

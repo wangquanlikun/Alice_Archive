@@ -125,6 +125,7 @@ private:
     }
 
 public:
+    int type;
     QString name;
     int level;
     int exp;

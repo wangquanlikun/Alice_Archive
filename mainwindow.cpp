@@ -172,8 +172,21 @@ void MainWindow::on_page2_to_page4_clicked(){
 
 
 void MainWindow::on_logout_clicked(){
-    socket->write("O&" + userdata.get_name().toUtf8());
-    //要写回用户信息更改吗
+    QString Send_logout_data;
+    Send_logout_data = "O&" + userdata.get_name();
+    Send_logout_data += " " + QString::number(userdata.winNum) + " " + QString::number(userdata.failNum) + " " + QString::number(userdata.petNum) + " " + QString::number(userdata.HighpetNum);
+    Send_logout_data += "#";
+    for(int i = 0; i < userdata.petNum; i++){
+        Send_logout_data += QString::number(userdata.userPals[i].type) + " ";
+        Send_logout_data += QString::number(userdata.userPals[i].Attack_power) + " ";
+        Send_logout_data += QString::number(userdata.userPals[i].Defense) + " ";
+        Send_logout_data += QString::number(userdata.userPals[i].HP) + " ";
+        Send_logout_data += QString::number(userdata.userPals[i].Attack_interval) + " ";
+        Send_logout_data += userdata.userPals[i].name + " ";
+        Send_logout_data += QString::number(userdata.userPals[i].level) + " ";
+        Send_logout_data += QString::number(userdata.userPals[i].exp) + " ";
+    }
+    socket->write(Send_logout_data.toUtf8());
     ui->Mainpage->setCurrentIndex(1);
 }
 

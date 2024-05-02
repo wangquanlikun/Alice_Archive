@@ -213,9 +213,26 @@ void Executor_Data::server_register(){
 }
 
 void Executor_Data::server_logout(){
+    int pos = socket_data.indexOf('&');
+    QString userdata_info = socket_data.mid(pos + 1);
+
     QString Logout_username;
-    for(int i = 2; i < this->socket_data.length(); i++)
-        Logout_username += socket_data[i];
+    int winNum;
+    int failNum;
+    int petNum;
+    int highpetNum;
+
+    QTextStream stream(&userdata_info);
+    stream >> Logout_username >> winNum >> failNum >> petNum >> highpetNum;
+
+    pos = socket_data.indexOf('#');
+    QString pet_info = socket_data.mid(pos + 1);
+
+    QString updateQuery = QString("UPDATE player SET winNum=%1, failNum=%2, petNum=%3, highPetNum=%4, pet='%5' WHERE name='%6'").arg(winNum).arg(failNum).arg(petNum).arg(highpetNum).arg(pet_info).arg(Logout_username);
+    if(userDatabase.DBquery->exec(updateQuery))
+        qDebug() << "Update UserInfo Success.";
+    else
+        qDebug() << "Update UserInfo Error.";
 
     auto it = std::find(Online_userName.begin(), Online_userName.end(), Logout_username);
     if (it != Online_userName.end()) {

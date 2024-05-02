@@ -9,6 +9,7 @@ void Pal::Initi_set(int type, QString name, int AP, int DP, int HP, int AI, int 
     this->Attack_interval = AI;
     this->level = LV;
     this->exp = EXP;
+    this->type = type;
 
     switch(type/10){
     case 1:
