@@ -11,6 +11,9 @@
 #include <QStandardItemModel>
 #include <QModelIndex>
 
+#define BGM_ON 1
+#include <QSoundEffect>
+
 #include "user.h"
 
 QT_BEGIN_NAMESPACE
@@ -79,5 +82,8 @@ private:
     bool fight();
     void refresh_personalPage();
     int choose_throw_pal();
+
+    QSoundEffect * startSound;
+    QSoundEffect * fightSound;
 };
 #endif // MAINWINDOW_H

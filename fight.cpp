@@ -146,6 +146,11 @@ void MainWindow::on_choose_Fight_1_clicked(){ //决斗赛
         QMessageBox::StandardButton box;
         box = QMessageBox::question(this,"邦邦咔邦","战斗结束，要离开这里吗？", QMessageBox::Yes | QMessageBox::No);
         if(box == QMessageBox::Yes){
+            #if BGM_ON
+                this->startSound->play();
+                this->fightSound->stop();
+            #endif
+
             ui->Mainpage->setCurrentIndex(4);
             refresh_personalPage();
         }
@@ -181,6 +186,11 @@ void MainWindow::on_choose_Fight_2_clicked(){ //升级赛
         QMessageBox::StandardButton box;
         box = QMessageBox::question(this,"邦邦咔邦","战斗结束，要离开这里吗？", QMessageBox::Yes | QMessageBox::No);
         if(box == QMessageBox::Yes){
+            #if BGM_ON
+                this->startSound->play();
+                this->fightSound->stop();
+            #endif
+
             ui->Mainpage->setCurrentIndex(4);
             refresh_personalPage();
         }
@@ -190,6 +200,11 @@ void MainWindow::on_choose_Fight_2_clicked(){ //升级赛
 }
 
 void MainWindow::init_fight_page(){
+    #if BGM_ON
+        this->startSound->stop();
+        this->fightSound->play();
+    #endif
+
     Pal this_pal = this->userdata.userPals[Now_pet - 1];
     QPixmap pixmap_1;
     QString pix_path_1 = ":/new/prefix1/Resource/blue_archive_big_head_sd/" + ToPinyin[this_pal.name] + ".png";

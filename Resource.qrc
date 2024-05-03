@@ -30,5 +30,7 @@
         <file>Resource/BA_Skill_5.png</file>
         <file>Resource/BA_Skill_9.png</file>
         <file>Resource/BA_Skill_17.png</file>
+        <file>Resource/BGM/Constant Moderato.wav</file>
+        <file>Resource/BGM/Mechanical JUNGLE 2.wav</file>
     </qresource>
 </RCC>

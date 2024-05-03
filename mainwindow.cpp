@@ -38,6 +38,17 @@ MainWindow::MainWindow(QWidget *parent)
     Now_pet = 1;
     choosed_fight_pal.name = "NULL";
     Init_pinyin();
+
+    #if BGM_ON
+        startSound = new QSoundEffect(this);
+        startSound->setSource(QUrl::fromLocalFile(":/new/prefix1/Resource/BGM/Constant Moderato.wav"));
+        startSound->setLoopCount(QSoundEffect::Infinite); //设置循环次数
+        startSound->play();
+
+        fightSound = new QSoundEffect(this);
+        fightSound->setSource(QUrl::fromLocalFile(":/new/prefix1/Resource/BGM/Mechanical JUNGLE 2.wav"));
+        fightSound->setLoopCount(QSoundEffect::Infinite);
+    #endif
 }
 
 MainWindow::~MainWindow(){
