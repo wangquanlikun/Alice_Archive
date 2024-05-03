@@ -57,6 +57,12 @@
 
 ![User](./Intro/Person_Page.png)
 
+#### 小精灵战斗界面
+![Fight](./Intro/fight_info.png)
+
+### 关于界面
+![About](./Intro/About.png)
+
 ### 服务端
 
 本页面用于展示运行过程中，服务端的相关运行参数与接受到的socket信息内容

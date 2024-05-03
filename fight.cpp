@@ -205,6 +205,32 @@ void MainWindow::init_fight_page(){
 
     ui->YourPal_HP_ProgBar->setValue(100);
     ui->othersPal_HP_ProgBar->setValue(100);
+
+    ui->Yourpal_S_AP->hide();
+    ui->Yourpal_S_AP_back->hide();
+    ui->Yourpal_S_HP->hide();
+    ui->Yourpal_S_HP_back->hide();
+    ui->Yourpal_S_cost->hide();
+    ui->Yourpal_S_cost_back->hide();
+    ui->Yourpal_S_down->hide();
+    ui->Yourpal_S_down_back->hide();
+    ui->Yourpal_S_tank->hide();
+    ui->Yourpal_S_tank_back->hide();
+    ui->Yourpal_S_up->hide();
+    ui->Yourpal_S_up_back->hide();
+
+    ui->otherspal_S_AP->hide();
+    ui->otherspal_S_AP_back->hide();
+    ui->otherspal_S_HP->hide();
+    ui->otherspal_S_HP_back->hide();
+    ui->otherspal_S_cost->hide();
+    ui->otherspal_S_cost_back->hide();
+    ui->otherspal_S_down->hide();
+    ui->otherspal_S_down_back->hide();
+    ui->otherspal_S_tank->hide();
+    ui->otherspal_S_tank_back->hide();
+    ui->otherspal_S_up->hide();
+    ui->otherspal_S_up_back->hide();
 }
 
 bool MainWindow::fight(){
@@ -273,6 +299,60 @@ bool MainWindow::fight(){
         Fight_info othersPal_GET_Attack = othersPal->fight(YourPal_Attack);
         if(othersPal_GET_Attack.Fight_info_output() != "-1"){
             ui->fight_Desc->append("Round: " + QString::number(round) + "\t" + othersPal_GET_Attack.Fight_info_output());
+            if(YourPal->get_attribute_int() == 1){
+                ;
+            }
+            else if(YourPal->get_attribute_int() == 2){
+                //无效技能 || 抵消攻击 || 伤害减少 || 防御增加
+                if(YourPal_Attack.special_power_desc == "0&22" || YourPal_Attack.special_power_desc == "0&24" || YourPal_Attack.special_power_desc == "0&23" || YourPal_Attack.special_power_desc == "0&21"){
+                    ui->Yourpal_S_up->show();
+                    ui->Yourpal_S_up_back->show();
+                }
+                else{
+                    ui->Yourpal_S_up->hide();
+                    ui->Yourpal_S_up_back->hide();
+                }
+            }
+            else if(YourPal->get_attribute_int() == 3){
+                //虎丸坦克
+                if((YourPal_Attack.special_power_desc.length() == 5 && YourPal_Attack.special_power_desc[4] == 'x') || (YourPal_Attack.special_power_desc != "" && YourPal_Attack.special_power_desc[0] == 'x')){
+                    ui->Yourpal_S_tank->show();
+                    ui->Yourpal_S_tank_back->show();
+                }
+                else{
+                    ui->Yourpal_S_tank->hide();
+                    ui->Yourpal_S_tank_back->hide();
+                }
+                //抵消攻击 || 防御增加
+                if(YourPal_Attack.special_power_desc == "0&32" || YourPal_Attack.special_power_desc == "0&32x" || YourPal_Attack.special_power_desc == "0&33" || YourPal_Attack.special_power_desc == "0&33x" || YourPal_Attack.special_power_desc == "0&34" || YourPal_Attack.special_power_desc == "0&34x"){
+                    ui->Yourpal_S_up->show();
+                    ui->Yourpal_S_up_back->show();
+                }
+                else{
+                    ui->Yourpal_S_up->hide();
+                    ui->Yourpal_S_up_back->hide();
+                }
+            }
+            else if(YourPal->get_attribute_int() == 4){
+                //生命值
+                if(YourPal_Attack.special_power_desc == "0&42"){
+                    ui->Yourpal_S_HP->show();
+                    ui->Yourpal_S_HP_back->show();
+                }
+                else{
+                    ui->Yourpal_S_HP->hide();
+                    ui->Yourpal_S_HP_back->hide();
+                }
+                //cost
+                if(YourPal_Attack.special_power_desc == "0&43"){
+                    ui->Yourpal_S_cost->show();
+                    ui->Yourpal_S_cost_back->show();
+                }
+                else{
+                    ui->Yourpal_S_cost->hide();
+                    ui->Yourpal_S_cost_back->hide();
+                }
+            }
             #if ENABLE_MESSAGEBOX
                 QMessageBox::about(this,"",othersPal_GET_Attack.Fight_info_output());
             #else
@@ -289,6 +369,60 @@ bool MainWindow::fight(){
         Fight_info YourPal_GET_Attack = YourPal->fight(othersPal_Attack);
         if(YourPal_GET_Attack.Fight_info_output() != "-1"){
             ui->fight_Desc->append("Round: " + QString::number(round) + "\t" + YourPal_GET_Attack.Fight_info_output());
+            if(othersPal->get_attribute_int() == 1){
+                ;
+            }
+            else if(othersPal->get_attribute_int() == 2){
+                //无效技能 || 抵消攻击 || 伤害减少 || 防御增加
+                if(othersPal_Attack.special_power_desc == "0&22" || othersPal_Attack.special_power_desc == "0&24" || othersPal_Attack.special_power_desc == "0&23" || othersPal_Attack.special_power_desc == "0&21"){
+                    ui->otherspal_S_up->show();
+                    ui->otherspal_S_up_back->show();
+                }
+                else{
+                    ui->otherspal_S_up->hide();
+                    ui->otherspal_S_up_back->hide();
+                }
+            }
+            else if(othersPal->get_attribute_int() == 3){
+                //虎丸坦克
+                if((othersPal_Attack.special_power_desc.length() == 5 && othersPal_Attack.special_power_desc[4] == 'x') || (othersPal_Attack.special_power_desc != "" && othersPal_Attack.special_power_desc[0] == 'x')){
+                    ui->otherspal_S_tank->show();
+                    ui->otherspal_S_tank_back->show();
+                }
+                else{
+                    ui->otherspal_S_tank->hide();
+                    ui->otherspal_S_tank_back->hide();
+                }
+                //抵消攻击 || 防御增加
+                if(othersPal_Attack.special_power_desc == "0&32" || othersPal_Attack.special_power_desc == "0&32x" || othersPal_Attack.special_power_desc == "0&33" || othersPal_Attack.special_power_desc == "0&33x" || othersPal_Attack.special_power_desc == "0&34" || othersPal_Attack.special_power_desc == "0&34x"){
+                    ui->otherspal_S_up->show();
+                    ui->otherspal_S_up_back->show();
+                }
+                else{
+                    ui->otherspal_S_up->hide();
+                    ui->otherspal_S_up_back->hide();
+                }
+            }
+            else if(othersPal->get_attribute_int() == 4){
+                //生命值
+                if(othersPal_Attack.special_power_desc == "0&42"){
+                    ui->otherspal_S_HP->show();
+                    ui->otherspal_S_HP_back->show();
+                }
+                else{
+                    ui->otherspal_S_HP->hide();
+                    ui->otherspal_S_HP_back->hide();
+                }
+                //cost
+                if(othersPal_Attack.special_power_desc == "0&43"){
+                    ui->otherspal_S_cost->show();
+                    ui->otherspal_S_cost_back->show();
+                }
+                else{
+                    ui->otherspal_S_cost->hide();
+                    ui->otherspal_S_cost_back->hide();
+                }
+            }
             #if ENABLE_MESSAGEBOX
                 QMessageBox::about(this,"",YourPal_GET_Attack.Fight_info_output());
             #else

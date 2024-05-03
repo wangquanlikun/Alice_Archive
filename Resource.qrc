@@ -21,5 +21,14 @@
         <file>Resource/blue_archive_big_head_sd/Yiluo_Mali~1.png</file>
         <file>Resource/blue_archive_big_head_sd/Zao_Yilvbo~1.png</file>
         <file>Resource/blue_archive_big_head_sd/Zaolai_Youxiang~1.png</file>
+        <file>Resource/72px-BA_Skill_S16.png</file>
+        <file>Resource/status_back.png</file>
+        <file>Resource/buff_back.png</file>
+        <file>Resource/defuff_back.png</file>
+        <file>Resource/BA_Skill_2.png</file>
+        <file>Resource/BA_Skill_4.png</file>
+        <file>Resource/BA_Skill_5.png</file>
+        <file>Resource/BA_Skill_9.png</file>
+        <file>Resource/BA_Skill_17.png</file>
     </qresource>
 </RCC>

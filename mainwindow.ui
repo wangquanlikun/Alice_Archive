@@ -58,7 +58,7 @@
 }</string>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="main">
      <widget class="QLabel" name="Background">
@@ -692,6 +692,485 @@ border-style: inset;
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
+     </widget>
+     <widget class="QFrame" name="Yourpal_Status">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>470</y>
+        <width>160</width>
+        <height>200</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="Yourpal_S_tank">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>5</y>
+         <width>70</width>
+         <height>60</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/72px-BA_Skill_S16.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Yourpal_S_tank_back">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>10</y>
+         <width>70</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/status_back.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Yourpal_S_down_back">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>140</y>
+         <width>70</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/defuff_back.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Yourpal_S_down">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>122</y>
+         <width>70</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/BA_Skill_5.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Yourpal_S_cost_back">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>75</y>
+         <width>70</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/buff_back.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Yourpal_S_cost">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>65</y>
+         <width>70</width>
+         <height>60</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/BA_Skill_17.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Yourpal_S_up">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>122</y>
+         <width>70</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/BA_Skill_4.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Yourpal_S_up_back">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>140</y>
+         <width>70</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/buff_back.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Yourpal_S_AP_back">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>75</y>
+         <width>70</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/buff_back.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Yourpal_S_AP">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>62</y>
+         <width>70</width>
+         <height>60</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/BA_Skill_2.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Yourpal_S_HP_back">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>10</y>
+         <width>70</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/status_back.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Yourpal_S_HP">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>0</y>
+         <width>70</width>
+         <height>60</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/BA_Skill_9.png</pixmap>
+       </property>
+      </widget>
+      <zorder>Yourpal_S_tank_back</zorder>
+      <zorder>Yourpal_S_tank</zorder>
+      <zorder>Yourpal_S_down_back</zorder>
+      <zorder>Yourpal_S_down</zorder>
+      <zorder>Yourpal_S_cost_back</zorder>
+      <zorder>Yourpal_S_cost</zorder>
+      <zorder>Yourpal_S_up_back</zorder>
+      <zorder>Yourpal_S_up</zorder>
+      <zorder>Yourpal_S_AP_back</zorder>
+      <zorder>Yourpal_S_AP</zorder>
+      <zorder>Yourpal_S_HP_back</zorder>
+      <zorder>Yourpal_S_HP</zorder>
+     </widget>
+     <widget class="QFrame" name="otherspal_Status">
+      <property name="geometry">
+       <rect>
+        <x>1055</x>
+        <y>470</y>
+        <width>160</width>
+        <height>200</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="otherspal_S_tank">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>5</y>
+         <width>70</width>
+         <height>60</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/72px-BA_Skill_S16.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="otherspal_S_tank_back">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>10</y>
+         <width>70</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/status_back.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="otherspal_S_up_back">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>138</y>
+         <width>70</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/buff_back.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="otherspal_S_HP">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>-2</y>
+         <width>70</width>
+         <height>60</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/BA_Skill_9.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="otherspal_S_down">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>120</y>
+         <width>70</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/BA_Skill_5.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="otherspal_S_cost_back">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>73</y>
+         <width>70</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/buff_back.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="otherspal_S_cost">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>63</y>
+         <width>70</width>
+         <height>60</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/BA_Skill_17.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="otherspal_S_HP_back">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>8</y>
+         <width>70</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/status_back.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="otherspal_S_up">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>120</y>
+         <width>70</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/BA_Skill_4.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="otherspal_S_down_back">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>138</y>
+         <width>70</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/defuff_back.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="otherspal_S_AP_back">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>73</y>
+         <width>70</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/buff_back.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="otherspal_S_AP">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>60</y>
+         <width>70</width>
+         <height>60</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/BA_Skill_2.png</pixmap>
+       </property>
+      </widget>
+      <zorder>otherspal_S_tank_back</zorder>
+      <zorder>otherspal_S_tank</zorder>
+      <zorder>otherspal_S_up_back</zorder>
+      <zorder>otherspal_S_cost_back</zorder>
+      <zorder>otherspal_S_cost</zorder>
+      <zorder>otherspal_S_HP_back</zorder>
+      <zorder>otherspal_S_up</zorder>
+      <zorder>otherspal_S_down_back</zorder>
+      <zorder>otherspal_S_AP_back</zorder>
+      <zorder>otherspal_S_AP</zorder>
+      <zorder>otherspal_S_down</zorder>
+      <zorder>otherspal_S_HP</zorder>
      </widget>
     </widget>
     <widget class="QWidget" name="about">
