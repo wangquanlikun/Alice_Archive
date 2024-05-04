@@ -52,6 +52,7 @@ private slots:
     void Init_pinyin();
 
     void on_refresh_Virtual_Pals_clicked();
+    void on_exit_fight_clicked();
 
 private:
     Ui::MainWindow *ui;

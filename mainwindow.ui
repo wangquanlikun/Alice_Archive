@@ -1172,6 +1172,75 @@ border-style: inset;
       <zorder>otherspal_S_down</zorder>
       <zorder>otherspal_S_HP</zorder>
      </widget>
+     <widget class="QPushButton" name="exit_fight">
+      <property name="geometry">
+       <rect>
+        <x>1135</x>
+        <y>680</y>
+        <width>80</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+border:1px groove gray;
+border-radius:6px;
+padding:2px 4px;
+border-style: outset;
+}
+QPushButton:hover{
+	background-color: rgb(155, 222, 255);
+color: black;
+}
+QPushButton:pressed{
+	background-color: rgb(0, 128, 255);
+border-style: inset;
+}</string>
+      </property>
+      <property name="text">
+       <string>离开页面</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Yourpal_death">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>385</y>
+        <width>75</width>
+        <height>75</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="Resource.qrc">:/new/prefix1/Resource/death.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="otherspal_death">
+      <property name="geometry">
+       <rect>
+        <x>1045</x>
+        <y>385</y>
+        <width>75</width>
+        <height>75</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="Resource.qrc">:/new/prefix1/Resource/death.png</pixmap>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="about">
      <widget class="QLabel" name="About">

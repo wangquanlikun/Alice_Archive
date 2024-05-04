@@ -154,8 +154,10 @@ void MainWindow::on_choose_Fight_1_clicked(){ //决斗赛
             ui->Mainpage->setCurrentIndex(4);
             refresh_personalPage();
         }
-        else
+        else{
+            ui->exit_fight->show();
             return;
+        }
     }
 }
 
@@ -194,8 +196,10 @@ void MainWindow::on_choose_Fight_2_clicked(){ //升级赛
             ui->Mainpage->setCurrentIndex(4);
             refresh_personalPage();
         }
-        else
+        else{
+            ui->exit_fight->show();
             return;
+        }
     }
 }
 
@@ -246,6 +250,11 @@ void MainWindow::init_fight_page(){
     ui->otherspal_S_tank_back->hide();
     ui->otherspal_S_up->hide();
     ui->otherspal_S_up_back->hide();
+
+    ui->exit_fight->hide();
+
+    ui->Yourpal_death->hide();
+    ui->otherspal_death->hide();
 }
 
 bool MainWindow::fight(){
@@ -469,6 +478,11 @@ bool MainWindow::fight(){
     QMessageBox::about(this,"","战斗结束");
     #endif
 
+    if(YourPal->HP <= 0)
+        ui->Yourpal_death->show();
+    if(othersPal->HP <= 0)
+        ui->otherspal_death->show();
+
     if(YourPal->HP > 0)
         return WIN;
     else
@@ -551,4 +565,14 @@ int MainWindow::choose_throw_pal(){
         choosed_pal_index = pre_choose_pal_index[name_to_index[item]];
     }
     return choosed_pal_index;
+}
+
+void MainWindow::on_exit_fight_clicked(){
+    #if BGM_ON
+        this->startSound->play();
+        this->fightSound->stop();
+    #endif
+
+    ui->Mainpage->setCurrentIndex(4);
+    refresh_personalPage();
 }
