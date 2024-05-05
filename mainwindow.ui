@@ -58,7 +58,7 @@
 }</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="main">
      <widget class="QLabel" name="Background">
@@ -1673,7 +1673,7 @@ border-style: inset;
         </font>
        </property>
        <property name="text">
-        <string>宠物个数勋章：Null</string>
+        <string>宠物个数勋章：无勋章</string>
        </property>
       </widget>
       <widget class="QLabel" name="HONOR_2">
@@ -1692,7 +1692,39 @@ border-style: inset;
         </font>
        </property>
        <property name="text">
-        <string>高级宠物勋章：Null</string>
+        <string>高级宠物勋章：无勋章</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="HONOR_IMG_1">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>108</y>
+         <width>30</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/BA_TerRat_D.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="HONOR_IMG_2">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>148</y>
+         <width>30</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/BA_TerRat_D.png</pixmap>
        </property>
       </widget>
      </widget>

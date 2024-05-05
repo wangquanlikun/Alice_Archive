@@ -177,7 +177,7 @@ void MainWindow::on_choose_Fight_2_clicked(){ //升级赛
             bool HighPet = false;
             if(this->userdata.userPals[Now_pet - 1].level == 15)
                 HighPet = true;
-            this->userdata.userPals[Now_pet - 1].getExp(100);
+            this->userdata.userPals[Now_pet - 1].getExp(100 + 20 * choosed_fight_pal.level);
 
             if(this->userdata.userPals[Now_pet - 1].level == 15 && (!HighPet))
                 this->userdata.HighpetNum ++;
@@ -533,24 +533,56 @@ void MainWindow::refresh_personalPage(){
     ui->winNumLED->display(userdata.winNum);
     ui->failNumLED->display(userdata.failNum);
 
-    if(userdata.petNum >= 30)
+    QPixmap pixmap;
+    if(userdata.petNum >= 30){
         ui->HONOR_1->setText("宠物个数勋章：金勋章");
-    else if(userdata.petNum >= 20)
+        QPixmapCache::clear();
+        pixmap.load(":/new/prefix1/Resource/BA_TerRat_S.png");
+        ui->HONOR_IMG_1->setPixmap(pixmap);
+    }
+    else if(userdata.petNum >= 20){
         ui->HONOR_1->setText("宠物个数勋章：银勋章");
-    else if(userdata.petNum >= 10)
+        QPixmapCache::clear();
+        pixmap.load(":/new/prefix1/Resource/BA_TerRat_A.png");
+        ui->HONOR_IMG_1->setPixmap(pixmap);
+    }
+    else if(userdata.petNum >= 10){
         ui->HONOR_1->setText("宠物个数勋章：铜勋章");
-    else
-        ui->HONOR_1->setText("宠物个数勋章：Null");
+        QPixmapCache::clear();
+        pixmap.load(":/new/prefix1/Resource/BA_TerRat_B.png");
+        ui->HONOR_IMG_1->setPixmap(pixmap);
+    }
+    else{
+        ui->HONOR_1->setText("宠物个数勋章：无勋章");
+        QPixmapCache::clear();
+        pixmap.load(":/new/prefix1/Resource/BA_TerRat_D.png");
+        ui->HONOR_IMG_1->setPixmap(pixmap);
+    }
 
-    if(userdata.HighpetNum >= 8)
+    if(userdata.HighpetNum >= 8){
         ui->HONOR_2->setText("高级宠物勋章：金勋章");
-    else if(userdata.HighpetNum >= 5)
+        QPixmapCache::clear();
+        pixmap.load(":/new/prefix1/Resource/BA_TerRat_S.png");
+        ui->HONOR_IMG_2->setPixmap(pixmap);
+    }
+    else if(userdata.HighpetNum >= 5){
         ui->HONOR_2->setText("高级宠物勋章：银勋章");
-    else if(userdata.HighpetNum >= 3)
+        QPixmapCache::clear();
+        pixmap.load(":/new/prefix1/Resource/BA_TerRat_A.png");
+        ui->HONOR_IMG_2->setPixmap(pixmap);
+    }
+    else if(userdata.HighpetNum >= 3){
         ui->HONOR_2->setText("高级宠物勋章：铜勋章");
-    else
-        ui->HONOR_2->setText("高级宠物勋章：Null");
-
+        QPixmapCache::clear();
+        pixmap.load(":/new/prefix1/Resource/BA_TerRat_B.png");
+        ui->HONOR_IMG_2->setPixmap(pixmap);
+    }
+    else{
+        ui->HONOR_2->setText("高级宠物勋章：无勋章");
+        QPixmapCache::clear();
+        pixmap.load(":/new/prefix1/Resource/BA_TerRat_D.png");
+        ui->HONOR_IMG_2->setPixmap(pixmap);
+    }
 
     ItemModel_PetList->clear();
     QStringList labels = QStringLiteral("精灵,等级").simplified().split(",");

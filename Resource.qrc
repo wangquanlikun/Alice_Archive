@@ -33,5 +33,9 @@
         <file>Resource/BGM/Constant Moderato.wav</file>
         <file>Resource/BGM/Mechanical JUNGLE 2.wav</file>
         <file>Resource/death.png</file>
+        <file>Resource/BA_TerRat_A.png</file>
+        <file>Resource/BA_TerRat_B.png</file>
+        <file>Resource/BA_TerRat_D.png</file>
+        <file>Resource/BA_TerRat_S.png</file>
     </qresource>
 </RCC>
