@@ -14,6 +14,8 @@ extern std::map<QString, QString> ToPinyin;
 #include<QThread>
 #include<QCoreApplication>
 
+#include <QPropertyAnimation>
+
 void MainWindow::Server_Pals_list_click(const QModelIndex index){
     int Server_V_Pals_array = index.row();
     choosed_fight_pal = Server_Pals_list[Server_V_Pals_array];
@@ -304,6 +306,27 @@ bool MainWindow::fight(){
 
     QMessageBox::about(this,"邦邦咔邦","对战开始");
 
+    QPropertyAnimation YourPal_anim((ui->YourPal_IMG), "geometry");
+    YourPal_anim.setDuration(100);
+    YourPal_anim.setLoopCount(3);
+    YourPal_anim.setEasingCurve(QEasingCurve::OutBounce);
+    QPropertyAnimation othersPal_anim((ui->othersPal_IMG), "geometry");
+    othersPal_anim.setDuration(100);
+    othersPal_anim.setLoopCount(3);
+    othersPal_anim.setEasingCurve(QEasingCurve::OutBounce);
+
+    //设回动画效果初始位置
+    ui->YourPal_IMG->move(160, 90);
+    ui->othersPal_IMG->move(880, 90);
+    const auto YourPal_geometry = ui->YourPal_IMG->geometry();
+    const auto othersPal_geometry = ui->othersPal_IMG->geometry();
+    QObject::connect(&YourPal_anim, &QPropertyAnimation::finished, [&]() {
+        ui->YourPal_IMG->setGeometry(YourPal_geometry);
+    });
+    QObject::connect(&othersPal_anim, &QPropertyAnimation::finished, [&]() {
+        ui->othersPal_IMG->setGeometry(othersPal_geometry);
+    });
+
     #define ENABLE_MESSAGEBOX 0
 
     while(true){
@@ -377,6 +400,13 @@ bool MainWindow::fight(){
                     ui->Yourpal_S_cost_back->hide();
                 }
             }
+
+            othersPal_anim.setStartValue(ui->othersPal_IMG->geometry());
+            QRect endValue = ui->othersPal_IMG->geometry();
+            endValue.translate(5, 5);
+            othersPal_anim.setEndValue(endValue);
+            othersPal_anim.start();
+
             #if ENABLE_MESSAGEBOX
                 QMessageBox::about(this,"",othersPal_GET_Attack.Fight_info_output());
             #else
@@ -447,6 +477,13 @@ bool MainWindow::fight(){
                     ui->otherspal_S_cost_back->hide();
                 }
             }
+
+            YourPal_anim.setStartValue(ui->YourPal_IMG->geometry());
+            QRect endValue = ui->YourPal_IMG->geometry();
+            endValue.translate(5, 5);
+            YourPal_anim.setEndValue(endValue);
+            YourPal_anim.start();
+
             #if ENABLE_MESSAGEBOX
                 QMessageBox::about(this,"",YourPal_GET_Attack.Fight_info_output());
             #else
@@ -477,6 +514,9 @@ bool MainWindow::fight(){
     #if ENABLE_MESSAGEBOX
     QMessageBox::about(this,"","战斗结束");
     #endif
+
+    QObject::disconnect(&YourPal_anim, &QPropertyAnimation::finished, nullptr, nullptr);
+    QObject::disconnect(&othersPal_anim, &QPropertyAnimation::finished, nullptr, nullptr);
 
     if(YourPal->HP <= 0)
         ui->Yourpal_death->show();
