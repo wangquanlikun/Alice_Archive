@@ -37,9 +37,15 @@ void MainWindow::on_choose_Fight_1_clicked(){ //决斗赛
         QMessageBox::warning(this,"无对战精灵","请点击列表选择虚拟决斗精灵！");
     }
     else{
+        #if CHARACTER_VOICE
+            Alice_FightStart->play();
+        #endif
         ui->Mainpage->setCurrentIndex(2);
         init_fight_page();
         if(fight()){
+            #if CHARACTER_VOICE
+                Alice_Win->play();
+            #endif
             QMessageBox::about(this,"邦邦咔邦","对战胜利！");
             userdata.winNum ++;
             userdata.userPals.push_back(choosed_fight_pal);
@@ -49,6 +55,9 @@ void MainWindow::on_choose_Fight_1_clicked(){ //决斗赛
             QMessageBox::about(this,"获得新精灵！",New_Pal_info);
         }
         else{
+            #if CHARACTER_VOICE
+                Alice_Fail->play();
+            #endif
             QMessageBox::about(this,"苦呀西","对战失败了呜… 下次再努力吧");
             userdata.failNum ++;
             QString Thrown_Pal_info;
@@ -168,21 +177,39 @@ void MainWindow::on_choose_Fight_2_clicked(){ //升级赛
         QMessageBox::warning(this,"无对战精灵","请点击列表选择虚拟决斗精灵！");
     }
     else{
+        #if CHARACTER_VOICE
+            Alice_FightStart->play();
+        #endif
         ui->Mainpage->setCurrentIndex(2);
         init_fight_page();
         if(fight()){
+            #if CHARACTER_VOICE
+                Alice_Win->play();
+            #endif
             QMessageBox::about(this,"邦邦咔邦","对战胜利！");
             userdata.winNum ++;
 
+            int pre_level = this->userdata.userPals[Now_pet - 1].level;
             bool HighPet = false;
             if(this->userdata.userPals[Now_pet - 1].level == 15)
                 HighPet = true;
             this->userdata.userPals[Now_pet - 1].getExp(100 + 20 * choosed_fight_pal.level);
 
+            int now_level = this->userdata.userPals[Now_pet - 1].level;
             if(this->userdata.userPals[Now_pet - 1].level == 15 && (!HighPet))
                 this->userdata.HighpetNum ++;
+
+            if(pre_level != now_level){
+                ;
+                #if CHARACTER_VOICE
+                    Alice_Levelup->play();
+                #endif
+            }
         }
         else{
+            #if CHARACTER_VOICE
+                Alice_Fail->play();
+            #endif
             QMessageBox::about(this,"苦呀西","对战失败了呜… 下次再努力吧");
             userdata.failNum ++;
         }

@@ -44,10 +44,33 @@ MainWindow::MainWindow(QWidget *parent)
         startSound->setSource(QUrl::fromLocalFile(":/new/prefix1/Resource/BGM/Constant Moderato.wav"));
         startSound->setLoopCount(QSoundEffect::Infinite); //设置循环次数
         startSound->play();
+        startSound->setVolume(0.2);
 
         fightSound = new QSoundEffect(this);
         fightSound->setSource(QUrl::fromLocalFile(":/new/prefix1/Resource/BGM/Mechanical JUNGLE 2.wav"));
         fightSound->setLoopCount(QSoundEffect::Infinite);
+        fightSound->setVolume(0.2);
+    #endif
+
+    #if CHARACTER_VOICE
+        Alice_Fail = new QSoundEffect(this);
+        Alice_Fail->setSource(QUrl::fromLocalFile(":/new/prefix1/Resource/BGM/Alice_Fail.wav"));
+        Alice_Fail->setLoopCount(1);
+        Alice_FightStart = new QSoundEffect(this);
+        Alice_FightStart->setSource(QUrl::fromLocalFile(":/new/prefix1/Resource/BGM/Alice_FightStart.wav"));
+        Alice_FightStart->setLoopCount(1);
+        Alice_Levelup = new QSoundEffect(this);
+        Alice_Levelup->setSource(QUrl::fromLocalFile(":/new/prefix1/Resource/BGM/Alice_Levelup.wav"));
+        Alice_Levelup->setLoopCount(1);
+        Alice_Welcome = new QSoundEffect(this);
+        Alice_Welcome->setSource(QUrl::fromLocalFile(":/new/prefix1/Resource/BGM/Alice_Welcome.wav"));
+        Alice_Welcome->setLoopCount(1);
+        Alice_Win = new QSoundEffect(this);
+        Alice_Win->setSource(QUrl::fromLocalFile(":/new/prefix1/Resource/BGM/Alice_Win.wav"));
+        Alice_Win->setLoopCount(1);
+        Alice_Leave = new QSoundEffect(this);
+        Alice_Leave->setSource(QUrl::fromLocalFile(":/new/prefix1/Resource/BGM/Alice_Leave.wav"));
+        Alice_Leave->setLoopCount(1);
     #endif
 }
 
@@ -79,6 +102,9 @@ void MainWindow::readData(){
         else if(buf == REGISTERSUCCESS){
             register_success = true;
             login_success = true;
+            #if CHARACTER_VOICE
+                Alice_Welcome->play();
+            #endif
             QMessageBox::about(this,"200","注册成功，现在登陆");
             ui->Mainpage->setCurrentIndex(4);
             userdata.Write_userData(buffer);
@@ -88,6 +114,9 @@ void MainWindow::readData(){
         else if(buf == LOGINSUCCESS){
             register_success = true;
             login_success = true;
+            #if CHARACTER_VOICE
+                Alice_Welcome->play();
+            #endif
             ui->Mainpage->setCurrentIndex(4);
             userdata.Write_userData(buffer);
             write_regi_userdata(buffer);
@@ -198,6 +227,9 @@ void MainWindow::on_logout_clicked(){
         Send_logout_data += QString::number(userdata.userPals[i].exp) + " ";
     }
     socket->write(Send_logout_data.toUtf8());
+    #if CHARACTER_VOICE
+        Alice_Leave->play();
+    #endif
     ui->Mainpage->setCurrentIndex(1);
 }
 

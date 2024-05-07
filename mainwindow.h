@@ -12,6 +12,7 @@
 #include <QModelIndex>
 
 #define BGM_ON 1
+#define CHARACTER_VOICE 1
 #include <QSoundEffect>
 
 #include "user.h"
@@ -86,5 +87,11 @@ private:
 
     QSoundEffect * startSound;
     QSoundEffect * fightSound;
+    QSoundEffect * Alice_Fail;
+    QSoundEffect * Alice_FightStart;
+    QSoundEffect * Alice_Levelup;
+    QSoundEffect * Alice_Welcome;
+    QSoundEffect * Alice_Win;
+    QSoundEffect * Alice_Leave;
 };
 #endif // MAINWINDOW_H
