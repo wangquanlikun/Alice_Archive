@@ -75,6 +75,8 @@ public:
             output += (Attack_giver_name + " 对 " + Attack_reciver_name);
             if(special_power_name != "")
                 output += (" 发动了 【" + special_power_name + "】");
+            if(special_status == "0&11")
+                output += (" 打出了暴击！");
             output += " 造成了 " + QString::number(real_HP_loss) + " 点伤害";
 
             if(special_status == "tank")
@@ -86,7 +88,9 @@ public:
                 else if(special_power_desc[0] == '0')
                     output += " 同时使 " + Attack_giver_name;
 
-                if(special_power_desc == "0&21")
+                if(special_power_desc == "0&13")
+                    output += (" 下一次攻击值增加 50%");
+                else if(special_power_desc == "0&21")
                     output += (" 下一次受击伤害减少 50%");
                 else if(special_power_desc == "0&22")
                     output += (" 无效化了对手下一次技能");
@@ -233,6 +237,8 @@ class Strength_Pal: public Pal{
         QString special_power_name[4 + 1];
         QString special_power_desc[4 + 1];
 
+        bool next_fight_ATK_double;
+
     public:
         Strength_Pal(Pal Base_Pal){
             interval = 0;
@@ -250,9 +256,9 @@ class Strength_Pal: public Pal{
             special_power_choice = -1;
 
             special_power[1] = 2 * Attack_power;
-            special_power[2] = 4 * Attack_power;
+            special_power[2] = 3 * Attack_power;
             special_power[3] = 2 * Attack_power;
-            special_power[4] = 2 * Attack_power;
+            special_power[4] = 0;
             special_power_cost[1] = 20;
             special_power_cost[2] = 35;
             special_power_cost[3] = 30;
@@ -263,8 +269,10 @@ class Strength_Pal: public Pal{
             special_power_name[4] = "少女们的垂怜经";
             special_power_desc[1] = "";
             special_power_desc[2] = "";
-            special_power_desc[3] = "";
+            special_power_desc[3] = "0&13";
             special_power_desc[4] = "";
+
+            next_fight_ATK_double = false;
         }
 
         Fight_info fight(){
@@ -286,6 +294,10 @@ class Strength_Pal: public Pal{
                         attack_info.Attack_power += special_power[1];
                         attack_info.special_power_name = special_power_name[1];
                         attack_info.special_power_desc = special_power_desc[1];
+                        if(QRandomGenerator::global()->bounded(1, 5) == 2) { //25%
+                            attack_info.Attack_power += Attack_power;
+                            attack_info.special_status = "0&11";
+                        }
                         special_power_choice = -1;
                     }
                     break;
@@ -304,19 +316,24 @@ class Strength_Pal: public Pal{
                         attack_info.Attack_power += special_power[3];
                         attack_info.special_power_name = special_power_name[3];
                         attack_info.special_power_desc = special_power_desc[3];
+                        next_fight_ATK_double = true;
                         special_power_choice = -1;
                     }
                     break;
                 case 4:
                     if(cost >= special_power_cost[4]){
                         cost -= special_power_cost[4];
-                        attack_info.Attack_power += special_power[4];
+                        attack_info.Attack_power += QRandomGenerator::global()->bounded(Attack_power, 3 * Attack_power + 1);
                         attack_info.special_power_name = special_power_name[4];
                         attack_info.special_power_desc = special_power_desc[4];
                         special_power_choice = -1;
                     }
                     break;
                 }
+            }
+            if(attack_info.Attack_power != 0 && next_fight_ATK_double && attack_info.special_power_name != "0&13"){
+                attack_info.Attack_power = (int)((double)attack_info.Attack_power * 1.5);
+                next_fight_ATK_double = false;
             }
             return attack_info;
         }

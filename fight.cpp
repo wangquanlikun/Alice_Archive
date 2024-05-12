@@ -254,6 +254,9 @@ void MainWindow::init_fight_page(){
     ui->YourPal_HP_ProgBar->setValue(100);
     ui->othersPal_HP_ProgBar->setValue(100);
 
+    ui->YourPal_LV->display(this_pal.level);
+    ui->othersPal_LV->display(choosed_fight_pal.level);
+
     ui->Yourpal_S_AP->hide();
     ui->Yourpal_S_AP_back->hide();
     ui->Yourpal_S_HP->hide();
@@ -374,7 +377,15 @@ bool MainWindow::fight(){
         if(othersPal_GET_Attack.Fight_info_output() != "-1"){
             ui->fight_Desc->append("Round: " + QString::number(round) + "\t" + othersPal_GET_Attack.Fight_info_output());
             if(YourPal->get_attribute_int() == 1){
-                ;
+                //暴击 || 攻击值增加
+                if(YourPal_Attack.special_status == "0&11" || YourPal_Attack.special_power_desc == "0&13"){
+                    ui->Yourpal_S_AP->show();
+                    ui->Yourpal_S_AP_back->show();
+                }
+                else{
+                    ui->Yourpal_S_AP->hide();
+                    ui->Yourpal_S_AP_back->hide();
+                }
             }
             else if(YourPal->get_attribute_int() == 2){
                 //无效技能 || 抵消攻击 || 伤害减少 || 防御增加
@@ -428,6 +439,16 @@ bool MainWindow::fight(){
                 }
             }
 
+            //无效化
+            if(YourPal_Attack.special_power_desc == "0&22" || YourPal_Attack.special_power_desc == "0&24" || YourPal_Attack.special_power_desc == "0&32" || YourPal_Attack.special_power_desc == "0&32x"){
+                ui->otherspal_S_down->show();
+                ui->otherspal_S_down_back->show();
+            }
+            else{
+                ui->otherspal_S_down->hide();
+                ui->otherspal_S_down_back->hide();
+            }
+
             othersPal_anim.setStartValue(ui->othersPal_IMG->geometry());
             QRect endValue = ui->othersPal_IMG->geometry();
             endValue.translate(5, 5);
@@ -451,7 +472,15 @@ bool MainWindow::fight(){
         if(YourPal_GET_Attack.Fight_info_output() != "-1"){
             ui->fight_Desc->append("Round: " + QString::number(round) + "\t" + YourPal_GET_Attack.Fight_info_output());
             if(othersPal->get_attribute_int() == 1){
-                ;
+                //暴击 || 攻击值增加
+                if(othersPal_Attack.special_status == "0&11" || othersPal_Attack.special_power_desc == "0&13"){
+                    ui->otherspal_S_AP->show();
+                    ui->otherspal_S_AP_back->show();
+                }
+                else{
+                    ui->otherspal_S_AP->hide();
+                    ui->otherspal_S_AP_back->hide();
+                }
             }
             else if(othersPal->get_attribute_int() == 2){
                 //无效技能 || 抵消攻击 || 伤害减少 || 防御增加
@@ -503,6 +532,16 @@ bool MainWindow::fight(){
                     ui->otherspal_S_cost->hide();
                     ui->otherspal_S_cost_back->hide();
                 }
+            }
+
+            //无效化
+            if(othersPal_Attack.special_power_desc == "0&22" || othersPal_Attack.special_power_desc == "0&24" || othersPal_Attack.special_power_desc == "0&32" || othersPal_Attack.special_power_desc == "0&32x"){
+                ui->Yourpal_S_down->show();
+                ui->Yourpal_S_down_back->show();
+            }
+            else{
+                ui->Yourpal_S_down->hide();
+                ui->Yourpal_S_down_back->hide();
             }
 
             YourPal_anim.setStartValue(ui->YourPal_IMG->geometry());

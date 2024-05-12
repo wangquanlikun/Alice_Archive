@@ -58,7 +58,7 @@
 }</string>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="main">
      <widget class="QLabel" name="Background">
@@ -635,7 +635,7 @@ border-style: inset;
         <x>80</x>
         <y>430</y>
         <width>64</width>
-        <height>23</height>
+        <height>25</height>
        </rect>
       </property>
      </widget>
@@ -645,7 +645,7 @@ border-style: inset;
         <x>1140</x>
         <y>430</y>
         <width>64</width>
-        <height>23</height>
+        <height>25</height>
        </rect>
       </property>
      </widget>
@@ -1239,6 +1239,64 @@ border-style: inset;
       </property>
       <property name="pixmap">
        <pixmap resource="Resource.qrc">:/new/prefix1/Resource/death.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLCDNumber" name="YourPal_LV">
+      <property name="geometry">
+       <rect>
+        <x>336</x>
+        <y>380</y>
+        <width>64</width>
+        <height>30</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLCDNumber" name="othersPal_LV">
+      <property name="geometry">
+       <rect>
+        <x>906</x>
+        <y>380</y>
+        <width>64</width>
+        <height>30</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TEXT_LV_1">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>380</y>
+        <width>25</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>LV</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TEXT_LV_2">
+      <property name="geometry">
+       <rect>
+        <x>880</x>
+        <y>380</y>
+        <width>25</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>LV</string>
       </property>
      </widget>
     </widget>
@@ -2045,6 +2103,12 @@ border-style: inset;
          <height>20</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QProgressBar::chunk{
+	border-radius: 5px;
+	background-color: rgb(255, 75, 55);
+}</string>
+       </property>
        <property name="maximum">
         <number>1000</number>
        </property>
@@ -2082,6 +2146,12 @@ border-style: inset;
          <width>145</width>
          <height>20</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QProgressBar::chunk{
+	border-radius: 5px;
+	background-color: rgb(22, 225, 157);
+}</string>
        </property>
        <property name="maximum">
         <number>1000</number>
