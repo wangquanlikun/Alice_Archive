@@ -26,6 +26,10 @@
 2. 头图：PID [110486537](https://www.pixiv.net/artworks/110486537)  
 3. 大头素材：作者UID [51776118](https://www.pixiv.net/users/51776118)  
 4. 字体：伶方体11号 项目[地址](https://github.com/ACh-K/Cubic-11)  
+5. BGM: Blue Archive OST  
+   - Constant Moderato 主界面
+   - Mechanical JUNGLE 战斗界面
+6. 天童爱丽丝 CV. 田中美海  
 
 如有侵权行为，请与我联系，将会及时处理和回复，谢谢！
 

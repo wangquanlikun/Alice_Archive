@@ -58,7 +58,7 @@
 }</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="main">
      <widget class="QLabel" name="Background">
@@ -1305,7 +1305,7 @@ border-style: inset;
       <property name="geometry">
        <rect>
         <x>940</x>
-        <y>135</y>
+        <y>80</y>
         <width>70</width>
         <height>50</height>
        </rect>
@@ -1340,7 +1340,7 @@ border-style: inset;
       <property name="geometry">
        <rect>
         <x>735</x>
-        <y>220</y>
+        <y>160</y>
         <width>490</width>
         <height>30</height>
        </rect>
@@ -1359,7 +1359,7 @@ border-style: inset;
       <property name="geometry">
        <rect>
         <x>735</x>
-        <y>260</y>
+        <y>200</y>
         <width>600</width>
         <height>30</height>
        </rect>
@@ -1378,7 +1378,7 @@ border-style: inset;
       <property name="geometry">
        <rect>
         <x>770</x>
-        <y>300</y>
+        <y>240</y>
         <width>490</width>
         <height>30</height>
        </rect>
@@ -1397,7 +1397,7 @@ border-style: inset;
       <property name="geometry">
        <rect>
         <x>740</x>
-        <y>340</y>
+        <y>280</y>
         <width>490</width>
         <height>30</height>
        </rect>
@@ -1416,7 +1416,7 @@ border-style: inset;
       <property name="geometry">
        <rect>
         <x>735</x>
-        <y>380</y>
+        <y>320</y>
         <width>600</width>
         <height>30</height>
        </rect>
@@ -1472,7 +1472,7 @@ border-style: inset;
       <property name="geometry">
        <rect>
         <x>770</x>
-        <y>420</y>
+        <y>360</y>
         <width>500</width>
         <height>30</height>
        </rect>
@@ -1491,7 +1491,7 @@ border-style: inset;
       <property name="geometry">
        <rect>
         <x>770</x>
-        <y>460</y>
+        <y>400</y>
         <width>500</width>
         <height>30</height>
        </rect>
@@ -1510,7 +1510,7 @@ border-style: inset;
       <property name="geometry">
        <rect>
         <x>735</x>
-        <y>560</y>
+        <y>570</y>
         <width>490</width>
         <height>30</height>
        </rect>
@@ -1529,7 +1529,7 @@ border-style: inset;
       <property name="geometry">
        <rect>
         <x>770</x>
-        <y>500</y>
+        <y>440</y>
         <width>520</width>
         <height>30</height>
        </rect>
@@ -1542,6 +1542,44 @@ border-style: inset;
       </property>
       <property name="text">
        <string>伶方体11号：https://github.com/ACh-K/Cubic-11</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="About_line_10">
+      <property name="geometry">
+       <rect>
+        <x>774</x>
+        <y>480</y>
+        <width>520</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>BGM: Blue Archive OST</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="About_line_11">
+      <property name="geometry">
+       <rect>
+        <x>770</x>
+        <y>520</y>
+        <width>520</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>俐方体11号</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>天童爱丽丝 CV. 田中美海</string>
       </property>
      </widget>
     </widget>
