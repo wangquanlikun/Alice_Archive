@@ -54,6 +54,7 @@ private slots:
 
     void on_refresh_Virtual_Pals_clicked();
     void on_exit_fight_clicked();
+    void on_leave_fight_run_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -82,6 +83,7 @@ private:
     Pal choosed_fight_pal;
     void init_fight_page();
     bool fight();
+    bool leave_fight;
     void refresh_personalPage();
     int choose_throw_pal();
 

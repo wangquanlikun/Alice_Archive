@@ -48,6 +48,24 @@ void MainWindow::on_choose_Fight_1_clicked(){ //决斗赛
             #endif
             QMessageBox::about(this,"邦邦咔邦","对战胜利！");
             userdata.winNum ++;
+
+            int pre_level = this->userdata.userPals[Now_pet - 1].level;
+            bool HighPet = false;
+            if(this->userdata.userPals[Now_pet - 1].level == 15)
+                HighPet = true;
+            this->userdata.userPals[Now_pet - 1].getExp(100 + 20 * choosed_fight_pal.level);
+
+            int now_level = this->userdata.userPals[Now_pet - 1].level;
+            if(this->userdata.userPals[Now_pet - 1].level == 15 && (!HighPet))
+                this->userdata.HighpetNum ++;
+
+            if(pre_level != now_level){
+                ;
+                #if CHARACTER_VOICE
+                    Alice_Levelup->play();
+                #endif
+            }
+
             userdata.userPals.push_back(choosed_fight_pal);
             userdata.petNum ++;
             QString New_Pal_info;
@@ -154,6 +172,7 @@ void MainWindow::on_choose_Fight_1_clicked(){ //决斗赛
             }
         }
 
+        ui->leave_fight_run->hide();
         QMessageBox::StandardButton box;
         box = QMessageBox::question(this,"邦邦咔邦","战斗结束，要离开这里吗？", QMessageBox::Yes | QMessageBox::No);
         if(box == QMessageBox::Yes){
@@ -214,6 +233,7 @@ void MainWindow::on_choose_Fight_2_clicked(){ //升级赛
             userdata.failNum ++;
         }
 
+        ui->leave_fight_run->hide();
         QMessageBox::StandardButton box;
         box = QMessageBox::question(this,"邦邦咔邦","战斗结束，要离开这里吗？", QMessageBox::Yes | QMessageBox::No);
         if(box == QMessageBox::Yes){
@@ -284,6 +304,8 @@ void MainWindow::init_fight_page(){
     ui->otherspal_S_up_back->hide();
 
     ui->exit_fight->hide();
+    this->leave_fight = false;
+    ui->leave_fight_run->show();
 
     ui->Yourpal_death->hide();
     ui->otherspal_death->hide();
@@ -358,6 +380,8 @@ bool MainWindow::fight(){
     });
 
     #define ENABLE_MESSAGEBOX 0
+
+    bool timeout = false;
 
     while(true){
         QThread::msleep(20);
@@ -561,6 +585,14 @@ bool MainWindow::fight(){
 
         if(YourPal->HP <= 0 || othersPal->HP <= 0)
             break;
+
+        if(round >= 600){
+            timeout = true;
+            break;
+        }
+
+        if(leave_fight)
+            break;
     }
 
     QThread::msleep(200);
@@ -589,10 +621,26 @@ bool MainWindow::fight(){
     if(othersPal->HP <= 0)
         ui->otherspal_death->show();
 
-    if(YourPal->HP > 0)
-        return WIN;
-    else
-        return FAIL;
+    if(!timeout && !leave_fight){
+        if(YourPal->HP > 0)
+            return WIN;
+        else
+            return FAIL;
+    }
+    else if(timeout){
+        QMessageBox::about(this,"","战斗超时");
+        if(ui->YourPal_HP_ProgBar->value() >= ui->othersPal_HP_ProgBar->value())
+            return WIN;
+        else
+            return FAIL;
+    }
+    else{
+        QMessageBox::about(this,"","退出战斗");
+        if(ui->YourPal_HP_ProgBar->value() >= ui->othersPal_HP_ProgBar->value())
+            return WIN;
+        else
+            return FAIL;
+    }
 }
 
 void MainWindow::refresh_personalPage(){
@@ -713,4 +761,8 @@ void MainWindow::on_exit_fight_clicked(){
 
     ui->Mainpage->setCurrentIndex(4);
     refresh_personalPage();
+}
+
+void MainWindow::on_leave_fight_run_clicked(){
+    this->leave_fight = true;
 }
