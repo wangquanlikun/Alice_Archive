@@ -10,6 +10,8 @@
 #include <QStringListModel>
 #include <QStandardItemModel>
 #include <QModelIndex>
+#include <QLabel>
+#include <QMouseEvent>
 
 #define BGM_ON 1
 #define CHARACTER_VOICE 1
@@ -55,6 +57,7 @@ private slots:
     void on_refresh_Virtual_Pals_clicked();
     void on_exit_fight_clicked();
     void on_leave_fight_run_clicked();
+    void onLabelDoubleClicked();
 
 private:
     Ui::MainWindow *ui;
@@ -95,5 +98,20 @@ private:
     QSoundEffect * Alice_Welcome;
     QSoundEffect * Alice_Win;
     QSoundEffect * Alice_Leave;
+};
+
+class Click_Lable : public QLabel {
+Q_OBJECT
+    public:
+        explicit Click_Lable(QWidget *parent = nullptr) : QLabel(parent) {}
+    protected:
+        void mouseDoubleClickEvent(QMouseEvent *event) override {
+            if (event->button() == Qt::LeftButton) {
+                emit doubleClicked();
+            }
+            QLabel::mouseDoubleClickEvent(event);
+        }
+    signals:
+        void doubleClicked();
 };
 #endif // MAINWINDOW_H

@@ -399,7 +399,7 @@ bool MainWindow::fight(){
         Fight_info YourPal_Attack = YourPal->fight();
         Fight_info othersPal_GET_Attack = othersPal->fight(YourPal_Attack);
         if(othersPal_GET_Attack.Fight_info_output() != "-1"){
-            ui->fight_Desc->append("Round: " + QString::number(round) + "\t" + othersPal_GET_Attack.Fight_info_output());
+            ui->fight_Desc->append("< Round: " + QString::number(round) + "\t" + othersPal_GET_Attack.Fight_info_output());
             if(YourPal->get_attribute_int() == 1){
                 //暴击 || 攻击值增加
                 if(YourPal_Attack.special_status == "0&11" || YourPal_Attack.special_power_desc == "0&13"){
@@ -494,7 +494,7 @@ bool MainWindow::fight(){
         Fight_info othersPal_Attack = othersPal->fight();
         Fight_info YourPal_GET_Attack = YourPal->fight(othersPal_Attack);
         if(YourPal_GET_Attack.Fight_info_output() != "-1"){
-            ui->fight_Desc->append("Round: " + QString::number(round) + "\t" + YourPal_GET_Attack.Fight_info_output());
+            ui->fight_Desc->append("> Round: " + QString::number(round) + "\t" + YourPal_GET_Attack.Fight_info_output());
             if(othersPal->get_attribute_int() == 1){
                 //暴击 || 攻击值增加
                 if(othersPal_Attack.special_status == "0&11" || othersPal_Attack.special_power_desc == "0&13"){

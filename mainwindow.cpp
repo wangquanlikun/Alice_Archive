@@ -7,6 +7,7 @@
 #include<QPixmapCache>
 #include<thread>
 #include<chrono>
+#include<QLayout>
 
 #include<map>
 extern std::map<QString, QString> ToPinyin;
@@ -72,6 +73,12 @@ MainWindow::MainWindow(QWidget *parent)
         Alice_Leave->setSource(QUrl::fromLocalFile(":/new/prefix1/Resource/BGM/Alice_Leave.wav"));
         Alice_Leave->setLoopCount(1);
     #endif
+
+    //添加点击小精灵头像处的虚拟Click_Lable元素
+    QWidget *page = ui->Mainpage->widget(4);
+    Click_Lable * click_pixmap_show_power_desc = new Click_Lable(page);
+    click_pixmap_show_power_desc->setGeometry(60 + 439, 370 + 30, 240, 240);
+    connect(click_pixmap_show_power_desc, &Click_Lable::doubleClicked, this, &MainWindow::onLabelDoubleClicked);
 }
 
 MainWindow::~MainWindow(){
@@ -355,4 +362,42 @@ void MainWindow::change_now_pet(int Now_pet){
         ui->this_Pal_img->setPixmap(pixmap);
         break;
     }
+}
+
+void MainWindow::onLabelDoubleClicked(){
+    QMessageBox msg;
+    QString msg_text;
+    switch(userdata.userPals[Now_pet - 1].get_attribute_int()){
+    case 1:
+        msg_text += (QString::fromStdString("力量型精灵") + "\n\n");
+        msg_text += QString::fromStdString("1. 瓦尼瓦尼：精确狙击，造成 2 * 攻击力 的伤害；有 25% 的概率暴击，共计造成 3 * 攻击力 的伤害\n\n") +
+                    "2. 光啊：光之剑充能，造成 3 * 攻击力 的伤害\n\n" +
+                    "3. 格黑娜的风纪委员：造成 2 * 攻击力 的伤害，同时使下一次攻击造成的攻击值增加 50% ，持续一回合\n\n" +
+                    "4. 少女们的垂怜经：造成随机为 1 * 攻击力 与 3 * 攻击力 之间的伤害";
+        break;
+    case 2:
+        msg_text += (QString::fromStdString("肉盾型精灵") + "\n\n");
+        msg_text += QString::fromStdString("1. 千年的100kg小姐：怪力攻击，造成 2 * 攻击力 的伤害；同时下一次受击伤害减少 50% \n\n") +
+                    "2. 蓝色恶魔：无效化对手下一次技能 -- 对手下一次抽卡必不出彩\n\n" +
+                    "3. 一动不动还是好热啊~ ：造成 2 * 攻击力 的伤害；同时增加 50% 的防御力，持续一回合\n\n" +
+                    "4. 老师大人的责任：「色彩」老师将会出现，抵消对方下一次攻击";
+        break;
+    case 3:
+        msg_text += (QString::fromStdString("防御型精灵") + "\n\n");
+        msg_text += QString::fromStdString("1. 虎丸！出击：召唤虎丸坦克，继承 25% 的生命值与 100% 的防御力，在被击破前吸收所有伤害。同时其每 15 攻击间隔 造成 200% 攻击力 的伤害\n\n") +
+                    "2. 佩洛洛Sama：召唤佩洛洛人偶，抵消对方下一次攻击\n\n" +
+                    "3. 苦呀西~ ：增加 100% 的防御力，持续 4 回合\n\n" +
+                    "4. 银行不妙曲：立刻造成随机值为 攻击力 与 2 * 攻击力 之间的伤害，同时防御增加 50% ，持续一回合";
+        break;
+    case 4:
+        msg_text += (QString::fromStdString("敏捷型精灵") + "\n\n");
+        msg_text += QString::fromStdString("1. 游戏开发部的秘籍：可以在本次攻击间隔内，立即发动一次普通攻击\n\n") +
+                    "2. H的事情不行！：当血量低于 50% 时，可以立即回复 20% 的生命值；否则对对方造成一次 攻击力 的伤害\n\n" +
+                    "3. 对玛导致昏：立即增加 20 的 攻击间隔 与 10 的 技能点 \n\n" +
+                    "4. UZQueen：造成 2 * 攻击力 的伤害";
+        break;
+    }
+    msg.setWindowTitle("精灵技能描述");
+    msg.setText(msg_text);
+    msg.exec();
 }
