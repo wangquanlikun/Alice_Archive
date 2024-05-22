@@ -1631,7 +1631,7 @@ border-style: inset;
      <widget class="QPushButton" name="logout">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>40</x>
         <y>650</y>
         <width>100</width>
         <height>45</height>
@@ -1645,20 +1645,20 @@ border-style: inset;
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton{
-color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);
-border:1px groove gray;
-border-radius:6px;
-padding:2px 4px;
-border-style: outset;
+	color: rgb(0, 0, 0);
+	background-color: rgba(255, 255, 255, 150);
+	border:1px groove gray;
+	border-radius:6px;
+	padding:2px 4px;
+	border-style: outset;
 }
 QPushButton:hover{
-	background-color: rgb(155, 222, 255);
-color: black;
+	background-color: rgba(155, 222, 255, 150);
+	color: black;
 }
 QPushButton:pressed{
-	background-color: rgb(0, 128, 255);
-border-style: inset;
+	background-color: rgba(0, 128, 255, 150);
+	border-style: inset;
 }</string>
       </property>
       <property name="text">
@@ -1700,7 +1700,9 @@ border-style: inset;
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">QTextBrower {
+       <string notr="true">QTextBrowser {
+	border-radius: 5px;
+	background-color: rgba(250, 255, 255, 150);
 	border:0px groove gray;
 }</string>
       </property>
@@ -1713,6 +1715,21 @@ border-style: inset;
         <width>385</width>
         <height>200</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame {
+	background-color: rgba(250, 255, 255, 100);
+	border-radius: 10px;
+	border: none;
+}
+QFrame QLabel {
+	background-color: none; 
+}
+QFrame QLCDNumber{
+	background-color: rgba(250, 255, 255, 150);
+	border-radius: 4px;
+	border: 1px white;
+}</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -1873,18 +1890,35 @@ border-style: inset;
        <rect>
         <x>439</x>
         <y>30</y>
-        <width>840</width>
+        <width>800</width>
         <height>660</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">QProgressBar{
 	border-radius: 5px;
-	background: white;
+	background: rgba(255, 255, 255, 150);
 }
 QProgressBar::chunk{
 	border-radius: 5px;
-	background: rgb(47, 109, 255);
+	background: rgba(47, 109, 255, 200);
+}
+QFrame {
+	background-color: transparent;
+	border-radius: 10px;
+	border: none;
+}
+QFrame QLabel {
+	background-color: none; 
+}
+QFrame QLCDNumber{
+	background-color: rgba(250, 255, 255, 150);
+	border-radius: 4px;
+	border: 1px white;
+}
+QFrame QTextBrowser{
+	border-radius: 5px;
+	background-color: rgba(250, 255, 255, 150);
 }</string>
       </property>
       <property name="frameShape">
@@ -1910,20 +1944,20 @@ QProgressBar::chunk{
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton{
-color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);
-border:1px groove gray;
-border-radius:6px;
-padding:2px 4px;
-border-style: outset;
+	color: rgb(0, 0, 0);
+	background-color: rgba(255, 255, 255, 150);
+	border:1px groove gray;
+	border-radius:6px;
+	padding:2px 4px;
+	border-style: outset;
 }
 QPushButton:hover{
-	background-color: rgb(155, 222, 255);
-color: black;
+	background-color: rgba(155, 222, 255, 150);
+	color: black;
 }
 QPushButton:pressed{
-	background-color: rgb(0, 128, 255);
-border-style: inset;
+	background-color: rgba(0, 128, 255, 150);
+	border-style: inset;
 }</string>
        </property>
        <property name="text">
@@ -2198,7 +2232,7 @@ border-style: inset;
        <property name="styleSheet">
         <string notr="true">QProgressBar::chunk{
 	border-radius: 5px;
-	background-color: rgb(255, 75, 55);
+	background-color: rgba(255, 75, 55, 200);
 }</string>
        </property>
        <property name="maximum">
@@ -2242,7 +2276,7 @@ border-style: inset;
        <property name="styleSheet">
         <string notr="true">QProgressBar::chunk{
 	border-radius: 5px;
-	background-color: rgb(22, 225, 157);
+	background-color: rgba(20, 200, 128, 200);
 }</string>
        </property>
        <property name="maximum">
@@ -2267,7 +2301,7 @@ border-style: inset;
        <property name="styleSheet">
         <string notr="true">QProgressBar::chunk{
 	border-radius: 5px;
-	background: rgb(255, 170, 0);
+	background: rgba(255, 170, 0, 200);
 }</string>
        </property>
        <property name="maximum">
@@ -2297,20 +2331,20 @@ border-style: inset;
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton{
-color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);
-border:1px groove gray;
-border-radius:6px;
-padding:2px 4px;
-border-style: outset;
+	color: rgb(0, 0, 0);
+	background-color: rgba(255, 255, 255, 150);
+	border:1px groove gray;
+	border-radius:6px;
+	padding:2px 4px;
+	border-style: outset;
 }
 QPushButton:hover{
-	background-color: rgb(155, 222, 255);
-color: black;
+	background-color: rgba(155, 222, 255, 150);
+	color: black;
 }
 QPushButton:pressed{
-	background-color: rgb(0, 128, 255);
-border-style: inset;
+	background-color: rgba(0, 128, 255, 150);
+	border-style: inset;
 }</string>
        </property>
        <property name="text">
@@ -2353,20 +2387,20 @@ border-style: inset;
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton{
-color: rgb(0, 0, 0);
-background-color: rgb(255, 255, 255);
-border:1px groove gray;
-border-radius:6px;
-padding:2px 4px;
-border-style: outset;
+	color: rgb(0, 0, 0);
+	background-color: rgba(255, 255, 255, 150);
+	border:1px groove gray;
+	border-radius:6px;
+	padding:2px 4px;
+	border-style: outset;
 }
 QPushButton:hover{
-	background-color: rgb(155, 222, 255);
-color: black;
+	background-color: rgba(155, 222, 255, 150);
+	color: black;
 }
 QPushButton:pressed{
-	background-color: rgb(0, 128, 255);
-border-style: inset;
+	background-color: rgba(0, 128, 255, 150);
+	border-style: inset;
 }</string>
        </property>
        <property name="text">
@@ -2378,26 +2412,7 @@ border-style: inset;
         <rect>
          <x>420</x>
          <y>70</y>
-         <width>320</width>
-         <height>240</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>俐方体11号</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="editTriggers">
-        <set>QAbstractItemView::NoEditTriggers</set>
-       </property>
-      </widget>
-      <widget class="QTableView" name="Pals_list">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>70</y>
-         <width>235</width>
+         <width>330</width>
          <height>240</height>
         </rect>
        </property>
@@ -2408,7 +2423,95 @@ border-style: inset;
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">QTableView {
+    background-color: transparent;
+	gridline-color: rgba(160, 160, 160, 160);
+    border: 1px solid gray;
+	border-radius: 5px;
+	padding: 5px;
+}
+QTableView::item {
+    background-color: transparent;
+    border: none;
+}
+QTableView::item:selected {
+	color: rgb(0, 0, 0);
+    background-color: rgba(0, 120, 215, 50);
+    border: transparent;
+}
+QHeaderView::section {
+    background-color: transparent;
+    border: none;
+}
+QTableCornerButton::section {
+    background-color: transparent;
+    border: none;
+}
+QScrollBar:horizontal {
+    background: transparent;
+}
+QScrollBar:vertical {
+    background: transparent;
+}
+QTableView::indicator {
+    background: transparent;
+    border: none;
+}</string>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+      </widget>
+      <widget class="QTableView" name="Pals_list">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>70</y>
+         <width>240</width>
+         <height>240</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>俐方体11号</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTableView {
+    background-color: transparent;
+	gridline-color: rgba(160, 160, 160, 160);
+    border: 1px solid gray;
+	border-radius: 5px;
+	padding: 5px;
+}
+QTableView::item {
+    background-color: transparent;
+    border: none;
+}
+QTableView::item:selected {
+	color: rgb(0, 0, 0);
+    background-color: rgba(0, 120, 215, 50);
+    border: transparent;
+}
+QHeaderView::section {
+    background-color: transparent;
+    border: none;
+}
+QTableCornerButton::section {
+    background-color: transparent;
+    border: none;
+}
+QScrollBar:horizontal {
+    background: transparent;
+}
+QScrollBar:vertical {
+    background: transparent;
+}
+QTableView::indicator {
+    background: transparent;
+    border: none;
+}</string>
        </property>
       </widget>
      </widget>
@@ -2420,6 +2523,16 @@ border-style: inset;
         <width>385</width>
         <height>320</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame {
+	background-color: rgba(250, 255, 255, 100);
+	border-radius: 10px;
+	border: none;
+}
+QFrame QLabel {
+	background-color: none; 
+}</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -2451,7 +2564,7 @@ border-style: inset;
         <rect>
          <x>20</x>
          <y>70</y>
-         <width>250</width>
+         <width>260</width>
          <height>235</height>
         </rect>
        </property>
@@ -2461,8 +2574,66 @@ border-style: inset;
          <pointsize>12</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QTableView {
+    background-color: transparent;
+	gridline-color: rgba(160, 160, 160, 160);
+    border: 1px solid gray;
+	border-radius: 5px;
+	padding: 5px;
+}
+QTableView::item {
+    background-color: transparent;
+    border: none;
+}
+QTableView::item:selected {
+	color: rgb(0, 0, 0);
+    background-color: rgba(0, 120, 215, 50);
+    border: transparent;
+}
+QHeaderView::section {
+    background-color: transparent;
+    border: none;
+}
+QTableCornerButton::section {
+    background-color: transparent;
+    border: none;
+}
+
+QScrollBar:horizontal {
+    background: transparent;
+}
+QScrollBar:vertical {
+    background: transparent;
+}
+QTableView::indicator {
+    background: transparent;
+    border: none;
+}
+</string>
+       </property>
       </widget>
      </widget>
+     <widget class="QLabel" name="person_background">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1280</width>
+        <height>720</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <zorder>person_background</zorder>
+     <zorder>logout</zorder>
+     <zorder>Welcome_1</zorder>
+     <zorder>Welcome_username</zorder>
+     <zorder>basic_info</zorder>
+     <zorder>Pals_info</zorder>
+     <zorder>other_User_info</zorder>
     </widget>
    </widget>
   </widget>

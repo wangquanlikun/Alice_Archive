@@ -43,5 +43,6 @@
         <file>Resource/BGM/Alice_Welcome.wav</file>
         <file>Resource/BGM/Alice_Win.wav</file>
         <file>Resource/BGM/Alice_Leave.wav</file>
+        <file>Resource/personal_background.png</file>
     </qresource>
 </RCC>

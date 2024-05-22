@@ -61,7 +61,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-
+    QPixmap setPixmapOpacity(const QPixmap &src, qreal opacity);
     QTcpSocket *socket;
     QString IP;
     int port;

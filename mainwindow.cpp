@@ -8,9 +8,19 @@
 #include<thread>
 #include<chrono>
 #include<QLayout>
-
+#include<QPainter>
 #include<map>
 extern std::map<QString, QString> ToPinyin;
+
+QPixmap MainWindow::setPixmapOpacity(const QPixmap &src, qreal opacity) {
+    QPixmap dest(src.size());
+    dest.fill(Qt::transparent);
+    QPainter painter(&dest);
+    painter.setOpacity(opacity);
+    painter.drawPixmap(0, 0, src);
+    painter.end();
+    return dest;
+}
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -79,6 +89,12 @@ MainWindow::MainWindow(QWidget *parent)
     Click_Lable * click_pixmap_show_power_desc = new Click_Lable(page);
     click_pixmap_show_power_desc->setGeometry(60 + 439, 370 + 30, 240, 240);
     connect(click_pixmap_show_power_desc, &Click_Lable::doubleClicked, this, &MainWindow::onLabelDoubleClicked);
+
+    //背景图片：透明度
+    QPixmap pixmap(":/new/prefix1/Resource/personal_background.png");
+    qreal opacity = 0.2;
+    QPixmap transparentPixmap = setPixmapOpacity(pixmap, opacity);
+    ui->person_background->setPixmap(transparentPixmap);
 }
 
 MainWindow::~MainWindow(){
