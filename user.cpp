@@ -26,3 +26,13 @@ void Pal::Initi_set(int type, QString name, int AP, int DP, int HP, int AI, int 
         break;
     }
 }
+
+void User_Data::erase_userdata(){
+    this->userPals.clear();
+    this->userPals.shrink_to_fit(); //清除元素的同时释放内存
+    this->username.clear();
+    this->petNum = -1;
+    this->HighpetNum = -1;
+    this->winNum = -1;
+    this->failNum = -1;
+}

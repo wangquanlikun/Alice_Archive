@@ -183,9 +183,9 @@ public:
         }
     }
 
-    void Initi_set(int type, QString name, int AP, int DP, int HP, int AI, int LV, int EXP);
+    void Initi_set(int type, QString name, int AP, int DP, int HP, int AI, int LV, int EXP); //初始化精灵对象信息
 
-    void set_attribute_int(const int main_type){
+    void set_attribute_int(const int main_type){ //主属性
         switch(main_type){
         case 1:
             this->attribute.main_attribute = Attribute::Strength;

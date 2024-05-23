@@ -34,7 +34,7 @@ public:
     ~MainWindow();
     QStackedWidget Mainpage;
 
-private slots:
+private slots: //槽函数：点击等操作
     void on_enterGame_clicked();
     void on_page2_to_page1_clicked();
     void on_register_2_clicked();
@@ -58,8 +58,8 @@ private slots:
     void onLabelDoubleClicked();
 
 private:
-    Ui::MainWindow *ui;
-    QPixmap setPixmapOpacity(const QPixmap &src, qreal opacity);
+    Ui::MainWindow *ui; //开发环境 UI界面元素
+    QPixmap setPixmapOpacity(const QPixmap &src, qreal opacity); //设置图片透明度
     QTcpSocket *socket;
     QString IP;
     int port;
@@ -70,26 +70,26 @@ private:
     User_Data userdata;
     std::vector<Pal> Server_Pals_list;
     void create_Server_Pals_list();
-    int Now_pet;
+    int Now_pet; //我方选择的小精灵
     void window_personalPage();
     QStandardItemModel *ItemModel_PetList;
     QStandardItemModel *ItemModel_serverPetList;
     void change_now_pet(int Now_pet);
 
-    void Init_pinyin();
+    void Init_pinyin(); //初始化拼音映射map对象：ToPinyin
     std::map<QString, QString> ToPinyin;
 
     std::vector<Registered_userdata> regi_userdata;
-    void write_regi_userdata(const QByteArray buffer);
+    void write_regi_userdata(const QByteArray buffer); //已注册用户信息；列表模型与生成
     QStandardItemModel *ItemModel_RegiUserList;
     void creat_Regi_User_List();
 
-    Pal choosed_fight_pal;
-    void init_fight_page();
+    Pal choosed_fight_pal; //对战方小精灵
+    void init_fight_page(); //对战界面
     bool fight();
     bool leave_fight;
-    void refresh_personalPage();
-    int choose_throw_pal();
+    void refresh_personalPage(); //个人信息界面；作战完成后涉及的内容更改
+    int choose_throw_pal(); //随机3个与用户选择战败放弃的精灵
 
     QSoundEffect * startSound;
     QSoundEffect * fightSound;
@@ -98,7 +98,7 @@ private:
     QSoundEffect * Alice_Levelup;
     QSoundEffect * Alice_Welcome;
     QSoundEffect * Alice_Win;
-    QSoundEffect * Alice_Leave;
+    QSoundEffect * Alice_Leave; //BGM对象
 };
 
 class Click_Lable : public QLabel {
@@ -114,5 +114,5 @@ Q_OBJECT
         }
     signals:
         void doubleClicked();
-};
+}; //继承自QLable的可点击对象
 #endif // MAINWINDOW_H

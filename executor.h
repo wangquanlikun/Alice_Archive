@@ -1,9 +1,8 @@
 #ifndef EXECUTOR_H
 #define EXECUTOR_H
 
-#include "mainwindow.h"
 #include <QByteArray>
-#include <QString>
+#include <Qstring>
 
 #define USERNAMEIN 1
 #define PASSWORDWRONG 2

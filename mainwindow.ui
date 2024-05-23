@@ -1888,7 +1888,7 @@ QFrame QLCDNumber{
      <widget class="QFrame" name="Pals_info">
       <property name="geometry">
        <rect>
-        <x>439</x>
+        <x>440</x>
         <y>30</y>
         <width>800</width>
         <height>660</height>
@@ -2010,6 +2010,13 @@ QPushButton:pressed{
          <width>240</width>
          <height>240</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+	border: 5px solid rgba(250, 255, 255, 200);
+	border-radius: 10px;
+	padding: 0px;
+}</string>
        </property>
        <property name="text">
         <string/>

@@ -85,8 +85,9 @@ MainWindow::MainWindow(QWidget *parent)
     //添加点击小精灵头像处的虚拟Click_Lable元素
     QWidget *page = ui->Mainpage->widget(4);
     Click_Lable * click_pixmap_show_power_desc = new Click_Lable(page);
-    click_pixmap_show_power_desc->setGeometry(60 + 439, 370 + 30, 240, 240);
+    click_pixmap_show_power_desc->setGeometry(60 + 440, 370 + 30, 240, 240);
     connect(click_pixmap_show_power_desc, &Click_Lable::doubleClicked, this, &MainWindow::onLabelDoubleClicked);
+    click_pixmap_show_power_desc->setStyleSheet("Click_Lable { border: 2px solid rgba(0, 0, 0, 100); border-radius: 10px;}");
 
     //背景图片：透明度
     QPixmap pixmap(":/new/prefix1/Resource/personal_background.png");
