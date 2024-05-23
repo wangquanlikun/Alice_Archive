@@ -9,8 +9,6 @@
 #include<chrono>
 #include<QLayout>
 #include<QPainter>
-#include<map>
-extern std::map<QString, QString> ToPinyin;
 
 QPixmap MainWindow::setPixmapOpacity(const QPixmap &src, qreal opacity) {
     QPixmap dest(src.size());

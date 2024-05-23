@@ -19,7 +19,7 @@ public:
     void write_name(QString username){
         this->username = username;
     }
-    QString get_name(){
+    QString get_name() const {
         return username;
     }
     void Write_userData(const QByteArray buffer);

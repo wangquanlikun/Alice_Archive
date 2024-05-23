@@ -1,8 +1,5 @@
 #include "mainwindow.h"
-#include <map>
 #include <Qstring>
-
-std::map<QString, QString> ToPinyin;
 
 void MainWindow::Init_pinyin(){
     ToPinyin["阿罗娜"] = "ARONA~2";

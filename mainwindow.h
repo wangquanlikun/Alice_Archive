@@ -52,8 +52,6 @@ private slots:
     void readData();
     void socket_disconnected();
 
-    void Init_pinyin();
-
     void on_refresh_Virtual_Pals_clicked();
     void on_exit_fight_clicked();
     void on_leave_fight_run_clicked();
@@ -77,6 +75,9 @@ private:
     QStandardItemModel *ItemModel_PetList;
     QStandardItemModel *ItemModel_serverPetList;
     void change_now_pet(int Now_pet);
+
+    void Init_pinyin();
+    std::map<QString, QString> ToPinyin;
 
     std::vector<Registered_userdata> regi_userdata;
     void write_regi_userdata(const QByteArray buffer);

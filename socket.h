@@ -21,7 +21,7 @@ class Packet{
         QByteArray UserID;
         QByteArray Password;
     public:
-        bool isvaild_UserID(){
+        bool isvaild_UserID() const {
             const int length = UserID.length();
             for(int i = 0; i < length; i++){
                 if((UserID[i] >= 'a' && UserID[i] <= 'z') || (UserID[i] >= 'A' && UserID[i] <= 'Z') || (UserID[i] >= '0' && UserID[i] <= '9'))
@@ -32,7 +32,7 @@ class Packet{
             return true;
         }
 
-        bool isvaild_Password(){
+        bool isvaild_Password() const {
             const int length = Password.length();
             for(int i = 0; i < length; i++){
                 if((Password[i] >= 'a' && Password[i] <= 'z') || (Password[i] >= 'A' && Password[i] <= 'Z') || (Password[i] >= '0' && Password[i] <= '9'))
@@ -43,11 +43,11 @@ class Packet{
             return true;
         }
 
-        bool notempty(){
+        bool notempty() const {
             return (UserID.length() > 0 ) && (Password.length() > 0);
         }
 
-        bool usernameTooShort(){
+        bool usernameTooShort() const {
             return (UserID.length() <= 2);
         }
 
@@ -59,14 +59,14 @@ class Packet{
         void getUserID(const QByteArray s){
             UserID.append(s);
         }
-        QByteArray getUserID(){
+        QByteArray getUserID() const {
             return UserID;
         }
 
         void getPassword(const QByteArray s){
             Password.append(s);
         }
-        QByteArray getPassword(){
+        QByteArray getPassword() const {
             return Password;
         }
 
@@ -77,14 +77,14 @@ class Packet{
                 usertry = _register;
         }
 
-        int getUserTry(){
+        int getUserTry() const {
             if(usertry == _login)
                 return 0;
             else
                 return 1;
         }
 
-        QByteArray trans_to_QByteArray(){
+        QByteArray trans_to_QByteArray() const {
             QByteArray temp;
             if(usertry == _login)
                 temp.append("l");

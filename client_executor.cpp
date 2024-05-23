@@ -6,7 +6,7 @@
 #include <QRandomGenerator>
 #include <QMessageBox>
 
-QString Instruction::get_head(){
+QString Instruction::get_head() const {
     QString buf;
     int index = instruction.indexOf('&');
     if (index != -1) {
@@ -15,7 +15,7 @@ QString Instruction::get_head(){
     return buf;
 }
 
-int Instruction::executor(){
+int Instruction::executor() const {
     QString head = this->get_head();
     if(head == "UsernameIn"){
         return USERNAMEIN;

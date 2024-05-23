@@ -4,7 +4,7 @@
 
 std::vector<QString> Online_userName;
 
-#define REGI_INIT_PET_NUM 5
+#define REGI_INIT_PET_NUM 3
 
 Database::Database(){
     if (QSqlDatabase::contains("qt_sql_default_connection")) {

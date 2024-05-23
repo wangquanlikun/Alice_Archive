@@ -22,9 +22,9 @@ class Instruction{
             instruction.append(s);
         }
 
-        QString get_head();
+        QString get_head() const;
 
-        int executor();
+        int executor() const;
 };
 
 #endif // EXECUTOR_H

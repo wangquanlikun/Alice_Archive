@@ -45,7 +45,7 @@ public:
         Attack_reciver_name = "";
     }
 
-    QString Fight_info_output(){
+    QString Fight_info_output() const {
         QString output;
         if(Attack_power == 0){
             if(special_power_name == "")
@@ -120,11 +120,11 @@ class Pal{
 private:
     Attribute attribute;
 
-    int expNeed_for_levelup(){
+    int expNeed_for_levelup() const {
         return level * 100 + 5 * level * level;
     }
 
-    int expNeed_for_levelup(int pre_level){
+    int expNeed_for_levelup(int pre_level) const {
         return pre_level * 100 + 5 * pre_level * pre_level;
     }
 
@@ -202,7 +202,7 @@ public:
         }
     }
 
-    int get_attribute_int(){
+    int get_attribute_int() const {
         switch(this->attribute.main_attribute){
         case Attribute::Strength:
             return 1;
