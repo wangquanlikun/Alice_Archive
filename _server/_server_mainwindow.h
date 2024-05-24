@@ -2,7 +2,9 @@
 #define _SERVER_MAINWINDOW_H
 
 #include <QMainWindow>
-#include "_server_TcpServer.h"
+#include <QTcpServer>
+#include <QTcpSocket>
+#include <vector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,7 +27,7 @@ private:
     Ui::_Server_MainWindow *ui;
 
     QTcpServer* server;
-    QTcpSocket* socket;
+    std::vector<QTcpSocket *> socket_list;
     QString IP;
     int port;
 

@@ -83,7 +83,12 @@ void Executor_Data::server_login(){
     userDatabase.DBquery->exec(select_all);
 
     if(userDatabase.DBquery->next()){ //用户名已存在且密码正确
-        Online_userName.push_back(login_username);
+        auto it = std::find(Online_userName.begin(), Online_userName.end(), login_username);
+        if(it != Online_userName.end()){
+            socket->write("UserOnline&");
+            return;
+        }
+        Online_userName.push_back(QString(login_username));
         QString loginReturn = "LoginSuccess&";
         //还要返回用户信息
         QString winNum = userDatabase.DBquery->value(2).toString();

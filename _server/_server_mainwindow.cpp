@@ -1,4 +1,5 @@
 #include "_server_mainwindow.h"
+#include "_server_TcpServer.h"
 #include "ui__server_mainwindow.h"
 
 #include<QMessageBox>
@@ -28,13 +29,16 @@ _Server_MainWindow::~_Server_MainWindow()
 
 void _Server_MainWindow::ClientConnect(){
     while (server->hasPendingConnections()){
+        QTcpSocket * socket;
         socket = server->nextPendingConnection();
+        this->socket_list.push_back(socket);
         connect(socket, &QTcpSocket::readyRead, this, &_Server_MainWindow::ReadData);
     }
 }
 
 void _Server_MainWindow::ReadData(){
-    QByteArray buf = socket->readAll();//readAll最多接收65532的数据
+    QTcpSocket * socket = qobject_cast<QTcpSocket *>(sender());
+    QByteArray buf = socket->readAll(); //readAll接收发来的数据
     ui->text_Debug_Info->append("[R] " + QString(buf));
     //后续逻辑处理
     Executor_Data executor(socket, buf);

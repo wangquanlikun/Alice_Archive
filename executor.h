@@ -8,6 +8,7 @@
 #define PASSWORDWRONG 2
 #define REGISTERSUCCESS 3
 #define LOGINSUCCESS 4
+#define USERONLINE 5
 
 class Instruction{
     private:

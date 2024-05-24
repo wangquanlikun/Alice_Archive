@@ -63,7 +63,7 @@ private:
     QTcpSocket *socket;
     QString IP;
     int port;
-
+    bool on_online_state;
     bool register_success;
     bool login_success;
 

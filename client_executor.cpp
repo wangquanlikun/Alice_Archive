@@ -28,9 +28,9 @@ int Instruction::executor() const {
     }
     else if(head == "LoginSuccess"){
         return LOGINSUCCESS;
-    } //对于登录注册
-    else{
-
+    }
+    else if(head == "UserOnline"){
+        return USERONLINE;
     }
     return 0;
 }

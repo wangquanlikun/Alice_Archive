@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     IP = "127.0.0.1";
     port = 10043;
-
+    on_online_state = false;
     register_success = false;
     login_success = false;
 
@@ -109,7 +109,7 @@ void MainWindow::readData(){
     QByteArray buffer;
     buffer = socket->readAll();
     qDebug() << "[R] " + buffer;
-    if(!buffer.isEmpty()){
+    if(!buffer.isEmpty() && !on_online_state){
         Instruction instruction;
         instruction.get_inst(buffer);
         int buf = instruction.executor(); //对发回的buffer消息进行后续处理的逻辑
@@ -121,9 +121,14 @@ void MainWindow::readData(){
             login_success = false;
             QMessageBox::warning(this,"登陆失败","用户名或密码错误");
         }
+        else if(buf == USERONLINE){
+            login_success = false;
+            QMessageBox::warning(this,"登陆失败","无法重复登录账户");
+        }
         else if(buf == REGISTERSUCCESS){
             register_success = true;
             login_success = true;
+            on_online_state = true;
             #if CHARACTER_VOICE
                 Alice_Welcome->play();
             #endif
@@ -136,6 +141,7 @@ void MainWindow::readData(){
         else if(buf == LOGINSUCCESS){
             register_success = true;
             login_success = true;
+            on_online_state = true;
             #if CHARACTER_VOICE
                 Alice_Welcome->play();
             #endif
@@ -249,6 +255,8 @@ void MainWindow::on_logout_clicked(){
         Send_logout_data += QString::number(userdata.userPals[i].exp) + " ";
     }
     socket->write(Send_logout_data.toUtf8());
+    on_online_state = false;
+    this->userdata.erase_userdata();
     #if CHARACTER_VOICE
         Alice_Leave->play();
     #endif
