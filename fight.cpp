@@ -67,6 +67,8 @@ void MainWindow::on_choose_Fight_1_clicked(){ //决斗赛
 
             userdata.userPals.push_back(choosed_fight_pal);
             userdata.petNum ++;
+            if(choosed_fight_pal.level == 15)
+                userdata.HighpetNum ++;
             QString New_Pal_info;
             New_Pal_info += ("获得新精灵：" + choosed_fight_pal.name + "  LV. " + QString::number(choosed_fight_pal.level));
             QMessageBox::about(this,"获得新精灵！",New_Pal_info);
